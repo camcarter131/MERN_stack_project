@@ -1,5 +1,6 @@
 import React from 'react';
-import Grid from '../../bomberman/grid';
+import Grid from '../../bummerman/grid';
+import Player from '../../bummerman/player';
 
 class Canvas extends React.Component {
     constructor(props) {
@@ -7,7 +8,6 @@ class Canvas extends React.Component {
         this.state = {canvas: null};
         
     }    
-
     componentDidMount() {
         if (this.state.canvas === null) this.setState({canvas: document.getElementById("canvas")});
     }
@@ -16,6 +16,8 @@ class Canvas extends React.Component {
         const ctx = this.state.canvas.getContext('2d');
         this.grid = new Grid(this.state.canvas, ctx);
         this.grid.drawGrid();
+        this.player = new Player(this.state.canvas, ctx);
+        this.player.render();
     }
 
     render() {

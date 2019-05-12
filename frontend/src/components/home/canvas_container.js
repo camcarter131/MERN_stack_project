@@ -1,11 +1,12 @@
 import Canvas from './canvas';
 // import Player from '../../bomberman/player';
-import Grid from '../../bomberman/grid';
+import Grid from '../../bummerman/grid';
 import { connect } from 'react-redux';
 
 
 const msp = state => {
     return ({
+        
 
     });
 }
