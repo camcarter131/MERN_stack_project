@@ -5,11 +5,8 @@ import { connect } from 'react-redux';
 
 
 const msp = state => {
-    // let canvas = document.getElementById("canvas");
     return ({
-        grid: new Grid(canvas),
-        // player: new Player(canvas),
-        test: "test"
+
     });
 }
 

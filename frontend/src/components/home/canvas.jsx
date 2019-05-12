@@ -4,19 +4,22 @@ import Grid from '../../bomberman/grid';
 class Canvas extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {canvas: null};
         
     }    
 
+    componentDidMount() {
+        if (this.state.canvas === null) this.setState({canvas: document.getElementById("canvas")});
+    }
+
     componentDidUpdate() {
-        debugger
-        this.canvas = document.getElementById("canvas");
-        const ctx = this.canvas.getContext('2d');
-        this.grid = new Grid(this.canvas, ctx);
+        const ctx = this.state.canvas.getContext('2d');
+        this.grid = new Grid(this.state.canvas, ctx);
         this.grid.drawGrid();
     }
 
     render() {
-        if (this.canvas === null) return null;
+        // if (this.canvas === null) return null;
         return (
             <canvas id='canvas' width={720} height={720}></canvas>
         )

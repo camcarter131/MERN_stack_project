@@ -13,7 +13,7 @@ export default class Grid {
         //640x640  15 squares 
         for (let x = 0; x <= this.width; x += 48) {
             this.ctx.moveTo(x, 0);
-            this.ctx.lineTo(0, this.height);
+            this.ctx.lineTo(x, this.height);
         }
 
         for (let y = 0; y <= this.height; y += 48) {
