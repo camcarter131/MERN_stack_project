@@ -7,7 +7,7 @@ class Canvas extends React.Component {
 
     render() {
         return (
-            <canvas id='canvas' width={640} height={640}></canvas>
+            <canvas id='canvas' width={720} height={720}></canvas>
         )
     }
 }
