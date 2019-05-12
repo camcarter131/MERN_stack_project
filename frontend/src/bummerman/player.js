@@ -18,7 +18,8 @@ class Player {
 
     render () {
         this.canvasContext.fillStyle = this.color;
-        this.canvasContext.fillCircle(this.position.x, this.position.y, this.size.width / 2, 0, 360);
+        this.canvasContext.arc(this.position.x, this.position.y, this.size.width / 2, 0, 360);
+        this.canvasContext.fill();
     }
 }
 
