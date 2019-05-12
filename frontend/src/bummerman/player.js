@@ -1,25 +1,23 @@
 class Player {
-    constructor () {
-        const canvas = document.getElementById('canvas');
-        this.canvasContext = canvas.getContext('2d');
-
-        this.size = { 
-            width: (canvas.width / 15) * (0.75),
-            height: (canvas.height / 15) * (0.75)
-        };
+    constructor (canvas, ctx) {
+        this.radius = ((canvas.width / 15) * (0.75)) / 2;
+        this.ctx = ctx;
 
         this.position = {
-            x: 0,
-            y: 0
+            x: canvas.width/2,
+            y: canvas.height / 2
         };
 
         this.color = '#2a52be';
     }
 
     render () {
-        this.canvasContext.fillStyle = this.color;
-        this.canvasContext.arc(this.position.x, this.position.y, this.size.width / 2, 0, 360);
-        this.canvasContext.fill();
+        this.ctx.fillStyle = this.color;
+        this.ctx.beginPath();
+        this.ctx.arc(this.position.x, this.position.y, this.radius, 0, 2 * Math.PI);
+        this.ctx.closePath();
+        this.ctx.fill();
+
     }
 }
 
