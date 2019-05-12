@@ -1,9 +1,14 @@
 import React from 'react';
 import './App.css';
+import Greeting from './components/home/greeting';
+import Canvas from './components/home/canvas';
 
 function App() {
   return (
-    <h2>Bummerman</h2>
+    <div className='main-container'>
+      <Greeting />
+      <Canvas />
+    </div>
   );
 }
 
