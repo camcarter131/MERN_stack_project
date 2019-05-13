@@ -11,6 +11,6 @@ export default class BombPlus extends Powerup {
 
     onPickup(player) {
         super();
-        // player.maximumBombs += 1;
+        // player.maxBombs += 1;
     }
 }
