@@ -22,7 +22,9 @@ class Player extends Sprite {
     handleInput(dt) {
         
         if (this.inputHandler.isPressed(DOWN) || this.inputHandler.isPressed('s')) {
-            // let gridCoords = this.grid.canvasToArray([this.position.x, this.position.y + this.size.width]);
+            this.velocity.y = this.speed;
+            this.velocity.x = 0;
+            let gridCoords = this.grid.canvasToArray([this.position.x, this.position.y + this.radius + 5]);
             // let gridCoordsL = this.grid.canvasToArray([this.position.x - this.radius_partial, this.position.y + this.radius_partial]);
             // let gridCoordsR = this.grid.canvasToArray([this.position.x + this.radius_partial, this.position.y + this.radius_partial]);
 
@@ -30,10 +32,17 @@ class Player extends Sprite {
             //     return null
             // } else {
             // }
-            this.position.y += this.velocity.y * dt;
+            if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' 
+            || this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'O') {
+                return null
+            } else {
+                this.position.y += this.velocity.y * dt;
+            }
         }
         if (this.inputHandler.isPressed(UP) || this.inputHandler.isPressed('w')) {
-            // let gridCoords = this.grid.canvasToArray([this.position.x, this.position.y - this.radius]);
+            this.velocity.y = this.speed;
+            this.velocity.x = 0;
+            let gridCoords = this.grid.canvasToArray([this.position.x, this.position.y]);
             // let gridCoordsL = this.grid.canvasToArray([this.position.x - this.radius_partial, this.position.y - this.radius_partial]);
             // let gridCoordsR = this.grid.canvasToArray([this.position.x + this.radius_partial, this.position.y - this.radius_partial]);
 
@@ -41,26 +50,46 @@ class Player extends Sprite {
             //     return null
             // } else {
             // }
-            this.position.y -= this.velocity.y * dt;
+            if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' 
+            || this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'O' ) {
+                return null
+            } else {
+                this.position.y -= this.velocity.y * dt;
+            }
         }
 
         if (this.inputHandler.isPressed(RIGHT) || this.inputHandler.isPressed('s')) {
-            let gridCoords = this.grid.canvasToArray([this.position.x + this.radius, this.position.y]);
-            let gridCoordsU = this.grid.canvasToArray([this.position.x + this.radius_partial, this.position.y - this.radius_partial]);
-            let gridCoordsD = this.grid.canvasToArray([this.position.x + this.radius_partial, this.position.y + this.radius_partial]);
-            if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' || this.grid.gridArray[gridCoordsU[0]][gridCoordsU[1]] === 'W' || this.grid.gridArray[gridCoordsD[0]][gridCoordsD[1]] === 'W') {
+            this.velocity.x = this.speed;
+            this.velocity.y = 0;
+            let gridCoords = this.grid.canvasToArray([this.position.x + 22, this.position.y + 20]);
+            // let gridCoordsU = this.grid.canvasToArray([this.position.x + this.radius_partial, this.position.y - this.radius_partial]);
+            // let gridCoordsD = this.grid.canvasToArray([this.position.x + this.radius_partial, this.position.y + this.radius_partial]);
+            // if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' || this.grid.gridArray[gridCoordsU[0]][gridCoordsU[1]] === 'W' || this.grid.gridArray[gridCoordsD[0]][gridCoordsD[1]] === 'W') {
+            //     return null
+            // }
+            if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' 
+            || this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'O') {
                 return null
+            } else {
+                this.position.x += this.velocity.x * dt;
             }
-            this.position.x += this.velocity.x * dt;
         }
         if (this.inputHandler.isPressed(LEFT) || this.inputHandler.isPressed('w')) {
-            let gridCoords = this.grid.canvasToArray([this.position.x - this.radius, this.position.y]);
-            let gridCoordsU = this.grid.canvasToArray([this.position.x - this.radius_partial, this.position.y - this.radius_partial]);
-            let gridCoordsD = this.grid.canvasToArray([this.position.x - this.radius_partial, this.position.y + this.radius_partial]);
-            if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' || this.grid.gridArray[gridCoordsU[0]][gridCoordsU[1]] === 'W' || this.grid.gridArray[gridCoordsD[0]][gridCoordsD[1]] === 'W') {
+            this.velocity.x = this.speed;
+            this.velocity.y = 0;
+            let gridCoords = this.grid.canvasToArray([this.position.x - 4, this.position.y + 20]);
+            // debugger
+            // let gridCoordsU = this.grid.canvasToArray([this.position.x - this.radius_partial, this.position.y - this.radius_partial]);
+            // let gridCoordsD = this.grid.canvasToArray([this.position.x - this.radius_partial, this.position.y + this.radius_partial]);
+            // if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' || this.grid.gridArray[gridCoordsU[0]][gridCoordsU[1]] === 'W' || this.grid.gridArray[gridCoordsD[0]][gridCoordsD[1]] === 'W') {
+            //     return null
+            // }
+            if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' 
+            || this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'O' ) {
                 return null
+            } else {
+                this.position.x -= this.velocity.x * dt;
             }
-            this.position.x -= this.velocity.x * dt;
         }
     }
 
