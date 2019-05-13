@@ -4,11 +4,13 @@ import Input from '../input';
 import Sprite from './sprite';
 import Animation from '../animator/animation';
 
-class Player extends Sprite {
+class Player { //extends Sprite {
     constructor (canvas, ctx, img, grid) {
-        super (canvas, ctx, img);
-        this.position.x = (canvas.width/2) + 24;
-        this.position.y = (canvas.width/2) + 24;
+        // super (canvas, ctx, img);
+        this.position = {
+            x: (canvas.width/2) + 24,
+            y: (canvas.width/2) + 24
+        }
         this.renderSize = 48;
         this.radius = this.renderSize/2;
         this.radius_partial = Math.sqrt((this.radius**2)/2);
@@ -16,7 +18,7 @@ class Player extends Sprite {
         this.erase = this.erase.bind(this);
         this.inputHandler = new Input(this);
 
-        this.animation = new Animation(ctx, this, { frames: [1, 2], loop: true });
+        // this.animation = new Animation(ctx, this, { frames: [1, 2], loop: true });
     }
 
     handleInput(dt) {
@@ -109,7 +111,7 @@ class Player extends Sprite {
 
     render () {
         // debugger;
-        super.render();
+        // super.render();
         // this.animation.render("y", 1);
     }
 

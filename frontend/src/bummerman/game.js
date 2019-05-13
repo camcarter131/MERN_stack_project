@@ -21,7 +21,7 @@ class Game {
     }
 
     init () {
-        this.animator = new Animator(new SpriteSheet(this.rm.get("assets/images/df_bomber_ss.png"), { rows: 4, cols: 3 }));
+        this.animator = new Animator(this.ctx, new SpriteSheet(this.rm.get("assets/images/df_bomber_ss.png"), { rows: 4, cols: 3 }));
         this.player = new Player(this.canvas, this.ctx, this.rm.get("assets/images/df_bomber_ss.png"), this.grid);
         this.start();
     }

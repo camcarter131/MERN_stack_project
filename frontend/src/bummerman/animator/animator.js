@@ -1,6 +1,7 @@
 class Animator {
-    constructor () {
+    constructor (ctx, spriteSheet) {
         this.assets = {};
+        spriteSheet.generateSprites(ctx).forEach(sprite => this.addAsset(sprite));
     }
 
     addAsset (asset) {
