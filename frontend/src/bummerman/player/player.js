@@ -104,13 +104,13 @@ class Player extends Sprite {
 
     update (dt) {
         this.handleInput(dt);
-        this.animation.update(dt);
+        // this.animation.update(dt);
     }
 
     render () {
         // debugger;
         super.render();
-        this.animation.render("y", 1);
+        // this.animation.render("y", 1);
     }
 
     // render () {
