@@ -1,3 +1,5 @@
+import Wall from './wall';
+import Object from './object';
 
 export default class Grid {
 
@@ -7,6 +9,7 @@ export default class Grid {
         this.width = canvas.width;
         this.gridArray = [...Array(15)].map(e => ["X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X"]);
         this.createWalls();
+        this.createObjects();
         this.renderGame(this.ctx);
     }
 
@@ -19,6 +22,20 @@ export default class Grid {
         }
     }
 
+    createObjects(){
+        let numObjects = 25;
+        for(let i=0; i<this.gridArray[0].length; i+=1){
+            for(let j = 0; j < this.gridArray[0].length; j += 1){
+                if (i === 14 && j === 14) break;
+                if (this.gridArray[i][j] === "W") continue;
+                if (Math.random() < .15) {
+                    this.gridArray[i][j] = "O";
+                    numObjects -= 1;
+                }
+            }
+        }
+    }
+
     // Goes through master array and renders element in legend
 
     renderGame() {
@@ -27,7 +44,12 @@ export default class Grid {
                 let canvasCoords = this.arrayToCanvas([x, y]);
                 switch(el) {
                     case "W":
-                        this.renderWall(this.ctx, canvasCoords);
+                        let wall = new Wall(this.ctx, canvasCoords)
+                        wall.render();
+                        break;
+                    case "O":
+                        let object = new Object(this.ctx, canvasCoords)
+                        object.render();
                         break;
                     default:
                         break;
@@ -35,19 +57,6 @@ export default class Grid {
             });
         });
     }
-
-    renderWall(ctx, canvasCoords) {
-        ctx.fillStyle = "#000000";
-        ctx.fillRect(canvasCoords[0], canvasCoords[1], 48, 48);
-    }
-
-  
-
-
-
-
-
-
 
     //hard code initial gridarray
     //function to make that array reflect in canvas
@@ -64,7 +73,9 @@ export default class Grid {
     }
 
     canvasToArray(canvasPosition) {
-        return [canvasPosition[1] / 48, canvasPosition[0] / 48];
+        let x = Math.floor(canvasPosition[1]/48) * 48;
+        let y = Math.floor(canvasPosition[0]/48) * 48;
+        return [x / 48, y / 48];
     }
 
 
