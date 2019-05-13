@@ -11,6 +11,6 @@ export default class SuperBombPlus extends Powerup {
 
     onPickup(player) {
         super();
-        // player.bombs.unshift(new SuperBomb());
+        // player.bombs.pickUp(new SuperBomb());
     }
 }
