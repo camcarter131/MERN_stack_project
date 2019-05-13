@@ -1,5 +1,5 @@
 class Animation {
-    constructor (ctx, sprite, config) {
+    constructor(ctx, sprite, config) {
         this.ctx = ctx;
         this.sprite = sprite;
         this.frames = config.frames;
@@ -15,7 +15,7 @@ class Animation {
         window.spritevel = this.sprite.velocity;
     }
 
-    update (dt) {
+    update(dt) {
         this.frameCount++;
         if (this.frameCount < this.frameCountBuffer) return;
         else {
@@ -24,28 +24,15 @@ class Animation {
         }
     }
 
-    render (axis, dir) {
-        // let frame;
-        // if (this.sprite.speed > 0) {
-        //     const maxFrameCount = this.frames.length;
-        //     const nextFrameIdx = Math.floor(this._index);
-        //     frame = this.frames[nextFrameIdx % maxFrameCount];
-
-        //     if (!this.config.loop && nextFrameIdx > maxFrameCount) return;
-        //     else frame = 0;
-        // }
+    render(axis, dir) {
         if (dir > 0) {
-            // this._index = (this.sprite.velocity[axis] > 0) ? this._index : 0;
-
             (this.sprite.velocity[axis] > 0) ?
                 this.ctx.drawImage(this.sprite.img, this.frames[this._index] * this.sprite.size.width, 0, this.sprite.size.width, this.sprite.size.height, 0, 0, 48, 48) :
                 this.ctx.drawImage(this.sprite.img, 0 * this.sprite.size.width, 0, this.sprite.size.width, this.sprite.size.height, 0, 0, 48, 48);
-             
-
         } else {
-            this._index = (this.sprite.velocity[axis] < 0) ? this._index : 0;
+            this._index = (this.sprite.velocity[axis] < 0) ? this.ctx.drawImage(this.sprite.img, this.frames[this._index] * this.sprite.size.width, 0, this.sprite.size.width, this.sprite.size.height, 0, 0, 48, 48) :
+                this.ctx.drawImage(this.sprite.img, 0 * this.sprite.size.width, 0, this.sprite.size.width, this.sprite.size.height, 0, 0, 48, 48);
         }
-        this.ctx.drawImage(this.sprite.img, this.frames[this._index] * this.sprite.size.width, 0, this.sprite.size.width, this.sprite.size.height, 0, 0, 48, 48);
     }
 }
 
