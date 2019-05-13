@@ -1,7 +1,7 @@
-import Bomb from './bomb';
-import { DOWN, UP, RIGHT, LEFT } from './keys';
-import Input from './input';
-import Sprite from './animator/sprite';
+import Bomb from '../bomb';
+import { DOWN, UP, RIGHT, LEFT } from '../keys';
+import Input from '../input';
+import Sprite from './sprite';
 
 class Player extends Sprite {
     constructor (canvas, ctx, img) {
