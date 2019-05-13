@@ -19,23 +19,23 @@ export default class Input {
                 break;
             case 37:
                 key = LEFT; 
-                this.player.velocity.y = 0;
                 this.player.velocity.x = this.player.speed;
+                this.player.velocity.y = 0;
                 break;
             case 38:
                 key = UP; 
-                this.player.velocity.x = 0;
                 this.player.velocity.y = this.player.speed;
+                this.player.velocity.x = 0;
                 break;
                 case 39:
                 key = RIGHT; 
-                this.player.velocity.y = 0;
                 this.player.velocity.x = this.player.speed;
+                this.player.velocity.y = 0;
                 break;
                 case 40:
                 key = DOWN; 
-                this.player.velocity.x = 0;
                 this.player.velocity.y = this.player.speed;
+                this.player.velocity.x = 0;
                 break;
             default:
                 // Convert ASCII codes to letters
@@ -44,7 +44,6 @@ export default class Input {
         }
 
         this.pressedKeys[key] = status;
-        console.log(this.player.velocity);
     }
 
     isPressed (key) {

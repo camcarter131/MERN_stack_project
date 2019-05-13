@@ -1,5 +1,6 @@
 import Grid from "./grid";
 import Player from "./player";
+import Sprite from "./animator/sprite";
 
 class Game {
     constructor (canvas, ctx) {
@@ -12,6 +13,8 @@ class Game {
         this.initialTime = Date.now();
 
         this.start();
+
+        this.sprite = new Sprite(canvas, ctx, "assets/images/df_bomber_ss.png");
     }
     
     update (dt) {
@@ -19,12 +22,14 @@ class Game {
     }
     
     render () {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        // this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         
         this.grid.drawGrid();
         this.grid.renderGame();
         
         this.player.render();
+
+        // this.sprite.render();
     }
 
     start () {
