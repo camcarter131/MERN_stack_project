@@ -10,11 +10,22 @@ class Game {
         this.player = new Player(canvas, ctx);
 
         this.initialTime = Date.now();
-        
+
         this.start();
     }
-
     
+    update (dt) {
+        this.player.update(dt);
+    }
+    
+    render () {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        
+        this.grid.drawGrid();
+        this.grid.renderGame();
+        
+        this.player.render();
+    }
 
     start () {
         let time = Date.now();
@@ -25,17 +36,6 @@ class Game {
 
         this.initialTime = time;
         requestAnimationFrame(this.start.bind(this));
-    }
-
-    update (dt) {
-        this.player.update(dt);
-    }
-
-    render () {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.grid.drawGrid();
-        this.grid.renderGame();
-        this.player.render();
     }
 
 }
