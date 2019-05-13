@@ -34,8 +34,8 @@ export default class Bomb {
         // directions.forEach(dir => {
 
         // });
-        arrPosition = canvasToArray(position);
-        if (grid[arrPosition] !== 'X') return;
+        position = canvasToArray(position);
+        if (grid[position] !== 'X') return;
 
         const x = position.x;
         const y = position.y;
@@ -55,6 +55,19 @@ export default class Bomb {
                 explode(explosionSize - 1, [x, j]);
             }
         }
+
+        const left = [x - 1, y];
+        const right = [x + 1, y];
+        const up = [x, y - 1];
+        const down = [x, y + 1];
+
+        const dir = [left, right, up, down];
+
+        dir.forEach(d => {
+            if (d !== 'X') return;
+
+            explode(explosionSize - 1, d);
+        });
 
         // this.position = {
         //     x: 7,
