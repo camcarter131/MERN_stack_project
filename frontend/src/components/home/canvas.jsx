@@ -16,7 +16,9 @@ class Canvas extends React.Component {
         const ctx = this.state.canvas.getContext('2d');
         this.grid = new Grid(this.state.canvas, ctx);
         this.grid.drawGrid();
-        this.grid.populateGrid();
+        let coords = this.grid.gridToCanvas([1,3]);
+
+        // this.grid.populateGrid();
 
         this.player = new Player(this.state.canvas, ctx);
         this.player.render();
