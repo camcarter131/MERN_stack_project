@@ -33,7 +33,8 @@ class Sprite {
     }
 
     render () {
-        this.ctx.drawImage(this.img, 0, 0, this.size.width, this.size.height, this.position.x, this.position.y, 48, 48);// this.size.width, this.size.height);
+        this.ctx.drawImage(this.img, 0, 0, this.size.width, this.size.height, this.position.x - (this.size.width/2), this.position.y - (this.size.height/2), 48, 48);// this.size.width, this.size.height);
+
     }
 
 }
