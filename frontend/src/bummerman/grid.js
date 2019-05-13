@@ -8,7 +8,7 @@ export default class Grid {
         this.ctx = ctx;
         this.height = canvas.height;
         this.width = canvas.width;
-        this.gridArray = [...Array(15)].map(e => ["X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X"]);
+        this.gridArray = [...Array(17)].map(e => ["X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X"]);
         this.createWalls();
         this.createObjects();
         this.renderGame(this.ctx);
@@ -16,22 +16,36 @@ export default class Grid {
 
     //populates gridarray with W's
     createWalls(){
-        for(let i=1; i<this.gridArray[0].length; i+=2){
-            for(let j = 1; j < this.gridArray[0].length; j += 2){
+        let rowTop = 0;
+        let rowBottom = 16;
+        for (let col = 0; col < this.gridArray[0].length; col+= 1) {
+            this.gridArray[rowTop][col] = "W";
+            this.gridArray[rowBottom][col] = "W";
+        }
+        let colLeft = 0;
+        let colRight = 16;
+        for (let row = 0; row < this.gridArray[0].length; row+= 1) {
+            this.gridArray[row][colLeft] = "W";
+            this.gridArray[row][colRight] = "W";
+        }
+        for(let i=2; i<this.gridArray[0].length-1; i+=2){
+            for(let j = 2; j < this.gridArray[0].length-1; j += 2){
                 this.gridArray[i][j] = "W";
             }
         }
+
     }
 
     createObjects(){
-        let numObjects = 25;
-        for(let i=0; i<this.gridArray[0].length; i+=1){
-            for(let j = 0; j < this.gridArray[0].length; j += 1){
-                if (i === 14 && j === 14) break;
+        // let numObjects = 25;
+        for(let i=1; i<this.gridArray[0].length-1; i+=1){
+            for(let j = 1; j < this.gridArray[0].length-1; j += 1){
+                // if (i === 15 && j === 15) break;
+                if ((i === 1 && j === 15) || (i === 1 && j === 1) || (i === 15 && j === 1) || (i === 15 && j === 15)) continue;
                 if (this.gridArray[i][j] === "W") continue;
-                if (Math.random() < .15) {
+                if (Math.random() < .25) {
                     this.gridArray[i][j] = "O";
-                    numObjects -= 1;
+                    // numObjects -= 1;
                 }
             }
         }
