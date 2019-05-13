@@ -36,7 +36,12 @@ class Player {
             let gridCoordsL = this.grid.canvasToArray([this.position.x - this.radius_partial, this.position.y + this.radius_partial]);
             let gridCoordsR = this.grid.canvasToArray([this.position.x + this.radius_partial, this.position.y + this.radius_partial]);
 
-            if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' || this.grid.gridArray[gridCoordsL[0]][gridCoordsL[1]] === 'W' || this.grid.gridArray[gridCoordsR[0]][gridCoordsR[1]] === 'W') {
+            if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' 
+            || this.grid.gridArray[gridCoordsL[0]][gridCoordsL[1]] === 'W' 
+            || this.grid.gridArray[gridCoordsR[0]][gridCoordsR[1]] === 'W'
+            || this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'O'
+            || this.grid.gridArray[gridCoordsL[0]][gridCoordsL[1]] === 'O'
+            || this.grid.gridArray[gridCoordsR[0]][gridCoordsR[1]] === 'O') {
                 return null
             } else {
                 this.position.y += this.velocity.y * dt;
@@ -47,7 +52,13 @@ class Player {
             let gridCoordsL = this.grid.canvasToArray([this.position.x - this.radius_partial, this.position.y - this.radius_partial]);
             let gridCoordsR = this.grid.canvasToArray([this.position.x + this.radius_partial, this.position.y - this.radius_partial]);
 
-            if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' || this.grid.gridArray[gridCoordsL[0]][gridCoordsL[1]] === 'W' || this.grid.gridArray[gridCoordsR[0]][gridCoordsR[1]] === 'W') {
+            if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' 
+            || this.grid.gridArray[gridCoordsL[0]][gridCoordsL[1]] === 'W' 
+            || this.grid.gridArray[gridCoordsR[0]][gridCoordsR[1]] === 'W'
+            || this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'O'
+            || this.grid.gridArray[gridCoordsL[0]][gridCoordsL[1]] === 'O'
+            || this.grid.gridArray[gridCoordsR[0]][gridCoordsR[1]] === 'O'
+            ) {
                 return null
             } else {
                 this.position.y -= this.velocity.y * dt;
@@ -58,7 +69,13 @@ class Player {
             let gridCoords = this.grid.canvasToArray([this.position.x + this.radius, this.position.y]);
             let gridCoordsU = this.grid.canvasToArray([this.position.x + this.radius_partial, this.position.y - this.radius_partial]);
             let gridCoordsD = this.grid.canvasToArray([this.position.x + this.radius_partial, this.position.y + this.radius_partial]);
-            if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' || this.grid.gridArray[gridCoordsU[0]][gridCoordsU[1]] === 'W' || this.grid.gridArray[gridCoordsD[0]][gridCoordsD[1]] === 'W') {
+            if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' 
+            || this.grid.gridArray[gridCoordsU[0]][gridCoordsU[1]] === 'W' 
+            || this.grid.gridArray[gridCoordsD[0]][gridCoordsD[1]] === 'W'
+            || this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'O'
+            || this.grid.gridArray[gridCoordsU[0]][gridCoordsU[1]] === 'O'
+            || this.grid.gridArray[gridCoordsD[0]][gridCoordsD[1]] === 'O'
+            ) {
                 return null
             }
             this.position.x += this.velocity.x * dt;
@@ -67,7 +84,13 @@ class Player {
             let gridCoords = this.grid.canvasToArray([this.position.x - this.radius, this.position.y]);
             let gridCoordsU = this.grid.canvasToArray([this.position.x - this.radius_partial, this.position.y - this.radius_partial]);
             let gridCoordsD = this.grid.canvasToArray([this.position.x - this.radius_partial, this.position.y + this.radius_partial]);
-            if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' || this.grid.gridArray[gridCoordsU[0]][gridCoordsU[1]] === 'W' || this.grid.gridArray[gridCoordsD[0]][gridCoordsD[1]] === 'W') {
+            if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' 
+            || this.grid.gridArray[gridCoordsU[0]][gridCoordsU[1]] === 'W' 
+            || this.grid.gridArray[gridCoordsD[0]][gridCoordsD[1]] === 'W'
+            || this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'O'
+            || this.grid.gridArray[gridCoordsU[0]][gridCoordsU[1]] === 'O'
+            || this.grid.gridArray[gridCoordsD[0]][gridCoordsD[1]] === 'O'
+            ) {
                 return null
             }
             this.position.x -= this.velocity.x * dt;
