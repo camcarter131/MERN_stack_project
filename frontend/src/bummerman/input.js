@@ -26,12 +26,12 @@ export default class Input {
                 this.player.velocity.x = 0;
                 this.player.velocity.y = this.player.speed;
                 break;
-                case 39:
+            case 39:
                 key = RIGHT; 
                 this.player.velocity.y = 0;
                 this.player.velocity.x = this.player.speed;
                 break;
-                case 40:
+            case 40:
                 key = DOWN; 
                 this.player.velocity.x = 0;
                 this.player.velocity.y = this.player.speed;

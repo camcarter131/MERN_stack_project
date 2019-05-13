@@ -3,9 +3,11 @@ import { DOWN, UP, RIGHT, LEFT } from './keys';
 import Input from './input';
 
 class Player {
-    constructor (canvas, ctx) {
+    constructor (canvas, ctx, grid) {
         this.radius = ((canvas.width / 15) * (0.75)) / 2;
+        this.radius_partial = Math.sqrt((this.radius**2)/2);
         this.ctx = ctx;
+        this.grid = grid;
 
         this.position = {
             x: (canvas.width/2) + 48,
@@ -23,22 +25,51 @@ class Player {
 
         this.color = '#2a52be';
         this.erase = this.erase.bind(this);
-
         this.inputHandler = new Input(this);
+
     }
 
     handleInput(dt) {
+
         if (this.inputHandler.isPressed(DOWN) || this.inputHandler.isPressed('s')) {
-            this.position.y += this.velocity.y * dt;
+            let gridCoords = this.grid.canvasToArray([this.position.x, this.position.y + this.radius]);
+            let gridCoordsL = this.grid.canvasToArray([this.position.x - this.radius_partial, this.position.y + this.radius_partial]);
+            let gridCoordsR = this.grid.canvasToArray([this.position.x + this.radius_partial, this.position.y + this.radius_partial]);
+
+            if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' || this.grid.gridArray[gridCoordsL[0]][gridCoordsL[1]] === 'W' || this.grid.gridArray[gridCoordsR[0]][gridCoordsR[1]] === 'W') {
+                return null
+            } else {
+                this.position.y += this.velocity.y * dt;
+            }
         }
         if (this.inputHandler.isPressed(UP) || this.inputHandler.isPressed('w')) {
-            this.position.y -= this.velocity.y * dt;
+            let gridCoords = this.grid.canvasToArray([this.position.x, this.position.y - this.radius]);
+            let gridCoordsL = this.grid.canvasToArray([this.position.x - this.radius_partial, this.position.y - this.radius_partial]);
+            let gridCoordsR = this.grid.canvasToArray([this.position.x + this.radius_partial, this.position.y - this.radius_partial]);
+
+            if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' || this.grid.gridArray[gridCoordsL[0]][gridCoordsL[1]] === 'W' || this.grid.gridArray[gridCoordsR[0]][gridCoordsR[1]] === 'W') {
+                return null
+            } else {
+                this.position.y -= this.velocity.y * dt;
+            }
         }
 
         if (this.inputHandler.isPressed(RIGHT) || this.inputHandler.isPressed('s')) {
+            let gridCoords = this.grid.canvasToArray([this.position.x + this.radius, this.position.y]);
+            let gridCoordsU = this.grid.canvasToArray([this.position.x + this.radius_partial, this.position.y - this.radius_partial]);
+            let gridCoordsD = this.grid.canvasToArray([this.position.x + this.radius_partial, this.position.y + this.radius_partial]);
+            if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' || this.grid.gridArray[gridCoordsU[0]][gridCoordsU[1]] === 'W' || this.grid.gridArray[gridCoordsD[0]][gridCoordsD[1]] === 'W') {
+                return null
+            }
             this.position.x += this.velocity.x * dt;
         }
         if (this.inputHandler.isPressed(LEFT) || this.inputHandler.isPressed('w')) {
+            let gridCoords = this.grid.canvasToArray([this.position.x - this.radius, this.position.y]);
+            let gridCoordsU = this.grid.canvasToArray([this.position.x - this.radius_partial, this.position.y - this.radius_partial]);
+            let gridCoordsD = this.grid.canvasToArray([this.position.x - this.radius_partial, this.position.y + this.radius_partial]);
+            if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' || this.grid.gridArray[gridCoordsU[0]][gridCoordsU[1]] === 'W' || this.grid.gridArray[gridCoordsD[0]][gridCoordsD[1]] === 'W') {
+                return null
+            }
             this.position.x -= this.velocity.x * dt;
         }
     }
@@ -55,7 +86,7 @@ class Player {
     update (dt) {
         this.handleInput(dt);
     }
-
+ 
     render () {
         this.ctx.fillStyle = this.color;
         this.ctx.beginPath();
