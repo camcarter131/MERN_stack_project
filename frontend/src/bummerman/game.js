@@ -10,11 +10,7 @@ class Game {
         this.rm = new ResourceManager();
 
         this.grid = new Grid(canvas, ctx);
-<<<<<<< HEAD
-        this.player = new Player(canvas, ctx, this.grid);
-=======
         // this.player = new Player(canvas, ctx);
->>>>>>> b828e6502334d0695cbb265669ebdf0040337b5d
 
         this.initialTime = Date.now();
 
@@ -27,7 +23,7 @@ class Game {
     }
 
     init () {
-        this.player = new Player(this.canvas, this.ctx, this.rm.get("assets/images/df_bomber_ss.png"));
+        this.player = new Player(this.canvas, this.ctx, this.rm.get("assets/images/df_bomber_ss.png"), this.grid);
         this.start();
     }
     

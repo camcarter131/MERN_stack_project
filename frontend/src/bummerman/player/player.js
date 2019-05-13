@@ -3,50 +3,43 @@ import { DOWN, UP, RIGHT, LEFT } from '../keys';
 import Input from '../input';
 import Sprite from './sprite';
 
-<<<<<<< HEAD:frontend/src/bummerman/player.js
-class Player {
-    constructor (canvas, ctx, grid) {
-        this.radius = ((canvas.width / 15) * (0.75)) / 2;
-        this.radius_partial = Math.sqrt((this.radius**2)/2);
-        this.ctx = ctx;
-        this.grid = grid;
-=======
 class Player extends Sprite {
-    constructor (canvas, ctx, img) {
+    constructor (canvas, ctx, img, grid) {
         super (canvas, ctx, img);
->>>>>>> b828e6502334d0695cbb265669ebdf0040337b5d:frontend/src/bummerman/player/player.js
-
         this.position.x = (canvas.width/2) + 24;
         this.position.y = (canvas.width/2) + 24;
-
+        this.renderSize = 48;
+        this.radius = this.renderSize/2;
+        this.radius_partial = Math.sqrt((this.radius**2)/2);
+        this.grid = grid;
         this.erase = this.erase.bind(this);
         this.inputHandler = new Input(this);
 
     }
 
     handleInput(dt) {
-
+        
         if (this.inputHandler.isPressed(DOWN) || this.inputHandler.isPressed('s')) {
-            let gridCoords = this.grid.canvasToArray([this.position.x, this.position.y + this.radius]);
-            let gridCoordsL = this.grid.canvasToArray([this.position.x - this.radius_partial, this.position.y + this.radius_partial]);
-            let gridCoordsR = this.grid.canvasToArray([this.position.x + this.radius_partial, this.position.y + this.radius_partial]);
+            // let gridCoords = this.grid.canvasToArray([this.position.x, this.position.y + this.size.width]);
+            // let gridCoordsL = this.grid.canvasToArray([this.position.x - this.radius_partial, this.position.y + this.radius_partial]);
+            // let gridCoordsR = this.grid.canvasToArray([this.position.x + this.radius_partial, this.position.y + this.radius_partial]);
 
-            if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' || this.grid.gridArray[gridCoordsL[0]][gridCoordsL[1]] === 'W' || this.grid.gridArray[gridCoordsR[0]][gridCoordsR[1]] === 'W') {
-                return null
-            } else {
-                this.position.y += this.velocity.y * dt;
-            }
+            // if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' || this.grid.gridArray[gridCoordsL[0]][gridCoordsL[1]] === 'W' || this.grid.gridArray[gridCoordsR[0]][gridCoordsR[1]] === 'W') {
+            //     return null
+            // } else {
+            // }
+            this.position.y += this.velocity.y * dt;
         }
         if (this.inputHandler.isPressed(UP) || this.inputHandler.isPressed('w')) {
-            let gridCoords = this.grid.canvasToArray([this.position.x, this.position.y - this.radius]);
-            let gridCoordsL = this.grid.canvasToArray([this.position.x - this.radius_partial, this.position.y - this.radius_partial]);
-            let gridCoordsR = this.grid.canvasToArray([this.position.x + this.radius_partial, this.position.y - this.radius_partial]);
+            // let gridCoords = this.grid.canvasToArray([this.position.x, this.position.y - this.radius]);
+            // let gridCoordsL = this.grid.canvasToArray([this.position.x - this.radius_partial, this.position.y - this.radius_partial]);
+            // let gridCoordsR = this.grid.canvasToArray([this.position.x + this.radius_partial, this.position.y - this.radius_partial]);
 
-            if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' || this.grid.gridArray[gridCoordsL[0]][gridCoordsL[1]] === 'W' || this.grid.gridArray[gridCoordsR[0]][gridCoordsR[1]] === 'W') {
-                return null
-            } else {
-                this.position.y -= this.velocity.y * dt;
-            }
+            // if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' || this.grid.gridArray[gridCoordsL[0]][gridCoordsL[1]] === 'W' || this.grid.gridArray[gridCoordsR[0]][gridCoordsR[1]] === 'W') {
+            //     return null
+            // } else {
+            // }
+            this.position.y -= this.velocity.y * dt;
         }
 
         if (this.inputHandler.isPressed(RIGHT) || this.inputHandler.isPressed('s')) {
@@ -81,16 +74,6 @@ class Player extends Sprite {
     update (dt) {
         this.handleInput(dt);
     }
-<<<<<<< HEAD:frontend/src/bummerman/player.js
- 
-    render () {
-        this.ctx.fillStyle = this.color;
-        this.ctx.beginPath();
-        this.ctx.arc(this.position.x, this.position.y, this.radius, 0, 2 * Math.PI);
-        this.ctx.closePath();
-        this.ctx.fill();
-    }
-=======
 
     // render () {
     //     this.ctx.fillStyle = this.color;
@@ -99,7 +82,6 @@ class Player extends Sprite {
     //     this.ctx.closePath();
     //     this.ctx.fill();
     // }
->>>>>>> b828e6502334d0695cbb265669ebdf0040337b5d:frontend/src/bummerman/player/player.js
 
     renderBomb() {
         let x = this.position.x - this.width; 
