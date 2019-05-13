@@ -19,9 +19,9 @@ class Player extends Sprite {
 
     handleInput(dt) {
 
-        if (this.inputHandler.isPressed(SPACE)) {
-            
-        }
+        // if (this.inputHandler.isPressed(SPACE)) {
+
+        // }
         
         if (this.inputHandler.isPressed(DOWN) || this.inputHandler.isPressed('s')) {
             // let gridCoords = this.grid.canvasToArray([this.position.x, this.position.y + this.size.width]);
