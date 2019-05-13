@@ -11,6 +11,6 @@ export default class SpeedPlus extends Powerup {
 
     onPickup(player) {
         super();
-        // player.speed *= 2;
+        player.speed += player.width;
     }
 }
