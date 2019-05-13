@@ -8,8 +8,8 @@ class Player {
         this.ctx = ctx;
 
         this.position = {
-            x: canvas.width/2,
-            y: canvas.height / 2
+            x: (canvas.width/2) + 48,
+            y: (canvas.height/2) + 48
         };
         
         this.width = canvas.width/15.0;

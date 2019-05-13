@@ -11,17 +11,12 @@ class Game {
 
         this.initialTime = Date.now();
         
-        this.grid.drawGrid();
-        this.grid.populateGrid();
-        
         this.start();
     }
 
     
 
     start () {
-        console.log('hello');
-        if (this === undefined) debugger;
         let time = Date.now();
         let dt = (time - this.initialTime) / 1000.0;    
 
@@ -33,15 +28,13 @@ class Game {
     }
 
     update (dt) {
-        // debugger;
-        // console.log('hello');
         this.player.update(dt);
     }
 
     render () {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.grid.drawGrid();
-        this.grid.populateGrid();
+        this.grid.renderGame();
         this.player.render();
     }
 
