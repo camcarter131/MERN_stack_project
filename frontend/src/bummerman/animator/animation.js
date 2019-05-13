@@ -28,18 +28,13 @@ class Animation {
 
     render(axis, dir) {
         if (dir > 0) {
-            // debugger
             (this.sprite.velocity[axis] > 0) ?
                 this.ctx.drawImage(this.sprite.img, this.frames[this._index] * this.frameWidth, 0, this.frameWidth, this.frameWidth, 0, 0, 48, 48) :
                 this.ctx.drawImage(this.sprite.img, 0 * this.frameWidth, 0, this.frameWidth, this.frameWidth, 0, 0, 48, 48);
-                // this.ctx.drawImage(this.sprite.img, this.frames[this._index] * this.frameWidth, this.config.row * this.frameWidth, this.sprite.size.width, this.sprite.size.height, 0, 0, 48, 48) :
-                // this.ctx.drawImage(this.sprite.img, 0 * this.sprite.size.width, this.config.row * this.frameWidth, this.sprite.size.width, this.sprite.size.height, 0, 0, 48, 48);
         } else {
             (this.sprite.velocity[axis] > 0) ?
                 this.ctx.drawImage(this.sprite.img, this.frames[this._index] * this.frameWidth, 0, this.frameWidth, this.frameWidth, 0, 0, 48, 48) :
                 this.ctx.drawImage(this.sprite.img, 0 * this.frameWidth, 0, this.frameWidth, this.frameWidth, 0, 0, 48, 48);
-        //     this._index = (this.sprite.velocity[axis] < 0) ? this.ctx.drawImage(this.sprite.img, this.frames[this._index] * this.frameWidth, this.config.row * this.sprite.size.height, this.sprite.size.width, this.sprite.size.height, 0, 0, 48, 48) :
-        //         this.ctx.drawImage(this.sprite.img, 0 * this.sprite.size.width, 0, this.sprite.size.width, this.sprite.size.height, 0, 0, 48, 48);
         }
     }
 }
