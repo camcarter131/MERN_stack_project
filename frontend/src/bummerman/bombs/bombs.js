@@ -1,18 +1,16 @@
 // Queue (FIFO) with an exception - SuperBomb will skip to the front
 
 export default class Bombs {
-    constructor(explosionSize) {
+    constructor() {
         this.bombQueue = [];
-
-        this.explosionSize = explosionSize;
     }
 
     pickUp(bomb) {
         (bomb instanceof Bomb) ? this.bombQueue.push(bomb) : this.bombQueue.unshift(bomb);
     }
 
-    deploy() {
+    deploy(explosionSize, playerPosition) {
         const bomb = this.bombQueue.shift();
-        if (bomb) bomb.deploy(this.explosionSize);
+        if (bomb) bomb.deploy(explosionSize, playerPosition);
     }
 }
