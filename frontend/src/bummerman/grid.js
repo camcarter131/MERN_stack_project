@@ -1,5 +1,6 @@
 import Wall from './wall';
 import Object from './object';
+import Bomb from './bomb';
 
 export default class Grid {
 
@@ -50,6 +51,9 @@ export default class Grid {
                     case "O":
                         let object = new Object(this.ctx, canvasCoords)
                         object.render();
+                        break;
+                    case "B":
+                        Bomb.render(this.ctx, canvasCoords);
                         break;
                     default:
                         break;

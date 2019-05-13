@@ -9,7 +9,7 @@ class Player extends Sprite {
         this.position.x = (canvas.width/2) + 24;
         this.position.y = (canvas.width/2) + 24;
         this.renderSize = 48;
-        this.radius = this.renderSize/2;
+        this.radius = this.renderSize/2; 
         this.radius_partial = Math.sqrt((this.radius**2)/2);
         this.grid = grid;
         this.erase = this.erase.bind(this);
@@ -18,6 +18,10 @@ class Player extends Sprite {
     }
 
     handleInput(dt) {
+
+        if (this.inputHandler.isPressed(SPACE)) {
+            
+        }
         
         if (this.inputHandler.isPressed(DOWN) || this.inputHandler.isPressed('s')) {
             // let gridCoords = this.grid.canvasToArray([this.position.x, this.position.y + this.size.width]);

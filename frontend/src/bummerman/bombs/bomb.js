@@ -1,85 +1,46 @@
 export default class Bomb {
-    constructor(ctx) {
-        this.img = '';
-        this.flickerIntervalId = null;
+    // Constructor no longer needed as we are not doing instances of Bombs
+    // constructor(ctx) {
+    //     this.img = '';
+    //     this.flickerIntervalId = null;
 
-        this.explode = this.explode.bind(this);
-        this.flicker = this.flicker.bind(this);
+    //     this.explode = this.explode.bind(this);
+    //     this.flicker = this.flicker.bind(this);
+    // }
+
+    static createBomb(grid, playerPosition, explosionSize) {
+        const position = grid.canvasToArray(playerPosition);
+
+        
+        Bomb.deploy(Grid.gridArray, position);
+        setTimeout(() => Bomb.explode(Grid.gridArray, position, explosionSize), 3000);
+
+        // setTimeout(this.flicker, 2000);
     }
 
-    deploy() {
-        setTimeout(this.explode, 3000);
-        setTimeout(this.flicker, 2000);
-        this.render();
+    static deploy(gridArray, position) {
+        gridArray[position[0]][position[1]] = 'B';
     }
 
-    flicker() {
-        this.flickerIntervalId = setInterval(() => { }, 100);
+    static explode(gridArray, position, explosionSize) {
+        let row = position[0];
+        let col = position[1];
+
+        gridArray[row][col] = 'E';
+
+        if (row - 1 >= 0) gridArray[row - 1][col] = 'E';
+        if (row + 1 <= 15) gridArray[row + 1][col] = 'E';
+        if (col - 1 >= 0) gridArray[row][col - 1] = 'E';
+        if (col + 1 <= 15) gridArray[row][col + 1] = 'E';
+    }
+    
+    static render(ctx, position) {
+        ctx.fillStyle = "#ff0000";
+        ctx.fillRect(position[0], position[1], 48, 48);
     }
 
-    canvasToArray(canvasPosition) {
-        return [canvasPosition[1] / 48, canvasPosition[0] / 48];
-    }
+    // flicker() {
+    //     this.flickerIntervalId = setInterval(() => { }, 100);
+    // }
 
-    explode(explosionSize, position) {
-        clearInterval(this.flickerIntervalId);
-
-        // let left = [position.x - 1, position.y];
-        // let right = [position.x + 1, position.y];
-        // let up = [position.x, position.y - 1];
-        // let down = [position.x, position.y + 1];
-
-        // const directions = [left, right, up, down];
-
-        // directions.forEach(dir => {
-
-        // });
-        position = canvasToArray(position);
-        if (grid[position] !== 'X') return;
-
-        const x = position.x;
-        const y = position.y;
-
-        for(var i = x - 1; i <= x + 1; i++) {
-            if (i === x) continue;
-
-            if (explosionSize > 0) {
-                explode(explosionSize - 1, [i, y]);
-            }
-        }
-
-        for(var j = y - 1; j <= y + 1; j++) {
-            if (j === y) continue;
-
-            if (explosionSize > 0) {
-                explode(explosionSize - 1, [x, j]);
-            }
-        }
-
-        const left = [x - 1, y];
-        const right = [x + 1, y];
-        const up = [x, y - 1];
-        const down = [x, y + 1];
-
-        const dir = [left, right, up, down];
-
-        dir.forEach(d => {
-            if (d !== 'X') return;
-
-            explode(explosionSize - 1, d);
-        });
-
-        // this.position = {
-        //     x: 7,
-        //     y: 13
-        // };
-
-
-        // for every cell in each direction until count == explosionSize
-        // render an explosion that lasts 1500 ms
-    }
-
-    render() {
-        // do something with passed down ctx
-    }
 }
