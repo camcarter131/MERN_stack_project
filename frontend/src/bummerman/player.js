@@ -1,27 +1,15 @@
 import Bomb from './bomb';
 import { DOWN, UP, RIGHT, LEFT } from './keys';
 import Input from './input';
+import Sprite from './animator/sprite';
 
-class Player {
-    constructor (canvas, ctx) {
-        this.radius = ((canvas.width / 15) * (0.75)) / 2;
-        this.ctx = ctx;
+class Player extends Sprite {
+    constructor (canvas, ctx, img) {
+        super (canvas, ctx, img);
 
-        this.position = {
-            x: (canvas.width/2) + 48,
-            y: (canvas.height/2) + 48
-        };
-        
-        this.width = canvas.width/15.0;
-        this.height = canvas.height/15.0;
-        
-        this.speed = 100;
-        this.velocity = {
-            x: 0,
-            y: 0
-        };
+        this.position.x = (canvas.width/2) + 24;
+        this.position.y = (canvas.width/2) + 24;
 
-        this.color = '#2a52be';
         this.erase = this.erase.bind(this);
 
         this.inputHandler = new Input(this);
@@ -56,13 +44,13 @@ class Player {
         this.handleInput(dt);
     }
 
-    render () {
-        this.ctx.fillStyle = this.color;
-        this.ctx.beginPath();
-        this.ctx.arc(this.position.x, this.position.y, this.radius, 0, 2 * Math.PI);
-        this.ctx.closePath();
-        this.ctx.fill();
-    }
+    // render () {
+    //     this.ctx.fillStyle = this.color;
+    //     this.ctx.beginPath();
+    //     this.ctx.arc(this.position.x, this.position.y, this.radius, 0, 2 * Math.PI);
+    //     this.ctx.closePath();
+    //     this.ctx.fill();
+    // }
 
     renderBomb() {
         let x = this.position.x - this.width; 
