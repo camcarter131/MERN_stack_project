@@ -7,6 +7,8 @@ import Animation from '../animator/animation';
 class Player { //extends Sprite {
     constructor (canvas, ctx, img, grid) {
         // super (canvas, ctx, img);
+        this.canvas = canvas;
+        this.ctx = ctx;
         this.position = {
             x: (canvas.width/2) + 24,
             y: (canvas.width/2) + 24
@@ -105,7 +107,8 @@ class Player { //extends Sprite {
     }
 
     update (dt) {
-        this.handleInput(dt);
+        console.log('updating player');
+        // this.handleInput(dt);
         // this.animation.update(dt);
     }
 
