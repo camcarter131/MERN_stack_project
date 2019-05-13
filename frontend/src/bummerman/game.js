@@ -1,6 +1,5 @@
 import Grid from "./grid";
-import Player from "./player";
-import Sprite from "./animator/sprite";
+import Player from "./player/player";
 import ResourceManager from "./resource_manager/resource_manager";
 
 class Game {
@@ -11,7 +10,7 @@ class Game {
         this.rm = new ResourceManager();
 
         this.grid = new Grid(canvas, ctx);
-        this.player = new Player(canvas, ctx);
+        // this.player = new Player(canvas, ctx);
 
         this.initialTime = Date.now();
 
@@ -24,13 +23,13 @@ class Game {
     }
 
     init () {
-        this.sprite = new Sprite(this.canvas, this.ctx, this.rm.get("assets/images/df_bomber_ss.png"));
+        this.player = new Player(this.canvas, this.ctx, this.rm.get("assets/images/df_bomber_ss.png"));
         this.start();
     }
     
     update (dt) {
         this.player.update(dt);
-        this.sprite.update(dt);
+        // this.sprite.update(dt);
     }
     
     render () {
@@ -41,7 +40,7 @@ class Game {
         
         this.player.render();
 
-        this.sprite.render();
+        // this.sprite.render();
     }
 
     start () {
