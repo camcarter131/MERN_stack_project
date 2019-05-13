@@ -15,7 +15,8 @@ serviceWorker.unregister();
 
 const prod = process.env.REACT_APP_PROD;
 
-const socket = prod ? io() : io('http://localhost:5000');
+// const socket = prod ? io() : io('http://localhost:5000');
+const socket = io('http://localhost:5000');
 
 socket.on('news', function (data) {
     console.log(data);
