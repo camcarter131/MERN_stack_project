@@ -1,10 +1,15 @@
 export default class Bomb {
 
-    static render(ctx, position){
+    static renderBomb(ctx, position){
         ctx.fillStyle = "#ff0000";
         ctx.fillRect(position[0], position[1], 48, 48);
     }
-    
+
+    static renderExplosion(ctx, position){
+        ctx.fillStyle = "#ffff00";
+        ctx.fillRect(position[0], position[1], 48, 48);
+    }
+
     constructor(player) {
         // this.img = '';
         // this.flickerIntervalId = null;
@@ -29,11 +34,30 @@ export default class Bomb {
     // }
 
     deploy() {
-        debugger
-        const position = this.player.grid.canvasToArray(this.player.position);
+        const position = this.player.grid.canvasToArray([this.player.position.x, this.player.position.y]);
         this.player.grid.gridArray[position[0]][position[1]] = 'B';
+        let row = position[0];
+        let col = position[1];
+        let gridArray = this.player.grid.gridArray;
+        
         setTimeout(() => {
-                this.player.bombs.pickup(this);
+            this.player.grid.gridArray[position[0]][position[1]] = 'E';
+
+
+            if (row - 1 >= 1 && gridArray[row - 1][col] != 'W') gridArray[row - 1][col] = 'E';
+            if (row + 1 <= 15 && gridArray[row + 1][col] != 'W') gridArray[row + 1][col] = 'E';
+            if (col - 1 >= 1 && gridArray[row][col - 1] != 'W') gridArray[row][col - 1] = 'E';
+            if (col + 1 <= 15 && gridArray[row][col + 1] != 'W') gridArray[row][col + 1] = 'E';
+            
+        }, 2000);
+        
+        setTimeout(() => {
+               this.player.bombs.pickUp(this);
+            
+                if (row - 1 >= 1 && gridArray[row - 1][col] != 'W') gridArray[row - 1][col] = 'X';
+                if (row + 1 <= 15 && gridArray[row + 1][col] != 'W') gridArray[row + 1][col] = 'X';
+                if (col - 1 >= 1 && gridArray[row][col - 1] != 'W') gridArray[row][col - 1] = 'X';
+                if (col + 1 <= 15 && gridArray[row][col + 1] != 'W') gridArray[row][col + 1] = 'X';
                 this.player.grid.gridArray[position[0]][position[1]] = 'X';
             }, 3000);
         
@@ -45,10 +69,7 @@ export default class Bomb {
 
     //     gridArray[row][col] = 'E';
 
-    //     if (row - 1 >= 0) gridArray[row - 1][col] = 'E';
-    //     if (row + 1 <= 15) gridArray[row + 1][col] = 'E';
-    //     if (col - 1 >= 0) gridArray[row][col - 1] = 'E';
-    //     if (col + 1 <= 15) gridArray[row][col + 1] = 'E';
+    
     // }
     
 

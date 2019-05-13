@@ -74,7 +74,10 @@ export default class Grid {
                         object.render();
                         break;
                     case "B":
-                        Bomb.render(this.ctx, canvasCoords);
+                        Bomb.renderBomb(this.ctx, canvasCoords);
+                        break;
+                    case "E":
+                        Bomb.renderExplosion(this.ctx, canvasCoords);
                         break;
                     default:
                         break;
