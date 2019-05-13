@@ -18,8 +18,22 @@ serv.listen(port);
 
 // app.listen(port, () => console.log(`Server is running on port ${port}`));
 
+var SOCKET_LIST = {};
+
 const io = require('socket.io')(serv,{});
+
+
 io.sockets.on('connection', (socket) => {
     console.log('socket connection');
-    socket.emit("news", {wow:"cool"});
+
+    socket.id = Math.random();
+    SOCKET_LIST[socket.id] = socket;
+
+    // socket.on('happy', function(data) {
+    //     console.log('happy (received from client) ' + data.reason);
+    // });
+
+    // socket.emit('serverMsg', {
+    //     msg: 'you have one life remaining'
+    // });
 });

@@ -13,11 +13,25 @@ ReactDOM.render(<Root store={configureStore()}/>, document.getElementById('root'
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
 
-const prod = process.env.REACT_APP_PROD;
+
+
+
+
+// const prod = process.env.REACT_APP_PROD;
 
 // const socket = prod ? io() : io('http://localhost:5000');
 const socket = io('http://localhost:5000');
 
+// this is received from client
 socket.on('news', function (data) {
     console.log(data);
+});
+
+socket.on('serverMsg', function(data) {
+    console.log(data.msg);
+});
+
+// 
+socket.emit('happy', {
+    reason: 'had cake today'
 });
