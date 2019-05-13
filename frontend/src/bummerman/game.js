@@ -22,6 +22,8 @@ class Game {
 
     init () {
         // this.animator = new Animator(this.ctx, new SpriteSheet(this.rm.get("assets/images/df_bomber_ss.png"), { rows: 4, cols: 3 }));
+        window.sheet = new SpriteSheet(this.rm.get("assets/images/df_bomber_ss.png"), { rows: 4, cols: 3 });
+        // window.sprites = window.sheet.generateSprites(this.ctx);
         this.player = new Player(this.canvas, this.ctx, this.rm.get("assets/images/df_bomber_ss.png"), this.grid);
         this.start();
     }
@@ -34,7 +36,7 @@ class Game {
     render () {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         
-        this.grid.drawGrid();
+        // this.grid.drawGrid();
         this.grid.renderGame();
         
         // this.player.render();

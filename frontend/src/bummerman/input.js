@@ -1,4 +1,5 @@
 import { SPACE, LEFT, UP, RIGHT, DOWN } from "./keys";
+import Bomb from './bombs/bomb';
 
 export default class Input {
     constructor (player) {
@@ -15,7 +16,7 @@ export default class Input {
         let key;
         switch (e.keyCode) {
             case 32:
-                key = SPACE; 
+                key = SPACE;
                 break;
             case 37:
                 key = LEFT; 
