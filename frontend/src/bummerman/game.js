@@ -1,6 +1,5 @@
 import Grid from "./grid";
 import Player from "./player";
-import Sprite from "./animator/sprite";
 import ResourceManager from "./resource_manager/resource_manager";
 
 class Game {
