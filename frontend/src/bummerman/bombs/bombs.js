@@ -1,6 +1,6 @@
 // Queue (FIFO) with an exception - SuperBomb will skip to the front
 
-class Bombs {
+export default class Bombs {
     constructor(explosionSize) {
         this.bombQueue = [];
 

@@ -1,6 +1,6 @@
 import Bomb from './bomb';
 
-class SuperBomb extends Bomb {
+export default class SuperBomb extends Bomb {
     constructor(ctx) {
         super();
     }
