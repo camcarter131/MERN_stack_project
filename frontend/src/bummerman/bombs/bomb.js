@@ -1,15 +1,25 @@
 export default class Bomb {
-    // Constructor no longer needed as we are not doing instances of Bombs
-    // constructor(ctx) {
-    //     this.img = '';
-    //     this.flickerIntervalId = null;
 
-    //     this.explode = this.explode.bind(this);
-    //     this.flicker = this.flicker.bind(this);
-    // }
+    static render(ctx, position){
+        ctx.fillStyle = "#ff0000";
+        ctx.fillRect(position[0], position[1], 48, 48);
+    }
+    
+    constructor(player) {
+        // this.img = '';
+        // this.flickerIntervalId = null;
+        // this.ctx = ctx;
+        // this.grid = grid;
+        this.player = player;
+        this.deploy = this.deploy.bind(this);
+        
+        // this.explode = this.explode.bind(this);
+        // this.flicker = this.flicker.bind(this);
+    }
+
 
     // static createBomb(grid, playerPosition, explosionSize) {
-    //     const position = grid.canvasToArray(playerPosition);
+    //     
 
         
     //     Bomb.deploy(Grid.gridArray, position);
@@ -18,11 +28,18 @@ export default class Bomb {
     //     // setTimeout(this.flicker, 2000);
     // }
 
-    // static deploy(gridArray, position) {
-    //     gridArray[position[0]][position[1]] = 'B';
-    // }
+    deploy() {
+        debugger
+        const position = this.player.grid.canvasToArray(this.player.position);
+        this.player.grid.gridArray[position[0]][position[1]] = 'B';
+        setTimeout(() => {
+                this.player.bombs.pickup(this);
+                this.player.grid.gridArray[position[0]][position[1]] = 'X';
+            }, 3000);
+        
+    }
 
-    // static explode(gridArray, position, explosionSize) {
+    // explode(gridArray, position, explosionSize) {
     //     let row = position[0];
     //     let col = position[1];
 
@@ -34,10 +51,6 @@ export default class Bomb {
     //     if (col + 1 <= 15) gridArray[row][col + 1] = 'E';
     // }
     
-    // static render(ctx, position) {
-    //     ctx.fillStyle = "#ff0000";
-    //     ctx.fillRect(position[0], position[1], 48, 48);
-    // }
 
     // flicker() {
     //     this.flickerIntervalId = setInterval(() => { }, 100);

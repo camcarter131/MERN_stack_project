@@ -1,6 +1,6 @@
 import Wall from './wall';
 import Object from './object';
-import Bomb from './bomb';
+import Bomb from './bombs/bomb';
 
 export default class Grid {
 
@@ -39,6 +39,13 @@ export default class Grid {
 
     // Goes through master array and renders element in legend
 
+     //legend
+    //W = immovable wall
+    //O = perishable obstacle
+    //B = bomb
+    //F = bomb fire
+    //X = background image
+
     renderGame() {
         this.gridArray.forEach((row, x) => {
             row.forEach((el, y) => {
@@ -62,21 +69,16 @@ export default class Grid {
         });
     }
 
-    //hard code initial gridarray
-    //function to make that array reflect in canvas
 
-    //legend
-    //W = immovable wall
-    //O = perishable obstacle
-    //B = bomb
-    //F = bomb fire
-    //X = background image
+   
 
     arrayToCanvas(arrayCoordinates) {
         return [48*arrayCoordinates[1], 48*arrayCoordinates[0]];
     }
 
+
     canvasToArray(canvasPosition) {
+        //where x is the row and y is the column in the nested array.
         let x = Math.floor(canvasPosition[1]/48) * 48;
         let y = Math.floor(canvasPosition[0]/48) * 48;
         return [x / 48, y / 48];

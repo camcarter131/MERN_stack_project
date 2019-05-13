@@ -17,7 +17,6 @@ export default class Input {
         switch (e.keyCode) {
             case 32:
                 key = SPACE;
-
                 break;
             case 37:
                 key = LEFT; 

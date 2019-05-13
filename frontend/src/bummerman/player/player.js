@@ -1,5 +1,5 @@
-import Bomb from '../bomb';
-import { DOWN, UP, RIGHT, LEFT } from '../keys';
+import Bombs from '../bombs/bombs'
+import { DOWN, UP, RIGHT, LEFT, SPACE } from '../keys';
 import Input from '../input';
 import Sprite from './sprite';
 import Animation from '../animator/animation';
@@ -15,15 +15,16 @@ class Player extends Sprite {
         this.grid = grid;
         this.erase = this.erase.bind(this);
         this.inputHandler = new Input(this);
-
+        this.bombs = new Bombs(this);
         this.animation = new Animation(ctx, this, { frames: [1, 2], loop: true });
     }
 
     handleInput(dt) {
 
-        // if (this.inputHandler.isPressed(SPACE)) {
-
-        // }
+        if (this.inputHandler.isPressed(SPACE)) {
+            // let gridCoords = this.grid.canvasToArray([this.position.x, this.position.y]);
+            this.bombs.deploy();
+        }
         
         if (this.inputHandler.isPressed(DOWN) || this.inputHandler.isPressed('s')) {
             this.velocity.y = this.speed;
@@ -125,28 +126,28 @@ class Player extends Sprite {
     //     this.ctx.fill();
     // }
 
-    renderBomb() {
-        let x = this.position.x - this.width; 
-        let y = this.position.y -this.height;
-        this.ctx.fillStyle = "#000000";
-        this.ctx.beginPath();
-        this.ctx.arc(this.position.x - this.width, this.position.y - this.height, this.radius, 0, 2 * Math.PI);
-        this.ctx.closePath();
-        this.ctx.fill();
-        setTimeout(() => {
-            this.ctx.fillStyle = "#ffffff";
-            this.ctx.beginPath();
-            this.ctx.arc(x, y, this.radius, 0, 2 * Math.PI);
-            this.ctx.closePath();
-            this.ctx.fill();
-        }, 2000);
-    }
+    // renderBomb() {
+    //     let x = this.position.x - this.width; 
+    //     let y = this.position.y -this.height;
+    //     this.ctx.fillStyle = "#000000";
+    //     this.ctx.beginPath();
+    //     this.ctx.arc(this.position.x - this.width, this.position.y - this.height, this.radius, 0, 2 * Math.PI);
+    //     this.ctx.closePath();
+    //     this.ctx.fill();
+    //     setTimeout(() => {
+    //         this.ctx.fillStyle = "#ffffff";
+    //         this.ctx.beginPath();
+    //         this.ctx.arc(x, y, this.radius, 0, 2 * Math.PI);
+    //         this.ctx.closePath();
+    //         this.ctx.fill();
+    //     }, 2000);
+    // }
         
 
-    dropBomb () {
-        let bomb = new Bomb(this.ctx, this.position);
-        bomb.render();
-    }
+    // dropBomb () {
+    //     let bomb = new Bomb(this.ctx, this.position);
+    //     bomb.render();
+    // }
 }
 
 export default Player;
