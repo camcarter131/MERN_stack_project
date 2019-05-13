@@ -7,8 +7,8 @@ import Animation from '../animator/animation';
 class Player extends Sprite {
     constructor (canvas, ctx, img, grid) {
         super (canvas, ctx, img);
-        this.position.x = (canvas.width/2) + 24;
-        this.position.y = (canvas.width/2) + 24;
+        this.position.x = 16;
+        this.position.y = canvas.height - 34;
         this.renderSize = 48;
         this.radius = this.renderSize/2;
         this.radius_partial = Math.sqrt((this.radius**2)/2);

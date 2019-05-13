@@ -23,14 +23,15 @@ export default class Grid {
     }
 
     createObjects(){
-        let numObjects = 25;
+        // let numObjects = 25;
         for(let i=0; i<this.gridArray[0].length; i+=1){
             for(let j = 0; j < this.gridArray[0].length; j += 1){
                 if (i === 14 && j === 14) break;
+                if ((i === 0 && j === 14) || (i === 0 && j === 0) || (i === 14 && j === 0) ) continue;
                 if (this.gridArray[i][j] === "W") continue;
-                if (Math.random() < .15) {
+                if (Math.random() < .3) {
                     this.gridArray[i][j] = "O";
-                    numObjects -= 1;
+                    // numObjects -= 1;
                 }
             }
         }
