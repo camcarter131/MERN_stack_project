@@ -17,14 +17,44 @@ export default class Bomb {
         this.flickerIntervalId = setInterval(() => { }, 100);
     }
 
-    explode(explosionSize, playerPosition) {
+    canvasToArray(canvasPosition) {
+        return [canvasPosition[1] / 48, canvasPosition[0] / 48];
+    }
+
+    explode(explosionSize, position) {
         clearInterval(this.flickerIntervalId);
 
-        let left = [playerPosition.x - 1, playerPosition.y];
-        let right = [playerPosition.x + 1, playerPosition.y];
-        let up = playerPosition.y - 1;
-        let down = playerPosition.y + 1;
+        // let left = [position.x - 1, position.y];
+        // let right = [position.x + 1, position.y];
+        // let up = [position.x, position.y - 1];
+        // let down = [position.x, position.y + 1];
 
+        // const directions = [left, right, up, down];
+
+        // directions.forEach(dir => {
+
+        // });
+        arrPosition = canvasToArray(position);
+        if (grid[arrPosition] !== 'X') return;
+
+        const x = position.x;
+        const y = position.y;
+
+        for(var i = x - 1; i <= x + 1; i++) {
+            if (i === x) continue;
+
+            if (explosionSize > 0) {
+                explode(explosionSize - 1, [i, y]);
+            }
+        }
+
+        for(var j = y - 1; j <= y + 1; j++) {
+            if (j === y) continue;
+
+            if (explosionSize > 0) {
+                explode(explosionSize - 1, [x, j]);
+            }
+        }
 
         // this.position = {
         //     x: 7,
