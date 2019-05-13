@@ -41,14 +41,6 @@ export default class Grid {
         ctx.fillRect(canvasCoords[0], canvasCoords[1], 48, 48);
     }
 
-  
-
-
-
-
-
-
-
     //hard code initial gridarray
     //function to make that array reflect in canvas
 
@@ -64,7 +56,9 @@ export default class Grid {
     }
 
     canvasToArray(canvasPosition) {
-        return [canvasPosition[1] / 48, canvasPosition[0] / 48];
+        let x = Math.floor(canvasPosition[1]/48) * 48;
+        let y = Math.floor(canvasPosition[0]/48) * 48;
+        return [x / 48, y / 48];
     }
 
 

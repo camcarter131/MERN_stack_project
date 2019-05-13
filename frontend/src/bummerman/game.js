@@ -7,7 +7,7 @@ class Game {
         this.ctx = ctx;
 
         this.grid = new Grid(canvas, ctx);
-        this.player = new Player(canvas, ctx);
+        this.player = new Player(canvas, ctx, this.grid);
 
         this.initialTime = Date.now();
 
