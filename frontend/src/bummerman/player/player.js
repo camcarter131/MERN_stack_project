@@ -2,6 +2,7 @@ import Bomb from '../bomb';
 import { DOWN, UP, RIGHT, LEFT } from '../keys';
 import Input from '../input';
 import Sprite from './sprite';
+import Animation from '../animator/animation';
 
 class Player extends Sprite {
     constructor (canvas, ctx, img) {
@@ -13,6 +14,8 @@ class Player extends Sprite {
         this.erase = this.erase.bind(this);
 
         this.inputHandler = new Input(this);
+
+        this.animation = new Animation(ctx, this, { frames: [1, 2], loop: true });
     }
 
     handleInput(dt) {
@@ -42,6 +45,13 @@ class Player extends Sprite {
 
     update (dt) {
         this.handleInput(dt);
+        this.animation.update(dt);
+    }
+
+    render () {
+        // debugger;
+        super.render();
+        this.animation.render("y", 1);
     }
 
     // render () {
