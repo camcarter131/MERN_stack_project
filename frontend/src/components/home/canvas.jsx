@@ -1,7 +1,5 @@
 import React from 'react';
-import Grid from '../../bummerman/grid';
-import Player from '../../bummerman/player';
-import Input from '../../bummerman/input';
+import Game from '../../bummerman/game';
 
 class Canvas extends React.Component {
     constructor(props) {
@@ -14,13 +12,7 @@ class Canvas extends React.Component {
     }
     componentDidUpdate() {
         const ctx = this.state.canvas.getContext('2d');
-        this.grid = new Grid(this.state.canvas, ctx);
-        this.grid.drawGrid();
-        this.grid.populateGrid();
-
-        this.player = new Player(this.state.canvas, ctx);
-        this.player.render();
-        this.input = new Input(this.player);
+        this.game = new Game(this.state.canvas, ctx);
     }
 
     render() {

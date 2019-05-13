@@ -1,38 +1,53 @@
+import { SPACE, LEFT, UP, RIGHT, DOWN } from "./keys";
+
 export default class Input {
     constructor (player) {
         this.player = player;
-        this.handleInput = this.handleInput.bind(this);
-        document.addEventListener('keydown', this.handleInput.bind(this));
+        document.addEventListener('keydown', (e) => this.setKey(e, true));
+        document.addEventListener('keyup', (e) => this.setKey(e, false));
+
+        this.pressedKeys = {};
     }
 
-    handleInput(e) {
+    setKey(e, status) {
         e.preventDefault();
+        let key;
         switch (e.keyCode) {
+            case 32:
+                key = SPACE; 
+                break;
             case 37:
-                this.player.erase()
-                this.player.position.x -= this.player.width;
-                this.player.render()
+                key = LEFT; 
+                this.player.velocity.y = 0;
+                this.player.velocity.x = this.player.speed;
                 break;
             case 38:
-                this.player.erase()
-                this.player.position.y -= this.player.width;
-                this.player.render()
+                key = UP; 
+                this.player.velocity.x = 0;
+                this.player.velocity.y = this.player.speed;
                 break;
-            case 39:
-                this.player.erase()
-                this.player.position.x += this.player.width;
-                this.player.render()
+                case 39:
+                key = RIGHT; 
+                this.player.velocity.y = 0;
+                this.player.velocity.x = this.player.speed;
                 break;
-            case 40:
-                this.player.erase()
-                this.player.position.y += this.player.width;
-                this.player.render()
+                case 40:
+                key = DOWN; 
+                this.player.velocity.x = 0;
+                this.player.velocity.y = this.player.speed;
                 break;
-            case 32:
-                // this.player.dropBomb()
-                this.player.renderBomb();
-                break;
+            default:
+                // Convert ASCII codes to letters
+                key = String.fromCharCode(e.keyCode);
+
         }
+
+        this.pressedKeys[key] = status;
+        console.log(this.player.velocity);
+    }
+
+    isPressed (key) {
+        return this.pressedKeys[key];
     }
     
 }
