@@ -23,7 +23,7 @@ class Game {
     }
 
     init () {
-        this.player = new Player(this.canvas, this.ctx, this.rm.get("assets/images/df_bomber_ss.png"));
+        this.player = new Player(this.canvas, this.ctx, this.rm.get("assets/images/df_bomber_ss.png"), this.grid);
         this.start();
     }
     

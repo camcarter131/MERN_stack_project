@@ -5,31 +5,61 @@ import Sprite from './sprite';
 import Animation from '../animator/animation';
 
 class Player extends Sprite {
-    constructor (canvas, ctx, img) {
+    constructor (canvas, ctx, img, grid) {
         super (canvas, ctx, img);
-
         this.position.x = (canvas.width/2) + 24;
         this.position.y = (canvas.width/2) + 24;
-
+        this.renderSize = 48;
+        this.radius = this.renderSize/2;
+        this.radius_partial = Math.sqrt((this.radius**2)/2);
+        this.grid = grid;
         this.erase = this.erase.bind(this);
-
         this.inputHandler = new Input(this);
 
         this.animation = new Animation(ctx, this, { frames: [1, 2], loop: true });
     }
 
     handleInput(dt) {
+        
         if (this.inputHandler.isPressed(DOWN) || this.inputHandler.isPressed('s')) {
+            // let gridCoords = this.grid.canvasToArray([this.position.x, this.position.y + this.size.width]);
+            // let gridCoordsL = this.grid.canvasToArray([this.position.x - this.radius_partial, this.position.y + this.radius_partial]);
+            // let gridCoordsR = this.grid.canvasToArray([this.position.x + this.radius_partial, this.position.y + this.radius_partial]);
+
+            // if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' || this.grid.gridArray[gridCoordsL[0]][gridCoordsL[1]] === 'W' || this.grid.gridArray[gridCoordsR[0]][gridCoordsR[1]] === 'W') {
+            //     return null
+            // } else {
+            // }
             this.position.y += this.velocity.y * dt;
         }
         if (this.inputHandler.isPressed(UP) || this.inputHandler.isPressed('w')) {
+            // let gridCoords = this.grid.canvasToArray([this.position.x, this.position.y - this.radius]);
+            // let gridCoordsL = this.grid.canvasToArray([this.position.x - this.radius_partial, this.position.y - this.radius_partial]);
+            // let gridCoordsR = this.grid.canvasToArray([this.position.x + this.radius_partial, this.position.y - this.radius_partial]);
+
+            // if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' || this.grid.gridArray[gridCoordsL[0]][gridCoordsL[1]] === 'W' || this.grid.gridArray[gridCoordsR[0]][gridCoordsR[1]] === 'W') {
+            //     return null
+            // } else {
+            // }
             this.position.y -= this.velocity.y * dt;
         }
 
         if (this.inputHandler.isPressed(RIGHT) || this.inputHandler.isPressed('s')) {
+            let gridCoords = this.grid.canvasToArray([this.position.x + this.radius, this.position.y]);
+            let gridCoordsU = this.grid.canvasToArray([this.position.x + this.radius_partial, this.position.y - this.radius_partial]);
+            let gridCoordsD = this.grid.canvasToArray([this.position.x + this.radius_partial, this.position.y + this.radius_partial]);
+            if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' || this.grid.gridArray[gridCoordsU[0]][gridCoordsU[1]] === 'W' || this.grid.gridArray[gridCoordsD[0]][gridCoordsD[1]] === 'W') {
+                return null
+            }
             this.position.x += this.velocity.x * dt;
         }
         if (this.inputHandler.isPressed(LEFT) || this.inputHandler.isPressed('w')) {
+            let gridCoords = this.grid.canvasToArray([this.position.x - this.radius, this.position.y]);
+            let gridCoordsU = this.grid.canvasToArray([this.position.x - this.radius_partial, this.position.y - this.radius_partial]);
+            let gridCoordsD = this.grid.canvasToArray([this.position.x - this.radius_partial, this.position.y + this.radius_partial]);
+            if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' || this.grid.gridArray[gridCoordsU[0]][gridCoordsU[1]] === 'W' || this.grid.gridArray[gridCoordsD[0]][gridCoordsD[1]] === 'W') {
+                return null
+            }
             this.position.x -= this.velocity.x * dt;
         }
     }
