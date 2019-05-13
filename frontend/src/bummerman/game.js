@@ -35,7 +35,7 @@ class Game {
     render () {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         
-        this.grid.drawGrid();
+        // this.grid.drawGrid();
         this.grid.renderGame();
         
         this.player.render();
