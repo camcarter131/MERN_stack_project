@@ -3,10 +3,11 @@ import { SPACE, LEFT, UP, RIGHT, DOWN } from "./keys";
 export default class Input {
     constructor (player) {
         this.player = player;
+        this.pressedKeys = {};
+
         document.addEventListener('keydown', (e) => this.setKey(e, true));
         document.addEventListener('keyup', (e) => this.setKey(e, false));
-
-        this.pressedKeys = {};
+        window.addEventListener('blur', () => this.pressedKeys = {})        
     }
 
     setKey(e, status) {
