@@ -19,9 +19,11 @@ class Player extends Sprite {
         this.bombSize = 4;
         this.bombs = new Bombs(this);
         this.spaceBool = true;
+        this.isKilled = true;
         this.animation = new Animation(ctx, this, { frames: [1, 2], loop: true });
         window.bombQueue = this.bombs.bombQueue;
         this.lives = 3;
+        this.deathMonitoring = this.deathMonitoring.bind(this);
     }
 
     itemMonitoring(row, col){
@@ -46,13 +48,21 @@ class Player extends Sprite {
     }
 
     death() {
-        super.death();
+        // super.death();
+        console.log('u are dead');
     }
 
     deathMonitoring(row, col) {
         if (this.grid.gridArray[row][col] === 'E') {
-            this.death();
-            this.lives--;
+            if (this.isKilled) {
+                this.isKilled = false;
+                this.lives -= 1;
+                console.log(this.lives);
+                this.speed = 0;
+                setTimeout(() => this.speed = 200, 1000)
+            }
+        } else {
+            this.isKilled = true;
         }
     }
 
@@ -80,7 +90,7 @@ class Player extends Sprite {
             //     return null
             // } else {
             // }
-            this.deathMonitoring(gridCoords[0], gridCoords[1]);
+            // this.deathMonitoring(gridCoords[0], gridCoords[1]);
             this.itemMonitoring(gridCoords[0], gridCoords[1]);
 
             if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' 
@@ -101,7 +111,7 @@ class Player extends Sprite {
             //     return null
             // } else {
             // }
-            this.deathMonitoring(gridCoords[0], gridCoords[1]);
+            // this.deathMonitoring(gridCoords[0], gridCoords[1]);
             this.itemMonitoring(gridCoords[0], gridCoords[1]);
 
             if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' 
@@ -121,7 +131,7 @@ class Player extends Sprite {
             // if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' || this.grid.gridArray[gridCoordsU[0]][gridCoordsU[1]] === 'W' || this.grid.gridArray[gridCoordsD[0]][gridCoordsD[1]] === 'W') {
             //     return null
             // }
-            this.deathMonitoring(gridCoords[0], gridCoords[1]);
+            // this.deathMonitoring(gridCoords[0], gridCoords[1]);
             this.itemMonitoring(gridCoords[0], gridCoords[1]);
 
             if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' 
@@ -141,7 +151,7 @@ class Player extends Sprite {
             // if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' || this.grid.gridArray[gridCoordsU[0]][gridCoordsU[1]] === 'W' || this.grid.gridArray[gridCoordsD[0]][gridCoordsD[1]] === 'W') {
             //     return null
             // }
-            this.deathMonitoring(gridCoords[0], gridCoords[1]);
+            // this.deathMonitoring(gridCoords[0], gridCoords[1]);
             this.itemMonitoring(gridCoords[0], gridCoords[1]);
 
             if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' 

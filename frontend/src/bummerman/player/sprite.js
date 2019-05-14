@@ -37,13 +37,13 @@ class Sprite {
 
     }
 
-    death () {
-        // this.inputHandler = null;
-        this.size = {
-            width: 0,
-            height: 0
-        };
-    }
+    // death () {
+    //     this.inputHandler = null;
+    //     this.size = {
+    //         width: 0,
+    //         height: 0
+    //     };
+    // }
 
 }
 
