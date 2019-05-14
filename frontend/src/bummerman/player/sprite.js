@@ -1,4 +1,4 @@
-import Input from "../input";
+const Input = require("../input");
 
 class Sprite {
     constructor (canvas, ctx, img) {
@@ -24,6 +24,7 @@ class Sprite {
             x: 0,
             y: 0
         };
+        this.render = this.render.bind(this);
 
     }
 
@@ -33,10 +34,11 @@ class Sprite {
     }
 
     render () {
+        // debugger
         this.ctx.drawImage(this.img, 0, 0, this.size.width, this.size.height, this.position.x - (this.size.width/2), this.position.y - (this.size.height/2), 48, 48);// this.size.width, this.size.height);
 
     }
 
 }
 
-export default Sprite;
+module.exports = Sprite;

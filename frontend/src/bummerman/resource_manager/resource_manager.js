@@ -51,4 +51,4 @@ class ResourceManager {
     }
 }
 
-export default ResourceManager;
+module.exports = ResourceManager;

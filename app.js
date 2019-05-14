@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 const serv = require('http').Server(app);
 const db = require('./config/keys').mongoURI;
+const Game = require('./frontend/src/bummerman/game');
 
 // const player = require('./frontend/src/bummerman/player/player');
 
@@ -20,49 +21,38 @@ serv.listen(port);
 
 const io = require('socket.io')(serv,{});
 
+let counter = 0;
+
 const players = {};
 // const connectionsLimit = 4;
 
 
 io.sockets.on('connection', (socket) => {
+    counter += 1;
+    players[socket.id] = `${counter}`;
     console.log('socket connection');
+    console.log(players);
 
-    socket.on('disconnect', function () {
+    socket.on('disconnect', () => {
+        delete players[socket.id];
         console.log('user disconnected');
     });
 
+    if (Object.keys(players).length === 4) {
+        socket.emit('playerList', players);
+        // debugger
+        // Object.keys(players).forEach((player) => {
+        //     socket.emit('player', players[player])
+        // })
+    }
 
 
-
-
-
-
-
-<<<<<<< HEAD
-    
     // if(io.engine.clientsCount > connectionsLimit) {
     //     socket.emit('err', { message: 'reach the limit of connections' });
     //     socket.disconnect();
     //     console.log('Disconnected...');
     //     return;
     // }
-=======
-
-    // not working 
-    if(io.engine.clientsCount > connectionsLimit) {
-        socket.emit('err', { message: 'reach the limit of connections' });
-        socket.disconnect();
-        console.log('Disconnected...');
-        return;
-    }
-
-
-
-
-
->>>>>>> 30104f56a73da917b1d93331462bab37dc340177
-
-
 
     // examples of how to transfer data back and forth
     // socket.on('happy', function(data) {
@@ -73,3 +63,5 @@ io.sockets.on('connection', (socket) => {
     //     msg: 'you have one life remaining'
     // });
 });
+
+

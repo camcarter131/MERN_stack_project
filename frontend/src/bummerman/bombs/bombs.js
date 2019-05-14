@@ -1,7 +1,7 @@
 // Queue (FIFO) with an exception - SuperBomb will skip to the front
-import Bomb from './bomb';
+const Bomb =require('./bomb');
 
-export default class Bombs {
+class Bombs {
     constructor(player) {
         this.bombQueue = [new Bomb(player)];
     }
@@ -16,3 +16,5 @@ export default class Bombs {
         if (bomb) bomb.deploy(explosionSize, playerPosition);
     }
 }
+
+module.exports = Bombs;

@@ -1,4 +1,4 @@
-export default class Bomb {
+class Bomb {
 
     static renderBomb(ctx, position){
         ctx.fillStyle = "#ff0000";
@@ -194,3 +194,5 @@ export default class Bomb {
     // }
 
 }
+
+module.exports = Bomb;

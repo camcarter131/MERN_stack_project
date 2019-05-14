@@ -1,8 +1,8 @@
-import Wall from './wall';
-import Object from './object';
-import Bomb from './bombs/bomb';
+const Wall = require('./wall');
+const Object = require('./object');
+const Bomb = require('./bombs/bomb');
 
-export default class Grid {
+class Grid {
 
     constructor(canvas, ctx){
         this.ctx = ctx;
@@ -10,8 +10,8 @@ export default class Grid {
         this.width = canvas.width;
         this.gridArray = [...Array(17)].map(e => ["X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X"]);
         this.createWalls();
-        this.createObjects();
-        this.renderGame(this.ctx);
+        // this.createObjects();
+        // this.renderGame(this.ctx);
     }
 
     //populates gridarray with W's
@@ -135,3 +135,4 @@ export default class Grid {
 
 }
 
+module.exports = Grid;

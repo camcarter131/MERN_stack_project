@@ -1,14 +1,13 @@
-import Bombs from '../bombs/bombs';
-import { DOWN, UP, RIGHT, LEFT, SPACE } from '../keys';
-import Input from '../input';
-import Sprite from './sprite';
-import Animation from '../animator/animation';
+const Bombs = require('../bombs/bombs');
+const { DOWN, UP, RIGHT, LEFT, SPACE } = require('../keys');
+const Input = require('../input');
+const Sprite = require('./sprite');
+const Animation = require('../animator/animation');
 
 class Player extends Sprite {
-    constructor (canvas, ctx, img, grid) {
+    constructor (position, canvas, ctx, img, grid) {
         super (canvas, ctx, img);
-        this.position.x = 16+48;
-        this.position.y = canvas.height - 34-48;
+        this.position = position;
         this.renderSize = 48;
         this.radius = this.renderSize/2; 
         this.radius_partial = Math.sqrt((this.radius**2)/2);
@@ -19,6 +18,7 @@ class Player extends Sprite {
         this.bombSize = 4;
         this.bombs = new Bombs(this);
         this.animation = new Animation(ctx, this, { frames: [1, 2], loop: true });
+        this.render = this.render.bind(this);
     }
 
     handleInput(dt) {
@@ -152,4 +152,4 @@ class Player extends Sprite {
     // }
 }
 
-export default Player;
+module.exports = Player;

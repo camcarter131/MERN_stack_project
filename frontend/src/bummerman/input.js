@@ -1,7 +1,7 @@
-import { SPACE, LEFT, UP, RIGHT, DOWN } from "./keys";
-import Bomb from './bombs/bomb';
+const keys = require("./keys");
+const Bomb =require('./bombs/bomb');
 
-export default class Input {
+class Input {
     constructor (player) {
         this.player = player;
         this.pressedKeys = {};
@@ -16,19 +16,19 @@ export default class Input {
         let key;
         switch (e.keyCode) {
             case 32:
-                key = SPACE;
+                key = keys.SPACE;
                 break;
             case 37:
-                key = LEFT; 
+                key = keys.LEFT; 
                 break;
             case 38:
-                key = UP; 
+                key = keys.UP; 
                 break;
             case 39:
-                key = RIGHT; 
+                key = keys.RIGHT; 
                 break;
             case 40:
-                key = DOWN; 
+                key = keys.DOWN; 
                 break;
             default:
                 // Convert ASCII codes to letters
@@ -44,3 +44,5 @@ export default class Input {
     }
     
 }
+
+module.exports = Input;

@@ -1,4 +1,4 @@
-export default class Object {
+class Object {
     constructor(ctx, position) {
         this.ctx = ctx;
         this.position = position;
@@ -11,3 +11,5 @@ export default class Object {
         this.ctx.fillRect(this.position[0], this.position[1], 48, 48);
     }
 }
+
+module.exports = Object;

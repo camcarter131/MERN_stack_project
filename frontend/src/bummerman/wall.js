@@ -1,4 +1,4 @@
-export default class Wall {
+class Wall {
     constructor(ctx, position) {
         this.ctx = ctx;
         this.position = position;
@@ -9,3 +9,5 @@ export default class Wall {
         this.ctx.fillRect(this.position[0], this.position[1], 48, 48);
     }
 }
+
+module.exports = Wall;
