@@ -37,7 +37,7 @@ io.sockets.on('connection', (socket) => {
 
 
 
-    
+
     // not working 
     if(io.engine.clientsCount > connectionsLimit) {
         socket.emit('err', { message: 'reach the limit of connections' });
@@ -50,7 +50,6 @@ io.sockets.on('connection', (socket) => {
 
 
 
-    // sockets test from cam's computer
 
 
 
