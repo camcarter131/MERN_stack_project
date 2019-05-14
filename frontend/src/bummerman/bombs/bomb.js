@@ -201,7 +201,7 @@ export default class Bomb {
         
         setTimeout(() => {
             this.clearExplosion();
-            // this.player.bombs.pickUpBomb(this);
+            this.player.bombs.pickUpBomb(this);
             }, 3000);
         
     }
