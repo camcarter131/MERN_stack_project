@@ -26,14 +26,18 @@ class Player extends Sprite {
         switch(this.grid.gridArray[row][col]){
             case "I1":
                 this.bombs.pickUpBomb();
-                setTimeout(() => this.grid.gridArray[row][col] = 'X', 500);
+                this.grid.gridArray[row][col] = 'X';
                 break;
             case "I2":
                 this.speed *= 2;
                 this.grid.gridArray[row][col] = 'X';
-                setTimeout(() => {this.speed /= 2}, 5000);
+                setTimeout(() => {this.speed /= 2; }, 5000);
                 break;
-            
+            case "I3":
+                this.bombSize *= 2;
+                setTimeout(() => { this.bombSize /= 2; }, 5000);
+                this.grid.gridArray[row][col] = 'X';
+                break;
             default:
                 break;
         }
