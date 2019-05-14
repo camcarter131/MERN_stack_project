@@ -21,6 +21,7 @@ class Player extends Sprite {
         this.spaceBool = true;
         this.animation = new Animation(ctx, this, { frames: [1, 2], loop: true });
         window.bombQueue = this.bombs.bombQueue;
+        this.lives = 3;
     }
 
     itemMonitoring(row, col){
@@ -44,7 +45,20 @@ class Player extends Sprite {
         }
     }
 
+    death() {
+        super.death();
+    }
+
+    deathMonitoring(row, col) {
+        if (this.grid.gridArray[row][col] === 'E') {
+            this.death();
+            this.lives--;
+        }
+    }
+
     handleInput(dt) {
+        let currPos = this.grid.canvasToArray([this.position.x, this.position.y]);
+        this.deathMonitoring(currPos[0], currPos[1]);
 
         if (this.inputHandler.isPressed(SPACE)) {
                 if (this.spaceBool){
@@ -66,11 +80,12 @@ class Player extends Sprite {
             //     return null
             // } else {
             // }
+            this.deathMonitoring(gridCoords[0], gridCoords[1]);
             this.itemMonitoring(gridCoords[0], gridCoords[1]);
 
             if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' 
             || this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'O') {
-                return null
+                return null;
             } else {
                 this.position.y += this.velocity.y * dt;
             }
@@ -86,6 +101,7 @@ class Player extends Sprite {
             //     return null
             // } else {
             // }
+            this.deathMonitoring(gridCoords[0], gridCoords[1]);
             this.itemMonitoring(gridCoords[0], gridCoords[1]);
 
             if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' 
@@ -105,6 +121,7 @@ class Player extends Sprite {
             // if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' || this.grid.gridArray[gridCoordsU[0]][gridCoordsU[1]] === 'W' || this.grid.gridArray[gridCoordsD[0]][gridCoordsD[1]] === 'W') {
             //     return null
             // }
+            this.deathMonitoring(gridCoords[0], gridCoords[1]);
             this.itemMonitoring(gridCoords[0], gridCoords[1]);
 
             if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' 
@@ -124,6 +141,7 @@ class Player extends Sprite {
             // if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' || this.grid.gridArray[gridCoordsU[0]][gridCoordsU[1]] === 'W' || this.grid.gridArray[gridCoordsD[0]][gridCoordsD[1]] === 'W') {
             //     return null
             // }
+            this.deathMonitoring(gridCoords[0], gridCoords[1]);
             this.itemMonitoring(gridCoords[0], gridCoords[1]);
 
             if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' 
