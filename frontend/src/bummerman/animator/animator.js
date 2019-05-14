@@ -35,7 +35,7 @@ class Animator {
     render () {
         // Object.values(this.assets).forEach((sprite, idx) => this.ctx.drawImage(sprite, idx*48, 64));
         // debugger;
-        // this.ctx.drawImage(this.assets.undefined, 64, 64);
+        if (this.assets["bomber_0_0"]) this.ctx.drawImage(this.assets.bomber_0_0, 64, 64);
     }
 }
 

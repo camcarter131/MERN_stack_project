@@ -21,7 +21,7 @@ class Game {
     }
 
     init () {
-        window.sheet = new SpriteSheet(this.rm.get("assets/images/df_bomber_ss.png"), { rows: 4, cols: 3});
+        // window.sheet = new SpriteSheet(this.rm.get("assets/images/df_bomber_ss.png"), { rows: 4, cols: 3});
         this.animator = new Animator(this.ctx, new SpriteSheet(this.rm.get("assets/images/df_bomber_ss.png"), { rows: 4, cols: 3, name: 'bomber' }));
         // debugger;
         // window.sprites = window.sheet.generateSprites();
