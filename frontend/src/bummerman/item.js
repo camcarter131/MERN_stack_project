@@ -8,6 +8,10 @@ export default class Bomb {
         ctx.fillStyle = "#ec170c";
         ctx.fillRect(position[0], position[1], 48, 48);
     }
+    static renderI3(ctx, position) {
+        ctx.fillStyle = "#81F353";
+        ctx.fillRect(position[0], position[1], 48, 48);
+    }
 
     static itemSelector(){
         //legend
@@ -16,7 +20,7 @@ export default class Bomb {
         //I3 = fire+
         //I4 = invisibility
         // let options = ["X", "I1", "I2"];
-        let options = ["I1"];
+        let options = ["I3"];
         let item = options[Math.floor(Math.random() * options.length)];
         return item;
     }
