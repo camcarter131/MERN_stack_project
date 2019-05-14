@@ -1,4 +1,4 @@
-import Bombs from '../bombs/bombs'
+import Bombs from '../bombs/bombs';
 import { DOWN, UP, RIGHT, LEFT, SPACE } from '../keys';
 import Input from '../input';
 import Sprite from './sprite';

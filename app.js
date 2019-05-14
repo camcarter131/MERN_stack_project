@@ -4,30 +4,51 @@ const app = express();
 const serv = require('http').Server(app);
 const db = require('./config/keys').mongoURI;
 
+// const player = require('./frontend/src/bummerman/player/player');
+
+
 
 mongoose
-.connect(db, { useNewUrlParser: true })
-.then(() => console.log("Connected to MongoDB successfully"))
-.catch(err => console.log(err));
+    .connect(db, { useNewUrlParser: true })
+    .then(() => console.log("Connected to MongoDB successfully"))
+    .catch(err => console.log(err));
 
 app.get("/", (req, res) => res.sendFile(__dirname + '/frontend/public/index.html'));
 app.use('/public', express.static(__dirname + '/public'));
 const port = process.env.PORT || 5000;
 serv.listen(port);
 
-
-// app.listen(port, () => console.log(`Server is running on port ${port}`));
-
-var SOCKET_LIST = {};
-
 const io = require('socket.io')(serv,{});
+const players = {};
+const connectionsLimit = 4;
 
 
 io.sockets.on('connection', (socket) => {
     console.log('socket connection');
 
-    socket.id = Math.random();
-    SOCKET_LIST[socket.id] = socket;
+    socket.on('disconnect', function () {
+        console.log('user disconnected');
+    });
+
+
+    // not working 
+    if(io.engine.clientsCount > connectionsLimit) {
+        socket.emit('err', { message: 'reach the limit of connections' });
+        socket.disconnect();
+        console.log('Disconnected...');
+        return;
+    }
+
+    
+    
+
+
+
+
+
+
+
+
 
     // socket.on('happy', function(data) {
     //     console.log('happy (received from client) ' + data.reason);
