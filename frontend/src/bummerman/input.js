@@ -1,5 +1,4 @@
 import { SPACE, LEFT, UP, RIGHT, DOWN } from "./keys";
-import Bomb from './bombs/bomb';
 
 export default class Input {
     constructor (player) {

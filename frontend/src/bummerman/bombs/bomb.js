@@ -10,6 +10,11 @@ export default class Bomb {
         ctx.fillRect(position[0], position[1], 48, 48);
     }
 
+    static renderExplosionObstacle(ctx, position){
+        ctx.fillStyle = "#ffff00";
+        ctx.fillRect(position[0], position[1], 48, 48);
+    }
+
     constructor(player) {
         // this.img = '';
         // this.flickerIntervalId = null;
@@ -62,8 +67,8 @@ export default class Bomb {
             //not on border, not a Wall, not an Obstacle => change gridArray letter to E && decrement bombsize
             if (
                 row - i >= 1 
-                && gridArray[row - i][col] != 'W' 
-                && gridArray[row - i][col] != 'O' 
+                && gridArray[row - i][col] !== 'W' 
+                && gridArray[row - i][col] !== 'O' 
                 && upClear 
                 && obstacleClearUp
                 ){
@@ -71,7 +76,7 @@ export default class Bomb {
                 gridArray[row - i][col] = 'E';
                 if (bombSize === 0) break;
             //if it is an obstacle OR we've already encountered an obstacle in the up direction
-            } else if ((row - i >= 1 && gridArray[row - i][col] === 'O') || !obstacleClearUp) {
+            } else if ((row - i >= 1 && upClear && gridArray[row - i][col] === 'O') || !obstacleClearUp) {
                 //if it's the first obstacle we've encoutered, destroy it and set boolean false but still decrement so explosion doesn't extend
                 if (obstacleClearUp) {
                     gridArray[row - i][col] = 'EO';
@@ -86,13 +91,17 @@ export default class Bomb {
 
             //DOWN---------
 
-            if (row + i <= 15 && gridArray[row + i][col] != 'W' && downClear){
-                // debugger 
+            if (
+                    row + i <= 15 
+                    && gridArray[row + i][col] !== 'W' 
+                    && gridArray[row + i][col] !== 'O' 
+                    && downClear
+                    && obstacleClearDown
+                ){
                 bombSize -= 1;
                 gridArray[row + i][col] = 'E';
                 if (bombSize === 0) break;
-            } else if ((row + i <= 15 && gridArray[row + i][col] === 'O') || !obstacleClearDown) {
-                // debugger
+            } else if ((row + i <= 15 && downClear && gridArray[row + i][col] === 'O') || !obstacleClearDown) {
                 //if it's the first obstacle we've encoutered, destroy it and set boolean false
                 if (obstacleClearDown) {
                     gridArray[row + i][col] = 'EO';
@@ -106,11 +115,17 @@ export default class Bomb {
 
             //LEFT---------
 
-            if (col - i >= 1 && gridArray[row][col - i] != 'W' && leftClear){
+            if (
+                    col - i >= 1 
+                    && gridArray[row][col - i] !== 'W' 
+                    && gridArray[row][col - i] !== 'O' 
+                    && leftClear
+                    && obstacleClearLeft
+                ){
                 bombSize -= 1;
                 gridArray[row][col - i] = 'E';
                 if (bombSize === 0) break;
-            } else if ((col - i >= 1 &&gridArray[row][col - i] === 'O') || !obstacleClearLeft) {
+            } else if ((col - i >= 1 && leftClear && gridArray[row][col - i] === 'O') || !obstacleClearLeft) {
                 //if it's the first obstacle we've encoutered, destroy it and set boolean false
                 if (obstacleClearLeft) {
                     gridArray[row][col - i] = 'EO';
@@ -124,11 +139,17 @@ export default class Bomb {
 
             //RIGHT---------
 
-            if (col + i <= 15 && gridArray[row][col + i] != 'W' && rightClear){
+            if (
+                    col + i <= 15 
+                    && gridArray[row][col + i] !== 'W' 
+                    && gridArray[row][col + i] !== 'O' 
+                    && rightClear
+                    && obstacleClearRight
+                ){
                 bombSize -= 1;
                 gridArray[row][col + i] = 'E';
                 if (bombSize === 0) break;
-            } else if ((col + i <= 15 &&gridArray[row][col + i] === 'O') || !obstacleClearRight) {
+            } else if ((col + i <= 15 && rightClear && gridArray[row][col + i] === 'O') || !obstacleClearRight) {
                 //if it's the first obstacle we've encoutered, destroy it and set boolean false
                 if (obstacleClearRight) {
                     gridArray[row][col + i] = 'EO';

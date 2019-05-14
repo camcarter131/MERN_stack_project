@@ -80,6 +80,9 @@ export default class Grid {
                     case "E":
                         Bomb.renderExplosion(this.ctx, canvasCoords);
                         break;
+                    case "EO":
+                        Bomb.renderExplosionObstacle(this.ctx, canvasCoords);
+                        break;
                     default:
                         break;
                 }
