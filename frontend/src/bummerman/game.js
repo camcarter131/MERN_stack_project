@@ -17,14 +17,15 @@ class Game {
         this.rm.load("assets/images/df_bomber_ss.png");
         this.rm.onReady(this.init.bind(this));
         
-        this.init();
+        // this.init();
     }
 
     init () {
-        // this.animator = new Animator(this.ctx, new SpriteSheet(this.rm.get("assets/images/df_bomber_ss.png"), { rows: 4, cols: 3 }));
-        window.sheet = new SpriteSheet(this.rm.get("assets/images/df_bomber_ss.png"), { rows: 4, cols: 3 });
-        // window.sprites = window.sheet.generateSprites(this.ctx);
-        this.player = new Player(this.canvas, this.ctx, this.rm.get("assets/images/df_bomber_ss.png"), this.grid);
+        window.sheet = new SpriteSheet(this.rm.get("assets/images/df_bomber_ss.png"), { rows: 4, cols: 3});
+        this.animator = new Animator(this.ctx, new SpriteSheet(this.rm.get("assets/images/df_bomber_ss.png"), { rows: 4, cols: 3, name: 'bomber' }));
+        // debugger;
+        // window.sprites = window.sheet.generateSprites();
+        // this.player = new Player(this.canvas, this.ctx, this.rm.get("assets/images/df_bomber_ss.png"), this.grid);
         this.start();
     }
     
@@ -42,6 +43,8 @@ class Game {
         // this.player.render();
 
         // this.sprite.render();
+
+        this.animator.render();
     }
 
     start () {

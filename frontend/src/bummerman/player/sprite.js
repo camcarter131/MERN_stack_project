@@ -1,11 +1,11 @@
-import Input from "../input";
+// import Input from "../input";
 
 class Sprite {
-    constructor (img, name) {
+    constructor (imgData, name) {
         // this.canvas = canvas;
         // this.ctx = ctx;
 
-        this.img = img;
+        this.imgData = imgData;
         this.name = name;
 
         // this.inputHandler = new Input(this);
