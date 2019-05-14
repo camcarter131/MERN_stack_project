@@ -19,8 +19,9 @@ const port = process.env.PORT || 5000;
 serv.listen(port);
 
 const io = require('socket.io')(serv,{});
+
 const players = {};
-const connectionsLimit = 4;
+// const connectionsLimit = 4;
 
 
 io.sockets.on('connection', (socket) => {
@@ -38,22 +39,16 @@ io.sockets.on('connection', (socket) => {
 
 
     
-    // not working 
-    if(io.engine.clientsCount > connectionsLimit) {
-        socket.emit('err', { message: 'reach the limit of connections' });
-        socket.disconnect();
-        console.log('Disconnected...');
-        return;
-    }
+    // if(io.engine.clientsCount > connectionsLimit) {
+    //     socket.emit('err', { message: 'reach the limit of connections' });
+    //     socket.disconnect();
+    //     console.log('Disconnected...');
+    //     return;
+    // }
 
 
 
-
-
-    // sockets test from cam's computer
-
-
-
+    // examples of how to transfer data back and forth
     // socket.on('happy', function(data) {
     //     console.log('happy (received from client) ' + data.reason);
     // });
