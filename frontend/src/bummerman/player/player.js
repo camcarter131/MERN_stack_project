@@ -17,13 +17,13 @@ class Player extends Sprite {
         this.inputHandler = new Input(this);
         //5 refers to the total number of squares an explosion will cover
         this.bombSize = 4;
-        this.lives = 6;
+        this.lives = 3 ;
         this.bombs = new Bombs(this);
         this.spaceBool = true;
         this.isKilled = true;
+        this.shouldEndGame = true;
         this.animation = new Animation(ctx, this, { frames: [1, 2], loop: true });
         window.bombQueue = this.bombs.bombQueue;
-        this.lives = 3;
         this.deathMonitoring = this.deathMonitoring.bind(this);
     }
 
@@ -83,9 +83,30 @@ class Player extends Sprite {
     }
 
     livesDepleted(){
-        if(this.lives === 0){
-            alert("GAME OVER, send 0.001 bitcoins to stefandabroski@gmail.com to play again");
+        if(this.lives === 0 && this. shouldEndGame) {
+            this.shouldEndGame = false;
+
+            this.speed = 0;
+            this.size.width = 0;
+            this.size.height = 0;
+
+            var a = setInterval(() => {
+                let randRow = Math.floor(Math.random() * this.grid.gridArray.length);
+                let randCol = Math.floor(Math.random() * this.grid.gridArray.length);
+
+                if (this.grid.gridArray[randRow][randCol] !== "W") {
+                    this.grid.gridArray[randRow][randCol] = "W";
+                }
+            }, 1);
+            // a(); 
+            
+            setTimeout(() => clearInterval(a), 10000); 
+                
+            // if(this.lives === 0){
+            //     alert("GAME OVER, send 0.001 bitcoins to stefandabroski@gmail.com to play again");
+            // }
         }
+        
     }
 
     handleInput(dt) {
@@ -94,7 +115,7 @@ class Player extends Sprite {
 
         this.deathMonitoring(currPos[0], currPos[1]);
         this.itemMonitoring(currPos[0], currPos[1]);
-        // this.livesDepleted(); 
+        this.livesDepleted(); 
 
         if (this.inputHandler.isPressed(SPACE)) {
                 if (this.spaceBool){
