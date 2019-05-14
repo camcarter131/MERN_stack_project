@@ -2,7 +2,7 @@ export default class Object {
     constructor(ctx, position) {
         this.ctx = ctx;
         this.position = position;
-        this.items = ['superbomb+', 'bomb+', 'speed+', 'fire+'];
+        this.items = ['superbomb+', 'bomb+', 'speed+', 'fire+', '', '', '', ''];
         this.item = this.items[Math.floor(Math.random() * this.items.length)];
     }
 

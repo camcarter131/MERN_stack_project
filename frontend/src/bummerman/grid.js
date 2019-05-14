@@ -59,6 +59,7 @@ export default class Grid {
     //B = bomb
     //F = bomb fire
     //X = background image
+    //I1 = item 1 etc.....
 
     renderGame() {
         this.gridArray.forEach((row, x) => {

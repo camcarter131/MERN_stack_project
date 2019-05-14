@@ -15,6 +15,8 @@ class Player extends Sprite {
         this.grid = grid;
         this.erase = this.erase.bind(this);
         this.inputHandler = new Input(this);
+        //5 refers to the total number of squares an explosion will cover
+        this.bombSize = 4;
         this.bombs = new Bombs(this);
         this.animation = new Animation(ctx, this, { frames: [1, 2], loop: true });
     }

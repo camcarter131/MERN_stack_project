@@ -17,6 +17,8 @@ export default class Bomb {
         // this.grid = grid;
         this.player = player;
         this.deploy = this.deploy.bind(this);
+
+        this.explodeBothWays = this.explodeBothWays.bind(this);
         
         // this.explode = this.explode.bind(this);
         // this.flicker = this.flicker.bind(this);
@@ -33,32 +35,146 @@ export default class Bomb {
     //     // setTimeout(this.flicker, 2000);
     // }
 
-    deploy() {
-        const position = this.player.grid.canvasToArray([this.player.position.x, this.player.position.y]);
-        this.player.grid.gridArray[position[0]][position[1]] = 'B';
+
+
+    explodeBothWays(
+        position, 
+        upClear=true, 
+        downClear=true, 
+        leftClear=true, 
+        rightClear=true, 
+        obstacleClearUp = true,
+        obstacleClearDown = true,
+        obstacleClearLeft = true,
+        obstacleClearRight = true
+        ) {
+        // let position = this.player.grid.canvasToArray([this.player.position.x, this.player.position.y]);
         let row = position[0];
         let col = position[1];
         let gridArray = this.player.grid.gridArray;
+        let bombSize = this.player.bombSize; //4
+    
+
+        for(let i = 1; bombSize >  0; i++){
+
+            //UP---------
+
+            //not on border, not a Wall, not an Obstacle => change gridArray letter to E && decrement bombsize
+            if (
+                row - i >= 1 
+                && gridArray[row - i][col] != 'W' 
+                && gridArray[row - i][col] != 'O' 
+                && upClear 
+                && obstacleClearUp
+                ){
+                bombSize -= 1;
+                gridArray[row - i][col] = 'E';
+                if (bombSize === 0) break;
+            //if it is an obstacle OR we've already encountered an obstacle in the up direction
+            } else if ((row - i >= 1 && gridArray[row - i][col] === 'O') || !obstacleClearUp) {
+                //if it's the first obstacle we've encoutered, destroy it and set boolean false but still decrement so explosion doesn't extend
+                if (obstacleClearUp) {
+                    gridArray[row - i][col] = 'EO';
+                    obstacleClearUp = false;
+                }
+                bombSize -= 1;
+                if (bombSize === 0) break;
+            //it's a wall
+            } else {
+                upClear = false;
+            }
+
+            //DOWN---------
+
+            if (row + i <= 15 && gridArray[row + i][col] != 'W' && downClear){
+                // debugger 
+                bombSize -= 1;
+                gridArray[row + i][col] = 'E';
+                if (bombSize === 0) break;
+            } else if ((row + i <= 15 && gridArray[row + i][col] === 'O') || !obstacleClearDown) {
+                // debugger
+                //if it's the first obstacle we've encoutered, destroy it and set boolean false
+                if (obstacleClearDown) {
+                    gridArray[row + i][col] = 'EO';
+                    obstacleClearDown = false;
+                }
+                bombSize -= 1;
+                if (bombSize === 0) break;
+            } else {
+                downClear = false;
+            }
+
+            //LEFT---------
+
+            if (col - i >= 1 && gridArray[row][col - i] != 'W' && leftClear){
+                bombSize -= 1;
+                gridArray[row][col - i] = 'E';
+                if (bombSize === 0) break;
+            } else if ((col - i >= 1 &&gridArray[row][col - i] === 'O') || !obstacleClearLeft) {
+                //if it's the first obstacle we've encoutered, destroy it and set boolean false
+                if (obstacleClearLeft) {
+                    gridArray[row][col - i] = 'EO';
+                    obstacleClearLeft = false;
+                }
+                bombSize -= 1;
+                
+            } else {
+                leftClear = false;
+            }
+
+            //RIGHT---------
+
+            if (col + i <= 15 && gridArray[row][col + i] != 'W' && rightClear){
+                bombSize -= 1;
+                gridArray[row][col + i] = 'E';
+                if (bombSize === 0) break;
+            } else if ((col + i <= 15 &&gridArray[row][col + i] === 'O') || !obstacleClearRight) {
+                //if it's the first obstacle we've encoutered, destroy it and set boolean false
+                if (obstacleClearRight) {
+                    gridArray[row][col + i] = 'EO';
+                    obstacleClearRight = false;
+                }
+                bombSize -= 1;
+                if (bombSize === 0) break;
+            } else {
+                rightClear = false;
+            }
+        }
+    }
+
+    clearExplosion(){
+        let gridArray = this.player.grid.gridArray;
+
+        for(let row = 0; row< gridArray.length; row++){
+            for(let col = 0; col < gridArray.length; col++){
+                if(gridArray[row][col] === 'E') gridArray[row][col] = 'X';
+                if(gridArray[row][col] === 'EO') gridArray[row][col] = 'I';
+            }
+        }
+    }
+    
+    deploy() {
+        const position = this.player.grid.canvasToArray([this.player.position.x, this.player.position.y]);
+        this.player.grid.gridArray[position[0]][position [1]] = 'B';
+        let row = position[0];
+        let col = position[1];
+        let gridArray = this.player.grid.gridArray;
+
+
         
         setTimeout(() => {
+
+            
             this.player.grid.gridArray[position[0]][position[1]] = 'E';
+            this.explodeBothWays(position);
 
-
-            if (row - 1 >= 1 && gridArray[row - 1][col] != 'W') gridArray[row - 1][col] = 'E';
-            if (row + 1 <= 15 && gridArray[row + 1][col] != 'W') gridArray[row + 1][col] = 'E';
-            if (col - 1 >= 1 && gridArray[row][col - 1] != 'W') gridArray[row][col - 1] = 'E';
-            if (col + 1 <= 15 && gridArray[row][col + 1] != 'W') gridArray[row][col + 1] = 'E';
             
         }, 2000);
         
         setTimeout(() => {
-               this.player.bombs.pickUp(this);
-            
-                if (row - 1 >= 1 && gridArray[row - 1][col] != 'W') gridArray[row - 1][col] = 'X';
-                if (row + 1 <= 15 && gridArray[row + 1][col] != 'W') gridArray[row + 1][col] = 'X';
-                if (col - 1 >= 1 && gridArray[row][col - 1] != 'W') gridArray[row][col - 1] = 'X';
-                if (col + 1 <= 15 && gridArray[row][col + 1] != 'W') gridArray[row][col + 1] = 'X';
-                this.player.grid.gridArray[position[0]][position[1]] = 'X';
+            this.clearExplosion();
+            // this.player.grid.gridArray[position[0]][position[1]] = 'X';
+            this.player.bombs.pickUp(this);
             }, 3000);
         
     }
