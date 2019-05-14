@@ -25,6 +25,23 @@ class Player extends Sprite {
         window.bombQueue = this.bombs.bombQueue;
         this.lives = 3;
         this.deathMonitoring = this.deathMonitoring.bind(this);
+
+        for (let i = 0; i < this.lives; i++) {
+            let heartIcon = document.createElement("IMG");
+            heartIcon.setAttribute("src", "heart.png");
+            heartIcon.setAttribute("width", "48");
+            heartIcon.setAttribute("height", "48");
+            document.getElementById('lives').appendChild(heartIcon);
+        }
+
+        for (let j = 0; j < this.bombs.bombQueue.length; j++) {
+            let bombIcon = document.createElement("IMG");
+            bombIcon.setAttribute("src", "bomb.png");
+            bombIcon.setAttribute("width", "48");
+            bombIcon.setAttribute("height", "48");
+            document.getElementById('bombs').appendChild(bombIcon);
+        }
+
     }
 
     itemMonitoring(row, col){
@@ -182,13 +199,15 @@ class Player extends Sprite {
         // debugger;
 
         super.render();
-        document.getElementById("lives").innerHTML = `num lives: ${this.lives}`;
-        document.getElementById("bombs").innerHTML = `num bombs ${this.bombs.bombQueue.length}`;
+        
+        // document.getElementById("stefan").innerHTML = `num lives: ${this.lives}`;
+        // document.getElementById("bombs").innerHTML = `num bombs ${this.bombs.bombQueue.length}`;
         //https://t6.rbxcdn.com/fcf99f49b7677fad75fbba9cb0281f09
 
 
         // this.animation.render("y", 1);
     }
+
 }
 
 export default Player;
