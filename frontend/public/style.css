@@ -1,0 +1,24 @@
+#lives{
+    font-size: 14px;
+    width: 100px;
+    height: 100px;
+    background-color: yellowgreen;
+}
+
+#bombs{
+    display: flex;
+    font-size: 14px;
+    width: 100px;
+    height: 100px;
+    background-color: orange;
+}
+
+#main-container {
+    display: flex;
+}
+
+#stats-container{
+    display: flex;
+    flex-direction: column;
+    margin-top: 300px;
+}

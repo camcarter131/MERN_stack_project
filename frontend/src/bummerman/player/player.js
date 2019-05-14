@@ -17,10 +17,14 @@ class Player extends Sprite {
         this.inputHandler = new Input(this);
         //5 refers to the total number of squares an explosion will cover
         this.bombSize = 4;
+        this.lives = 3;
         this.bombs = new Bombs(this);
         this.spaceBool = true;
         this.animation = new Animation(ctx, this, { frames: [1, 2], loop: true });
         window.bombQueue = this.bombs.bombQueue;
+
+        //lives
+
     }
 
     itemMonitoring(row, col){
@@ -151,40 +155,15 @@ class Player extends Sprite {
 
     render () {
         // debugger;
+
         super.render();
+        document.getElementById("lives").innerHTML = `num lives: ${this.lives}`;
+        document.getElementById("bombs").innerHTML = `num bombs ${this.bombs.bombQueue.length}`;
+        //https://t6.rbxcdn.com/fcf99f49b7677fad75fbba9cb0281f09
+
+
         // this.animation.render("y", 1);
     }
-
-    // render () {
-    //     this.ctx.fillStyle = this.color;
-    //     this.ctx.beginPath();
-    //     this.ctx.arc(this.position.x, this.position.y, this.radius, 0, 2 * Math.PI);
-    //     this.ctx.closePath();
-    //     this.ctx.fill();
-    // }
-
-    // renderBomb() {
-    //     let x = this.position.x - this.width; 
-    //     let y = this.position.y -this.height;
-    //     this.ctx.fillStyle = "#000000";
-    //     this.ctx.beginPath();
-    //     this.ctx.arc(this.position.x - this.width, this.position.y - this.height, this.radius, 0, 2 * Math.PI);
-    //     this.ctx.closePath();
-    //     this.ctx.fill();
-    //     setTimeout(() => {
-    //         this.ctx.fillStyle = "#ffffff";
-    //         this.ctx.beginPath();
-    //         this.ctx.arc(x, y, this.radius, 0, 2 * Math.PI);
-    //         this.ctx.closePath();
-    //         this.ctx.fill();
-    //     }, 2000);
-    // }
-        
-
-    // dropBomb () {
-    //     let bomb = new Bomb(this.ctx, this.position);
-    //     bomb.render();
-    // }
 }
 
 export default Player;
