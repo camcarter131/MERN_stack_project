@@ -3,7 +3,7 @@ import { DOWN, UP, RIGHT, LEFT, SPACE } from '../keys';
 import Input from '../input';
 
 class Player { //extends Sprite {
-    constructor (canvas, ctx, img, grid) {
+    constructor (canvas, grid) {
         this.position = {
             x: 16 + 48,
             y: canvas.height - 34 - 48

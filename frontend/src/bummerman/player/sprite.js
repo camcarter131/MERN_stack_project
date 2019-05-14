@@ -5,9 +5,9 @@ class Sprite {
         // this.canvas = canvas;
         // this.ctx = ctx;
 
-        this.imgData = imgData;
+        this.data = imgData;
         this.name = name;
-
+        // debugger;
         // this.inputHandler = new Input(this);
 
         // this.size = {

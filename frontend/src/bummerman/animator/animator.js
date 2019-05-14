@@ -1,11 +1,12 @@
-import { debug } from "util";
+import Sprite from "../player/sprite";
 
 class Animator {
     constructor (ctx, spriteSheet) {
         this.assets = {};
+        this.animations = {};
+
         this.ctx = ctx;
-        this.generateSprites(spriteSheet); //.forEach(sprite => this.addAsset(sprite));
-        window.assets = this.assets;
+        this.generateSprites(spriteSheet); 
     }
 
     generateSprites (spriteSheet) {
@@ -18,24 +19,33 @@ class Animator {
                     j * spriteSheet.frame.height,   // sy:
                     spriteSheet.frame.width,        // sw:
                     spriteSheet.frame.height        // sh:
-                ).then(res => this.addAsset(res, `${spriteSheet.config.name}_${i}_${j}`));
+                ).then(res => {
+                    const sprite = new Sprite(res, `${spriteSheet.config.name}_${i}_${j}`);
+                    this.addAsset(sprite);
+                });
             }
         }
         
     }
     
-    addAsset (asset, name) {
-        this.assets[name] = asset;
+    addAsset (sprite) {
+        this.assets[sprite.name] = sprite.data;
     }
 
     deleteAsset (asset) {
         delete this.assets[asset];
     }
+
+    createAnimation (animName, frames) {
+        this.animations[animName] = frames;
+    }
+
+    deleteAnimation (animName) {
+        delete this.animations[animName]
+    }
     
     render () {
-        // Object.values(this.assets).forEach((sprite, idx) => this.ctx.drawImage(sprite, idx*48, 64));
-        // debugger;
-        if (this.assets["bomber_0_0"]) this.ctx.drawImage(this.assets.bomber_0_0, 64, 64);
+        // if (this.assets["bomber_0_0"]) this.ctx.drawImage(this.assets.bomber_0_0, 64, 64);
     }
 }
 

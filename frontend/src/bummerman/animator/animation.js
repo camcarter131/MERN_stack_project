@@ -1,5 +1,5 @@
 class Animation {
-    constructor(ctx, sprite, config) {
+    constructor (ctx, sprite, config) {
         this.ctx = ctx;
         this.sprite = sprite;
         this.frames = config.frames;
@@ -9,15 +9,15 @@ class Animation {
         this.frameCountBuffer = config.frameCountBuffer || 20;
         this.frameCount = 0;
 
-        this.config = config || {
-            loop: true,
-            row: 1,
-            animCount: 1
-        }
-        window.spritevel = this.sprite.velocity;
+        // this.config = config || {
+        //     loop: true,
+        //     row: 1,
+        //     animCount: 1
+        // }
+        // window.spritevel = this.sprite.velocity;
     }
 
-    update(dt) {
+    update (dt) {
         this.frameCount++;
         if (this.frameCount < this.frameCountBuffer) return;
         else {
@@ -25,8 +25,8 @@ class Animation {
             this.frameCount = 0;
         }
     }
-
-    render(axis, dir) {
+ 
+    render (axis, dir) {
         if (dir > 0) {
             (this.sprite.velocity[axis] > 0) ?
                 this.ctx.drawImage(this.sprite.img, this.frames[this._index] * this.frameWidth, 0, this.frameWidth, this.frameWidth, 0, 0, 48, 48) :
@@ -36,6 +36,10 @@ class Animation {
                 this.ctx.drawImage(this.sprite.img, this.frames[this._index] * this.frameWidth, 0, this.frameWidth, this.frameWidth, 0, 0, 48, 48) :
                 this.ctx.drawImage(this.sprite.img, 0 * this.frameWidth, 0, this.frameWidth, this.frameWidth, 0, 0, 48, 48);
         }
+    }
+
+    createAnimation (name, frames) {
+
     }
 }
 
