@@ -4,6 +4,7 @@ export default class Input {
     constructor (player) {
         this.player = player;
         this.pressedKeys = {};
+        
 
         document.addEventListener('keydown', (e) => this.setKey(e, true));
         document.addEventListener('keyup', (e) => this.setKey(e, false));
@@ -16,7 +17,7 @@ export default class Input {
         switch (e.keyCode) {
             case 32:
                 key = SPACE;
-                break;
+                break;    
             case 37:
                 key = LEFT; 
                 break;
@@ -40,6 +41,5 @@ export default class Input {
 
     isPressed (key) {
         return this.pressedKeys[key];
-    }
-    
+    }  
 }

@@ -16,7 +16,7 @@ export default class Bomb {
         //I3 = fire+
         //I4 = invisibility
         // let options = ["X", "I1", "I2"];
-        let options = ["I1", "I2"];
+        let options = ["I1"];
         let item = options[Math.floor(Math.random() * options.length)];
         return item;
     }

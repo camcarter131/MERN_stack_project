@@ -18,6 +18,7 @@ class Player extends Sprite {
         //5 refers to the total number of squares an explosion will cover
         this.bombSize = 4;
         this.bombs = new Bombs(this);
+        this.spaceBool = true;
         this.animation = new Animation(ctx, this, { frames: [1, 2], loop: true });
         window.bombQueue = this.bombs.bombQueue;
     }
@@ -26,14 +27,13 @@ class Player extends Sprite {
         switch(this.grid.gridArray[row][col]){
             case "I1":
                 this.bombs.pickUpBomb();
-                setTimeout(() => this.grid.gridArray[row][col] = 'X', 500);
+                this.grid.gridArray[row][col] = 'X';
                 break;
             case "I2":
                 this.speed *= 2;
                 this.grid.gridArray[row][col] = 'X';
                 setTimeout(() => {this.speed /= 2}, 5000);
                 break;
-            
             default:
                 break;
         }
@@ -42,8 +42,12 @@ class Player extends Sprite {
     handleInput(dt) {
 
         if (this.inputHandler.isPressed(SPACE)) {
-            // let gridCoords = this.grid.canvasToArray([this.position.x, this.position.y]);
-            this.bombs.deploy();
+                if (this.spaceBool){
+                    this.spaceBool = false;
+                    this.bombs.deploy();
+                }
+        } else {
+            this.spaceBool = true;
         }
         
         if (this.inputHandler.isPressed(DOWN) || this.inputHandler.isPressed('s')) {

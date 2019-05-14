@@ -55,6 +55,7 @@ export default class Bomb {
         obstacleClearLeft = true,
         obstacleClearRight = true
         ) {
+
         // let position = this.player.grid.canvasToArray([this.player.position.x, this.player.position.y]);
         let row = position[0];
         let col = position[1];
@@ -200,8 +201,7 @@ export default class Bomb {
         
         setTimeout(() => {
             this.clearExplosion();
-            // this.player.grid.gridArray[position[0]][position[1]] = 'X';
-            this.player.bombs.pickUpBomb(this);
+            // this.player.bombs.pickUpBomb(this);
             }, 3000);
         
     }
