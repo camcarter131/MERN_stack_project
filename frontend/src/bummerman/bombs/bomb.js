@@ -1,3 +1,5 @@
+import Item from '../item';
+
 export default class Bomb {
 
     static renderBomb(ctx, position){
@@ -168,8 +170,12 @@ export default class Bomb {
 
         for(let row = 0; row< gridArray.length; row++){
             for(let col = 0; col < gridArray.length; col++){
-                if(gridArray[row][col] === 'E') gridArray[row][col] = 'X';
-                if(gridArray[row][col] === 'EO') gridArray[row][col] = 'I';
+                if(gridArray[row][col] === 'E'){
+                    gridArray[row][col] = 'X';
+                } 
+                else if(gridArray[row][col] === 'EO') {
+                    gridArray[row][col] = Item.itemSelector();
+                }
             }
         }
     }
@@ -195,7 +201,7 @@ export default class Bomb {
         setTimeout(() => {
             this.clearExplosion();
             // this.player.grid.gridArray[position[0]][position[1]] = 'X';
-            this.player.bombs.pickUp(this);
+            this.player.bombs.pickUpBomb(this);
             }, 3000);
         
     }

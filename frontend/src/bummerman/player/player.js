@@ -19,6 +19,24 @@ class Player extends Sprite {
         this.bombSize = 4;
         this.bombs = new Bombs(this);
         this.animation = new Animation(ctx, this, { frames: [1, 2], loop: true });
+        window.bombQueue = this.bombs.bombQueue;
+    }
+
+    itemMonitoring(row, col){
+        switch(this.grid.gridArray[row][col]){
+            case "I1":
+                this.bombs.pickUpBomb();
+                setTimeout(() => this.grid.gridArray[row][col] = 'X', 500);
+                break;
+            case "I2":
+                this.speed *= 2;
+                this.grid.gridArray[row][col] = 'X';
+                setTimeout(() => {this.speed /= 2}, 5000);
+                break;
+            
+            default:
+                break;
+        }
     }
 
     handleInput(dt) {
@@ -39,6 +57,8 @@ class Player extends Sprite {
             //     return null
             // } else {
             // }
+            this.itemMonitoring(gridCoords[0], gridCoords[1]);
+
             if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' 
             || this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'O') {
                 return null
@@ -57,6 +77,8 @@ class Player extends Sprite {
             //     return null
             // } else {
             // }
+            this.itemMonitoring(gridCoords[0], gridCoords[1]);
+
             if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' 
             || this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'O' ) {
                 return null
@@ -74,6 +96,8 @@ class Player extends Sprite {
             // if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' || this.grid.gridArray[gridCoordsU[0]][gridCoordsU[1]] === 'W' || this.grid.gridArray[gridCoordsD[0]][gridCoordsD[1]] === 'W') {
             //     return null
             // }
+            this.itemMonitoring(gridCoords[0], gridCoords[1]);
+
             if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' 
             || this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'O') {
                 return null
@@ -91,6 +115,8 @@ class Player extends Sprite {
             // if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' || this.grid.gridArray[gridCoordsU[0]][gridCoordsU[1]] === 'W' || this.grid.gridArray[gridCoordsD[0]][gridCoordsD[1]] === 'W') {
             //     return null
             // }
+            this.itemMonitoring(gridCoords[0], gridCoords[1]);
+
             if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' 
             || this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'O' ) {
                 return null

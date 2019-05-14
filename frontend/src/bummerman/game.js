@@ -11,6 +11,7 @@ class Game {
 
         this.grid = new Grid(canvas, ctx);
         // this.player = new Player(canvas, ctx);
+        window.gridArray = this.grid.gridArray;
 
         this.initialTime = Date.now();
 

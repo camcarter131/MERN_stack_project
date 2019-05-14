@@ -1,6 +1,7 @@
 import Wall from './wall';
 import Object from './object';
 import Bomb from './bombs/bomb';
+import Item from './item';
 
 export default class Grid {
 
@@ -82,6 +83,12 @@ export default class Grid {
                         break;
                     case "EO":
                         Bomb.renderExplosionObstacle(this.ctx, canvasCoords);
+                        break;
+                    case "I1":
+                        Item.renderI1(this.ctx, canvasCoords);
+                        break;
+                    case "I2":
+                        Item.renderI2(this.ctx, canvasCoords);
                         break;
                     default:
                         break;

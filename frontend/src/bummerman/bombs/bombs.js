@@ -4,15 +4,17 @@ import Bomb from './bomb';
 export default class Bombs {
     constructor(player) {
         this.bombQueue = [new Bomb(player)];
+        this.player = player;
     }
 
     //Comment in when we have a
-    pickUp(bomb) {
-        (bomb instanceof Bomb) ? this.bombQueue.push(bomb) : this.bombQueue.unshift(bomb);
+    pickUpBomb() {
+        let newBomb = new Bomb(this.player);
+        this.bombQueue.push(newBomb);
     }
     
-    deploy(explosionSize, playerPosition) {
-        const bomb = this.bombQueue.shift();
-        if (bomb) bomb.deploy(explosionSize, playerPosition);
+    deploy() {
+        let bomb = this.bombQueue.pop();
+        if (bomb) bomb.deploy();
     }
 }
