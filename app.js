@@ -38,6 +38,7 @@ io.sockets.on('connection', (socket) => {
 
 
 
+<<<<<<< HEAD
     
     // if(io.engine.clientsCount > connectionsLimit) {
     //     socket.emit('err', { message: 'reach the limit of connections' });
@@ -45,6 +46,21 @@ io.sockets.on('connection', (socket) => {
     //     console.log('Disconnected...');
     //     return;
     // }
+=======
+
+    // not working 
+    if(io.engine.clientsCount > connectionsLimit) {
+        socket.emit('err', { message: 'reach the limit of connections' });
+        socket.disconnect();
+        console.log('Disconnected...');
+        return;
+    }
+
+
+
+
+
+>>>>>>> 30104f56a73da917b1d93331462bab37dc340177
 
 
 
