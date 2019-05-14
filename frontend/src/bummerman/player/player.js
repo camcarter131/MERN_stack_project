@@ -17,7 +17,7 @@ class Player extends Sprite {
         this.inputHandler = new Input(this);
         //5 refers to the total number of squares an explosion will cover
         this.bombSize = 4;
-        this.lives = 3;
+        this.lives = 6;
         this.bombs = new Bombs(this);
         this.spaceBool = true;
         this.isKilled = true;
@@ -48,9 +48,23 @@ class Player extends Sprite {
         }
     }
 
-    death() {
-        // super.death();
-        console.log('u are dead');
+    relocatePlayer() {
+        let respawns = [
+            //bottom left
+            [64, this.canvas.height - 82],
+            //bottom right
+            [this.canvas.width - 80, this.canvas.height - 82],
+            //top left
+            [64, 64],
+            //top right
+            [this.canvas.width - 80, 64]
+        ]
+ 
+        let randomLocation = respawns[Math.floor(Math.random() * respawns.length)];
+        this.position.x = randomLocation[0];
+        this.position.y = randomLocation[1];
+        // this.position.x = this.canvas.width - 80;
+        // this.position.y = 64;
     }
 
     deathMonitoring(row, col) {
@@ -58,6 +72,7 @@ class Player extends Sprite {
             if (this.isKilled) {
                 this.isKilled = false;
                 this.lives -= 1;
+                setTimeout(() => this.relocatePlayer(), 1000); 
                 console.log(this.lives);
                 this.speed = 0;
                 setTimeout(() => this.speed = 200, 1000)
@@ -67,9 +82,19 @@ class Player extends Sprite {
         }
     }
 
+    livesDepleted(){
+        if(this.lives === 0){
+            alert("GAME OVER, send 0.001 bitcoins to stefandabroski@gmail.com to play again");
+        }
+    }
+
     handleInput(dt) {
         let currPos = this.grid.canvasToArray([this.position.x, this.position.y]);
+
+
         this.deathMonitoring(currPos[0], currPos[1]);
+        this.itemMonitoring(currPos[0], currPos[1]);
+        // this.livesDepleted(); 
 
         if (this.inputHandler.isPressed(SPACE)) {
                 if (this.spaceBool){
@@ -92,7 +117,7 @@ class Player extends Sprite {
             // } else {
             // }
             // this.deathMonitoring(gridCoords[0], gridCoords[1]);
-            this.itemMonitoring(gridCoords[0], gridCoords[1]);
+            // this.itemMonitoring(gridCoords[0], gridCoords[1]);
 
             if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' 
             || this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'O') {
@@ -113,7 +138,7 @@ class Player extends Sprite {
             // } else {
             // }
             // this.deathMonitoring(gridCoords[0], gridCoords[1]);
-            this.itemMonitoring(gridCoords[0], gridCoords[1]);
+            // this.itemMonitoring(gridCoords[0], gridCoords[1]);
 
             if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' 
             || this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'O' ) {
@@ -133,7 +158,7 @@ class Player extends Sprite {
             //     return null
             // }
             // this.deathMonitoring(gridCoords[0], gridCoords[1]);
-            this.itemMonitoring(gridCoords[0], gridCoords[1]);
+            // this.itemMonitoring(gridCoords[0], gridCoords[1]);
 
             if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' 
             || this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'O') {
@@ -153,7 +178,7 @@ class Player extends Sprite {
             //     return null
             // }
             // this.deathMonitoring(gridCoords[0], gridCoords[1]);
-            this.itemMonitoring(gridCoords[0], gridCoords[1]);
+            // this.itemMonitoring(gridCoords[0], gridCoords[1]);
 
             if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' 
             || this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'O' ) {
