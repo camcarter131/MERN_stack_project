@@ -1,4 +1,4 @@
-export default class Object {
+export default class Obstacle {
     constructor(ctx, position, crateImg) {
         this.ctx = ctx;
         this.position = position;

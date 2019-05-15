@@ -1,5 +1,5 @@
 import Wall from './wall';
-import Object from './object';
+import Obstacle from './object';
 import Bomb from './bombs/bomb';
 import Item from './item';
 import Background from './background';
@@ -15,7 +15,7 @@ export default class Grid {
         this.grassImg = grassImg;
         this.blockImg = wallImg;
         this.createWalls();
-        this.createObjects();
+        this.createObstacles();
         this.renderGame(this.ctx);
     }
 
@@ -41,8 +41,7 @@ export default class Grid {
 
     }
 
-    createObjects(){
-        // let numObjects = 25;
+    createObstacles(){
         for(let i=1; i<this.gridArray[0].length-1; i+=1){
             for(let j = 1; j < this.gridArray[0].length-1; j += 1){
                 // if (i === 15 && j === 15) break;
@@ -54,7 +53,6 @@ export default class Grid {
                 if (this.gridArray[i][j] === "W") continue;
                 if (Math.random() < 0.35) {
                     this.gridArray[i][j] = "O";
-                    // numObjects -= 1;
                 }
             }
         }
@@ -84,8 +82,8 @@ export default class Grid {
                         wall.render();
                         break;
                     case "O":
-                        let object = new Object(this.ctx, canvasCoords, this.blockImg)
-                        object.render();
+                        let obstacle = new Obstacle(this.ctx, canvasCoords, this.blockImg)
+                        obstacle.render();
                         break;
                     case "B":
                         Bomb.renderBomb(this.ctx, canvasCoords);
