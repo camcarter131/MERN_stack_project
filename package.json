@@ -2,11 +2,12 @@
   "name": "aA-flex",
   "version": "1.0.0",
   "description": "## Background and Overview An interactive, multi-player Bomberman-inspired game where you are able to connect with and play with up to three other online friends.",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
-    "server": "nodemon app.js"
+    "server": "nodemon app.js",
+    "webpack": "webpack --watch --mode=development"
   },
   "repository": {
     "type": "git",
@@ -20,9 +21,20 @@
   },
   "homepage": "https://github.com/camcarter131/MERN_stack_project#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
     "express": "^4.16.4",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.5.8",
-    "nodemon": "^1.19.0",
-    "socket.io": "^2.2.0"
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "socket.io": "^2.2.0",
+    "socket.io-client": "^2.2.0",
+    "validator": "^10.11.0",
+    "webpack": "^4.31.0",
+    "webpack-cli": "^3.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.0"
   }
 }
