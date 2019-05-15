@@ -5,6 +5,7 @@ const serv = require('http').Server(app);
 const db = require('./config/keys').mongoURI;
 
 const Game = require('./src/game/game');
+const Grid = require('./src/game/grid');
 const Player = require('./src/player/player');
 const SOCKETS = {};
 const PLAYERS = {};
@@ -22,6 +23,7 @@ serv.listen(port);
 const io = require('socket.io')(serv, {});
 
 const game = new Game();
+const grid = new Grid();
 let gameStarted = false;
 
 const start = () => { 
@@ -29,15 +31,15 @@ const start = () => {
         let time = Date.now();
         let dt = (time - game.initialTime) / 1000.0;
         
-
         let pack = game.update(PLAYERS, dt);
         
         Object.values(SOCKETS).forEach(socket => {
             socket.emit('updatePlayer', {pack});
+            socket.emit('updateGrid', grid);
         });
     
         game.initialTime = time;
-    }, 1000 / 30) 
+    }, 1000 / 45) 
 };
 
 io.sockets.on('connection', (socket) => {

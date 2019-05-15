@@ -1,5 +1,6 @@
 import io from 'socket.io-client';
 import Player from './player/player';
+import Grid from './game/grid';
 
 const socket = io('http://localhost:3000');
 
@@ -61,9 +62,14 @@ document.addEventListener('keyup', (e) => {
 document.addEventListener("DOMContentLoaded", () => {
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
-
+    socket.on('updateGrid', grid => {
+        debugger
+        Grid.renderGame(ctx, grid)
+    })
     socket.on('updatePlayer', data => {
         ctx.clearRect(0,0,canvas.width, canvas.height);
+
+
         Object.values(data.pack).forEach(player => {
             Player.render(ctx, player);
         });
