@@ -128,7 +128,8 @@ class Player extends Sprite {
                 console.log(this.lives);
                 this.speed = 0;
                 this.bombs = new Bombs(this);
-                setTimeout(() => this.speed = 200, 1000)
+                this.bombSize = 4;
+                setTimeout(() => this.speed = 200, 1000);
             }
         } else {
             this.isKilled = true;
@@ -211,12 +212,6 @@ class Player extends Sprite {
         }
     }
 
-    statsClear() {
-        var lives = document.getElementById('lives');
-        while (lives.firstChild) {
-            lives.removeChild(lives.firstChild);
-        }
-    }
 
     itemMonitoring(row, col){
         switch(this.grid.gridArray[row][col]){
