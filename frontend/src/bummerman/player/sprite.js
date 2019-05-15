@@ -19,7 +19,7 @@ class Sprite {
             y: 0
         };
 
-        this.speed = 200;
+        this.speed = 125;
         this.velocity = {
             x: 0,
             y: 0
