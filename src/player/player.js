@@ -53,7 +53,7 @@ class Player {
     handleInput(dt, keys) {
         if (keys.space) {
             // let gridCoords = this.grid.canvasToArray([this.position.x, this.position.y]);
-            this.bombs.deploy();
+            // this.bombs.deploy();
         }
 
         if (keys.down) {

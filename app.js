@@ -36,7 +36,7 @@ const start = () => {
         Object.values(SOCKETS).forEach(socket => {
             socket.emit('clearCanvas');
             socket.emit('updatePlayer', {pack});
-            socket.emit('updateGrid', grid);
+            socket.emit('updateGrid', {pack, grid});
         });
     
         game.initialTime = time;
