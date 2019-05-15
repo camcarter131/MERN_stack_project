@@ -51,20 +51,15 @@ class Player {
     }
 
     handleInput(dt, keys) {
-
-        // if (this.inputHandler.isPressed(keys.SPACE))
         if (keys.space) {
             // let gridCoords = this.grid.canvasToArray([this.position.x, this.position.y]);
             this.bombs.deploy();
         }
 
-        // if (this.inputHandler.isPressed(keys.DOWN) || this.inputHandler.isPressed('s'))
         if (keys.down) {
             this.velocity.y = this.speed;
             this.velocity.x = 0;
             // let gridCoords = this.grid.canvasToArray([this.position.x, this.position.y + this.radius + 5]);
-
-
             // let gridCoordsL = this.grid.canvasToArray([this.position.x - this.radius_partial, this.position.y + this.radius_partial]);
             // let gridCoordsR = this.grid.canvasToArray([this.position.x + this.radius_partial, this.position.y + this.radius_partial]);
 
@@ -81,7 +76,6 @@ class Player {
                 this.position.y += this.velocity.y * dt;
             // }
         }
-        // if (this.inputHandler.isPressed(keys.UP) || this.inputHandler.isPressed('w'))
         if (keys.up) {
             this.velocity.y = this.speed;
             this.velocity.x = 0;
@@ -103,7 +97,6 @@ class Player {
             // }
         }
 
-        // if (this.inputHandler.isPressed(keys.RIGHT) || this.inputHandler.isPressed('s'))
         if (keys.right) {
             this.velocity.x = this.speed;
             this.velocity.y = 0;
@@ -122,7 +115,6 @@ class Player {
                 this.position.x += this.velocity.x * dt;
             // }
         }
-        // if (this.inputHandler.isPressed(keys.LEFT) || this.inputHandler.isPressed('w'))
         if (keys.left) {
             this.velocity.x = this.speed;
             this.velocity.y = 0;
@@ -141,15 +133,6 @@ class Player {
                 this.position.x -= this.velocity.x * dt;
             // }
         }
-    }
-
-    erase() {
-        this.ctx.clearRect(this.position.x, this.position.y, this.width, this.height);
-        // this.ctx.fillStyle = "#ffffff";
-        // this.ctx.beginPath();
-        // this.ctx.arc(this.position.x, this.position.y, this.radius, 0, 2 * Math.PI);
-        // this.ctx.closePath();
-        // this.ctx.fill();
     }
 
     update(dt) {

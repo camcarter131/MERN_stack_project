@@ -1,4 +1,4 @@
-const Player = require('./player');
+const Player = require('../player/player');
 class Game {
     constructor () {
         this.startingPositions = [

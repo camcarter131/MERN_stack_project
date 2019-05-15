@@ -1,5 +1,5 @@
 import io from 'socket.io-client';
-import Player from './player';
+import Player from './player/player';
 
 const socket = io('http://localhost:3000');
 
@@ -63,11 +63,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const ctx = canvas.getContext('2d');
 
     socket.on('updatePlayer', data => {
+        ctx.clearRect(0,0,canvas.width, canvas.height);
         Object.values(data.pack).forEach(player => {
-            return (
-                Player.render(ctx, player)
-            )
-
-        })
+            Player.render(ctx, player);
+        });
     });
 });

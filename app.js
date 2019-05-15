@@ -4,8 +4,8 @@ const app = express();
 const serv = require('http').Server(app);
 const db = require('./config/keys').mongoURI;
 
-const Game = require('./src/game');
-const Player = require('./src/player');
+const Game = require('./src/game/game');
+const Player = require('./src/player/player');
 const SOCKETS = {};
 const PLAYERS = {};
 const numPlayers = 4;
