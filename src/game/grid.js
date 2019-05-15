@@ -70,7 +70,6 @@ class Grid {
     static renderGame(ctx, grid) {
         grid.gridArray.forEach((row, x) => {
             row.forEach((el, y) => {
-                debugger
                 let canvasCoords = [48 * y, 48 * x];
                 switch (el) {
                     case "W":

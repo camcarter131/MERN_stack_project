@@ -7,7 +7,17 @@ const socket = io('http://localhost:3000');
 // window.addEventListener('blur', () => inputHandler.pressedKeys = {});
 const keys = {'up':false, 'down': false, 'left': false, 'right': false, 'space': false};
 
+// const clearPlayer = () => {
+//     ctx.fillStyle = '#000000';
+//     ctx.beginPath();
+//     ctx.arc(player.position.x, player.position.y, 20, 0, 2 * Math.PI);
+//     ctx.closePath();
+//     ctx.fill();
+// };
+
+
 document.addEventListener('keydown', (e) => {
+    // clearPlayer();
     e.preventDefault();
     switch (e.keyCode) {
         case 32:
@@ -63,15 +73,26 @@ document.addEventListener("DOMContentLoaded", () => {
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
     socket.on('updateGrid', grid => {
-        debugger
+        // ctx.clearRect(0,0,canvas.width, canvas.height);
         Grid.renderGame(ctx, grid)
-    })
+    });
     socket.on('updatePlayer', data => {
-        ctx.clearRect(0,0,canvas.width, canvas.height);
-
 
         Object.values(data.pack).forEach(player => {
             Player.render(ctx, player);
         });
     });
+
+    // socket.on('clearCanvas', () => {
+    //     // ctx.clearRect(0, 0, canvas.width, canvas.height)
+    //     // ctx.fillStyle = '#fff';
+    //     // ctx.beginPath();
+    //     // ctx.arc(player.position.x, player.position.y, 20, 0, 2 * Math.PI);
+    //     // ctx.closePath();
+    //     // ctx.fill();
+    // });
+
+    
 });
+
+

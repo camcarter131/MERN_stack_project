@@ -34,12 +34,13 @@ const start = () => {
         let pack = game.update(PLAYERS, dt);
         
         Object.values(SOCKETS).forEach(socket => {
+            // socket.emit('clearCanvas');
             socket.emit('updatePlayer', {pack});
             socket.emit('updateGrid', grid);
         });
     
         game.initialTime = time;
-    }, 1000 / 45) 
+    }, 1000 / 30) 
 };
 
 io.sockets.on('connection', (socket) => {
