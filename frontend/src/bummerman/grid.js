@@ -42,9 +42,13 @@ export default class Grid {
         for(let i=1; i<this.gridArray[0].length-1; i+=1){
             for(let j = 1; j < this.gridArray[0].length-1; j += 1){
                 // if (i === 15 && j === 15) break;
-                if ((i === 1 && j === 15) || (i === 1 && j === 1) || (i === 15 && j === 1) || (i === 15 && j === 15)) continue;
+                if ((i === 1 && j === 15) || (i === 1 && j === 1) || (i === 15 && j === 1) || (i === 15 && j === 15) 
+                    || (i === 1 && j === 2) || (i === 2 && j === 1) 
+                    || (i === 15 && j === 2) || (i === 14 && j === 1)
+                    || (i === 15 && j === 14) || (i === 14 && j === 15)
+                    || (i === 1 && j === 14) || (i === 2 && j === 15) ) continue;
                 if (this.gridArray[i][j] === "W") continue;
-                if (Math.random() < .25) {
+                if (Math.random() < 0.35) {
                     this.gridArray[i][j] = "O";
                     // numObjects -= 1;
                 }

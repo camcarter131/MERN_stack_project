@@ -17,10 +17,11 @@ class Player extends Sprite {
         this.inputHandler = new Input(this);
         //5 refers to the total number of squares an explosion will cover
         this.bombSize = 4;
-        this.lives = 1 ;
+        this.lives = 3;
         this.bombs = new Bombs(this);
         this.spaceBool = true;
         this.isKilled = true;
+        this.statsChange();
         this.shouldEndGame = true;
         this.animation = new Animation(ctx, this, { frames: [1, 2], loop: true });
         window.bombQueue = this.bombs.bombQueue;
@@ -126,6 +127,7 @@ class Player extends Sprite {
                 setTimeout(() => this.relocatePlayer(), 1000);
                 console.log(this.lives);
                 this.speed = 0;
+                this.bombs = new Bombs(this);
                 setTimeout(() => this.speed = 200, 1000)
             }
         } else {
@@ -157,7 +159,7 @@ class Player extends Sprite {
                 }
             
             }, 0.1);
-            setTimeout(() => clearInterval(blackOut), 8000);
+            setTimeout(() => clearInterval(blackOut), 10000);
 
             setTimeout(() => {
                 let gameOverText = setInterval(() => {
@@ -177,6 +179,42 @@ class Player extends Sprite {
                 //     this.grid.gridArray[row][col] = "I2";
                 // })
             }, 2000);
+        this.statsChange();
+        }
+    }
+
+    statsChange() {
+        var lives = document.getElementById('lives');
+        while (lives.firstChild) {
+            lives.removeChild(lives.firstChild);
+        }
+
+        var bombs = document.getElementById('bombs');
+        while (bombs.firstChild) {
+            bombs.removeChild(bombs.firstChild);
+        }
+        
+        for (let i = 0; i < this.lives; i++) {
+            let heartIcon = document.createElement("IMG");
+            heartIcon.setAttribute("src", "heart.png");
+            heartIcon.setAttribute("width", "48");
+            heartIcon.setAttribute("height", "48");
+            document.getElementById('lives').appendChild(heartIcon);
+        }
+        for (let j = 0; j < this.bombs.bombQueue.length; j++) {
+            // debugger    
+            let bombIcon = document.createElement("IMG");
+            bombIcon.setAttribute("src", "bomb.png");
+            bombIcon.setAttribute("width", "48");
+            bombIcon.setAttribute("height", "48");
+            document.getElementById('bombs').appendChild(bombIcon);
+        }
+    }
+
+    statsClear() {
+        var lives = document.getElementById('lives');
+        while (lives.firstChild) {
+            lives.removeChild(lives.firstChild);
         }
     }
 
@@ -184,6 +222,7 @@ class Player extends Sprite {
         switch(this.grid.gridArray[row][col]){
             case "I1":
                 this.bombs.pickUpBomb();
+                this.statsChange();
                 this.grid.gridArray[row][col] = 'X';
                 break;
             case "I2":
@@ -192,8 +231,8 @@ class Player extends Sprite {
                 setTimeout(() => {this.speed /= 2; }, 5000);
                 break;
             case "I3":
-                this.bombSize *= 2;
-                setTimeout(() => { this.bombSize /= 2; }, 5000);
+                this.bombSize += 4;
+                // setTimeout(() => { this.bombSize /= 2; }, 5000);
                 this.grid.gridArray[row][col] = 'X';
                 break;
             default:
@@ -341,15 +380,15 @@ class Player extends Sprite {
 
     render () {
         // debugger;
-
         super.render();
-        document.getElementById("lives").innerHTML = `num lives: ${this.lives}`;
-        document.getElementById("bombs").innerHTML = `num bombs ${this.bombs.bombQueue.length}`;
-        //https://t6.rbxcdn.com/fcf99f49b7677fad75fbba9cb0281f09
+        
+        // document.getElementById("lives").innerHTML = `num lives: ${this.lives}`;
+        // document.getElementById("bombs").innerHTML = `num bombs ${this.bombs.bombQueue.length}`;
 
 
         // this.animation.render("y", 1);
     }
+
 }
 
 export default Player;

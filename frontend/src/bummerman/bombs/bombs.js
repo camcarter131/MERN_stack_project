@@ -15,6 +15,9 @@ export default class Bombs {
     
     deploy() {
         let bomb = this.bombQueue.pop();
-        if (bomb) bomb.deploy();
+        if (bomb) {
+            bomb.deploy();
+            this.player.statsChange();
+        }
     }
 }
