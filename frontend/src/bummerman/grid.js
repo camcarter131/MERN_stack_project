@@ -93,6 +93,9 @@ export default class Grid {
                     case "I3":
                         Item.renderI3(this.ctx, canvasCoords);
                         break;
+                    case "TXT":
+                        Item.renderI2(this.ctx, canvasCoords);
+                        break;
                     default:
                         break;
                 }

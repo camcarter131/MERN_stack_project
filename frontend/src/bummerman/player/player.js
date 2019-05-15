@@ -17,7 +17,7 @@ class Player extends Sprite {
         this.inputHandler = new Input(this);
         //5 refers to the total number of squares an explosion will cover
         this.bombSize = 4;
-        this.lives = 3 ;
+        this.lives = 1 ;
         this.bombs = new Bombs(this);
         this.spaceBool = true;
         this.isKilled = true;
@@ -25,6 +25,159 @@ class Player extends Sprite {
         this.animation = new Animation(ctx, this, { frames: [1, 2], loop: true });
         window.bombQueue = this.bombs.bombQueue;
         this.deathMonitoring = this.deathMonitoring.bind(this);
+        this.gameOverAnimation = [
+            [2, 1],
+            [2, 2],
+            [2, 3],
+            [2, 5],
+            [2, 6],
+            [2, 7],
+            [2, 9],
+            [2, 11],
+            [2, 13],
+            [2, 14],
+            [2, 15],
+            [3, 1],
+            [3, 5],
+            [3, 7],
+            [3, 9],
+            [3, 9],
+            [3, 10],
+            [3, 11],
+            [3, 13],
+            [4, 1],
+            [4, 5],
+            [4, 7],
+            [4, 9],
+            [4, 10],
+            [4, 11],
+            [4, 13],
+            [4, 14],
+            [5, 1],
+            [5, 3],
+            [5, 5],
+            [5, 6],
+            [5, 7],
+            [5, 9],
+            [5, 11],
+            [5, 13],
+            [6, 1],
+            [6, 2],
+            [6, 3],
+            [6, 5],
+            [6, 7],
+            [6, 9],
+            [6, 11],
+            [6, 13],
+            [6, 14],
+            [6, 15],
+            [10, 1],
+            [10, 2],
+            [10, 3],
+            [10, 5],
+            [10, 7],
+            [10, 9],
+            [10, 10],
+            [10, 11],
+            [10, 13],
+            [10, 14],
+            [10, 15],
+            [11, 1],
+            [11, 3],
+            [11, 5],
+            [11, 7],
+            [11, 9],
+            [11, 13],
+            [11, 15],
+            [12, 1],
+            [12, 3],
+            [12, 5],
+            [12, 7],
+            [12, 9],
+            [12, 10],
+            [12, 13],
+            [12, 15],
+            [13, 1],
+            [13, 3],
+            [13, 5],
+            [13, 7],
+            [13, 9],
+            [13, 13],
+            [13, 14],
+            [14, 1],
+            [14, 2],
+            [14, 3],
+            [14, 6],
+            [14, 9],
+            [14, 10],
+            [14, 11],
+            [14, 13],
+            [14, 15]
+        ];
+    
+    }
+
+    
+    deathMonitoring(row, col) {
+        if (this.grid.gridArray[row][col] === 'E') {
+            if (this.isKilled) {
+                this.isKilled = false;
+                this.lives -= 1;
+                setTimeout(() => this.relocatePlayer(), 1000);
+                console.log(this.lives);
+                this.speed = 0;
+                setTimeout(() => this.speed = 200, 1000)
+            }
+        } else {
+            this.isKilled = true;
+        }
+    }
+
+    livesDepleted() {
+        if (this.lives === 0 && this.shouldEndGame) {
+            this.shouldEndGame = false;
+
+            this.speed = 0;
+            this.size.width = 0;
+            this.size.height = 0;
+
+            let blackOut = setInterval(() => {
+                let alreadyBlacked = []
+
+                let randRow = Math.floor(Math.random() * this.grid.gridArray.length);
+                let randCol = Math.floor(Math.random() * this.grid.gridArray.length);
+                alreadyBlacked.push([randRow, randCol])
+
+                if (
+                    this.grid.gridArray[randRow][randCol] !== "W" 
+                    && this.grid.gridArray[randRow][randCol] !== "TXT" 
+                    && !alreadyBlacked.includes([randRow, randCol])) 
+                {
+                    this.grid.gridArray[randRow][randCol] = "W";
+                }
+            
+            }, 0.1);
+            setTimeout(() => clearInterval(blackOut), 8000);
+
+            setTimeout(() => {
+                let gameOverText = setInterval(() => {
+                    let selection = Math.floor(Math.random() * this.gameOverAnimation.length);
+                    let coords = this.gameOverAnimation[selection];
+                    let row = coords[0];
+                    let col = coords[1];
+
+                    this.grid.gridArray[row][col] = "TXT";
+                }, 10);
+
+                setTimeout(() => clearInterval(gameOverText), 15000);
+                // this.gameOverAnimation.forEach(coords => {
+                //     let row = coords[0];
+                //     let col = coords[1];
+
+                //     this.grid.gridArray[row][col] = "I2";
+                // })
+            }, 2000);
+        }
     }
 
     itemMonitoring(row, col){
@@ -67,47 +220,9 @@ class Player extends Sprite {
         // this.position.y = 64;
     }
 
-    deathMonitoring(row, col) {
-        if (this.grid.gridArray[row][col] === 'E') {
-            if (this.isKilled) {
-                this.isKilled = false;
-                this.lives -= 1;
-                setTimeout(() => this.relocatePlayer(), 1000); 
-                console.log(this.lives);
-                this.speed = 0;
-                setTimeout(() => this.speed = 200, 1000)
-            }
-        } else {
-            this.isKilled = true;
-        }
-    }
 
-    livesDepleted(){
-        if(this.lives === 0 && this. shouldEndGame) {
-            this.shouldEndGame = false;
 
-            this.speed = 0;
-            this.size.width = 0;
-            this.size.height = 0;
 
-            var a = setInterval(() => {
-                let randRow = Math.floor(Math.random() * this.grid.gridArray.length);
-                let randCol = Math.floor(Math.random() * this.grid.gridArray.length);
-
-                if (this.grid.gridArray[randRow][randCol] !== "W") {
-                    this.grid.gridArray[randRow][randCol] = "W";
-                }
-            }, 1);
-            // a(); 
-            
-            setTimeout(() => clearInterval(a), 10000); 
-                
-            // if(this.lives === 0){
-            //     alert("GAME OVER, send 0.001 bitcoins to stefandabroski@gmail.com to play again");
-            // }
-        }
-        
-    }
 
     handleInput(dt) {
         let currPos = this.grid.canvasToArray([this.position.x, this.position.y]);
