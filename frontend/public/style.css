@@ -49,5 +49,8 @@
 }
 
 #main-container {
-    margin-left: 2.5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
