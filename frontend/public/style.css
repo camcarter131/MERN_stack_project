@@ -1,16 +1,18 @@
 #lives{
     /* font-size: 14px; */
-    width: 100px;
-    height: 100px;
+    /* width: 100px;
+    height: 100px; */
     /* background-color: yellowgreen; */
 }
 
 #bombs{
     /* display: flex; */
     /* font-size: 14px; */
-    width: 100px;
-    height: 100px;
+    /* width: 100px;
+    height: 100px; */
     /* background-color: orange; */
+    margin:0px;
+    padding: 0px;
 }
 
 #main-container {
@@ -27,6 +29,7 @@
     margin-left: 1%;
     border: 2px solid black;
     height: 100%;
+    
 }
 
 #canvas {
@@ -36,4 +39,8 @@
 #root {
     height: 816px;
     width: 816px;
+}
+
+#main-container {
+    margin-left: 2.5%;
 }

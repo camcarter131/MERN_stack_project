@@ -25,7 +25,21 @@ class Player extends Sprite {
         this.animation = new Animation(ctx, this, { frames: [1, 2], loop: true });
         window.bombQueue = this.bombs.bombQueue;
         this.deathMonitoring = this.deathMonitoring.bind(this);
+        this.statsChange();
 
+    }
+
+    statsChange() {
+        var lives = document.getElementById('lives');
+        while (lives.firstChild) {
+            lives.removeChild(lives.firstChild);
+        }
+
+        var bombs = document.getElementById('bombs');
+        while (bombs.firstChild) {
+            bombs.removeChild(bombs.firstChild);
+        }
+        
         for (let i = 0; i < this.lives; i++) {
             let heartIcon = document.createElement("IMG");
             heartIcon.setAttribute("src", "heart.png");
@@ -33,21 +47,28 @@ class Player extends Sprite {
             heartIcon.setAttribute("height", "48");
             document.getElementById('lives').appendChild(heartIcon);
         }
-
         for (let j = 0; j < this.bombs.bombQueue.length; j++) {
+            // debugger    
             let bombIcon = document.createElement("IMG");
             bombIcon.setAttribute("src", "bomb.png");
             bombIcon.setAttribute("width", "48");
             bombIcon.setAttribute("height", "48");
             document.getElementById('bombs').appendChild(bombIcon);
         }
+    }
 
+    statsClear() {
+        var lives = document.getElementById('lives');
+        while (lives.firstChild) {
+            lives.removeChild(lives.firstChild);
+        }
     }
 
     itemMonitoring(row, col){
         switch(this.grid.gridArray[row][col]){
             case "I1":
                 this.bombs.pickUpBomb();
+                this.statsChange();
                 this.grid.gridArray[row][col] = 'X';
                 break;
             case "I2":
@@ -89,6 +110,7 @@ class Player extends Sprite {
             if (this.isKilled) {
                 this.isKilled = false;
                 this.lives -= 1;
+                this.statsChange();
                 setTimeout(() => this.relocatePlayer(), 1000); 
                 console.log(this.lives);
                 this.speed = 0;
@@ -243,12 +265,10 @@ class Player extends Sprite {
 
     render () {
         // debugger;
-
         super.render();
         
-        // document.getElementById("stefan").innerHTML = `num lives: ${this.lives}`;
+        // document.getElementById("lives").innerHTML = `num lives: ${this.lives}`;
         // document.getElementById("bombs").innerHTML = `num bombs ${this.bombs.bombQueue.length}`;
-        //https://t6.rbxcdn.com/fcf99f49b7677fad75fbba9cb0281f09
 
 
         // this.animation.render("y", 1);
