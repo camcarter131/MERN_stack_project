@@ -9,7 +9,7 @@ const Grid = require('./src/game/grid');
 const Player = require('./src/player/player');
 const SOCKETS = {};
 const PLAYERS = {};
-const numPlayers = 4;
+const numPlayers = 1;
 
 mongoose
     .connect(db, { useNewUrlParser: true })
@@ -34,8 +34,8 @@ const start = () => {
         let pack = game.update(PLAYERS, dt);
         
         Object.values(SOCKETS).forEach(socket => {
-            socket.emit('clearCanvas');
-            socket.emit('updatePlayer', {pack});
+            // socket.emit('clearCanvas');
+            // socket.emit('updatePlayer', {pack});
             socket.emit('updateGrid', {pack, grid});
         });
     
