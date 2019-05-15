@@ -2,11 +2,13 @@
 // import { DOWN, UP, RIGHT, LEFT, SPACE } from '../keys';
 const Input = require('./input');
 const keys = require("./keys");
-// import Sprite from './sprite';
+const Sprite = require('./sprite');
 // import Animation from '../animator/animation';
 
 class Player {
-    constructor(position, game) {
+    constructor(position, game, grid, img) {
+        this.grid = grid;
+        this.img = img;
         this.dt = 0;
         this.position = position;
         this.game = game;
@@ -16,13 +18,17 @@ class Player {
             y: 0
         };
         this.speed = 200;
+        this.size = {
+            width: 32,
+            height: 32
+        };
         // this.inputHandler = new Input(this);
         // this.handleInput = this.handleInput.bind(this);
         // super(canvas, ctx, img);
         // this.position.x = 16 + 48;
         // this.position.y = canvas.height - 34 - 48;
-        // this.renderSize = 48;
-        // this.radius = this.renderSize / 2;
+        this.renderSize = 48;
+        this.radius = this.renderSize / 2;
         // this.radius_partial = Math.sqrt((this.radius ** 2) / 2);
         // this.grid = grid;
         // this.erase = this.erase.bind(this);
@@ -59,7 +65,7 @@ class Player {
         if (keys.down) {
             this.velocity.y = this.speed;
             this.velocity.x = 0;
-            // let gridCoords = this.grid.canvasToArray([this.position.x, this.position.y + this.radius + 5]);
+            let gridCoords = this.grid.canvasToArray([this.position.x, this.position.y + this.radius + 5]);
             // let gridCoordsL = this.grid.canvasToArray([this.position.x - this.radius_partial, this.position.y + this.radius_partial]);
             // let gridCoordsR = this.grid.canvasToArray([this.position.x + this.radius_partial, this.position.y + this.radius_partial]);
 
@@ -69,17 +75,17 @@ class Player {
             // }
             // this.itemMonitoring(gridCoords[0], gridCoords[1]);
 
-            // if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W'
-            //     || this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'O') {
-            //     return null
-            // } else {
+            if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W'
+                || this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'O') {
+                return null
+            } else {
                 this.position.y += this.velocity.y * dt;
-            // }
+            }
         }
         if (keys.up) {
             this.velocity.y = this.speed;
             this.velocity.x = 0;
-            // let gridCoords = this.grid.canvasToArray([this.position.x, this.position.y]);
+            let gridCoords = this.grid.canvasToArray([this.position.x, this.position.y]);
             // let gridCoordsL = this.grid.canvasToArray([this.position.x - this.radius_partial, this.position.y - this.radius_partial]);
             // let gridCoordsR = this.grid.canvasToArray([this.position.x + this.radius_partial, this.position.y - this.radius_partial]);
 
@@ -89,18 +95,18 @@ class Player {
             // }
             // this.itemMonitoring(gridCoords[0], gridCoords[1]);
 
-            // if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W'
-            //     || this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'O') {
-            //     return null
-            // } else {
+            if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W'
+                || this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'O') {
+                return null
+            } else {
                 this.position.y -= this.velocity.y * dt;
-            // }
+            }
         }
 
         if (keys.right) {
             this.velocity.x = this.speed;
             this.velocity.y = 0;
-            // let gridCoords = this.grid.canvasToArray([this.position.x + 22, this.position.y + 20]);
+            let gridCoords = this.grid.canvasToArray([this.position.x + 22, this.position.y + 20]);
             // let gridCoordsU = this.grid.canvasToArray([this.position.x + this.radius_partial, this.position.y - this.radius_partial]);
             // let gridCoordsD = this.grid.canvasToArray([this.position.x + this.radius_partial, this.position.y + this.radius_partial]);
             // if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' || this.grid.gridArray[gridCoordsU[0]][gridCoordsU[1]] === 'W' || this.grid.gridArray[gridCoordsD[0]][gridCoordsD[1]] === 'W') {
@@ -108,17 +114,17 @@ class Player {
             // }
             // this.itemMonitoring(gridCoords[0], gridCoords[1]);
 
-            // if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W'
-            //     || this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'O') {
-            //     return null
-            // } else {
+            if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W'
+                || this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'O') {
+                return null
+            } else {
                 this.position.x += this.velocity.x * dt;
-            // }
+            }
         }
         if (keys.left) {
             this.velocity.x = this.speed;
             this.velocity.y = 0;
-            // let gridCoords = this.grid.canvasToArray([this.position.x - 4, this.position.y + 20]);
+            let gridCoords = this.grid.canvasToArray([this.position.x - 4, this.position.y + 20]);
             // let gridCoordsU = this.grid.canvasToArray([this.position.x - this.radius_partial, this.position.y - this.radius_partial]);
             // let gridCoordsD = this.grid.canvasToArray([this.position.x - this.radius_partial, this.position.y + this.radius_partial]);
             // if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' || this.grid.gridArray[gridCoordsU[0]][gridCoordsU[1]] === 'W' || this.grid.gridArray[gridCoordsD[0]][gridCoordsD[1]] === 'W') {
@@ -126,12 +132,12 @@ class Player {
             // }
             // this.itemMonitoring(gridCoords[0], gridCoords[1]);
 
-            // if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W'
-            //     || this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'O') {
-            //     return null
-            // } else {
+            if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W'
+                || this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'O') {
+                return null
+            } else {
                 this.position.x -= this.velocity.x * dt;
-            // }
+            }
         }
     }
 
@@ -147,11 +153,18 @@ class Player {
     }
 
     static render (ctx, player) {
-        ctx.fillStyle = '#000000';
-        ctx.beginPath();
-        ctx.arc(player.position.x, player.position.y, 20, 0, 2 * Math.PI);
-        ctx.closePath();
-        ctx.fill();
+        // ctx.fillStyle = '#000000';
+        // ctx.beginPath();
+        // ctx.arc(player.position.x, player.position.y, 20, 0, 2 * Math.PI);
+        // ctx.closePath();
+        // ctx.fill();
+        // debugger
+        const img = new Image();
+        img.src = player.img;
+        player.img = img;
+
+        // debugger
+        ctx.drawImage(player.img, 0, 0, player.size.width, player.size.height, player.position.x - (player.size.width / 2), player.position.y - (player.size.height / 2), 48, 48);
     }
 
     // renderBomb() {

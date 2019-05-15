@@ -72,14 +72,18 @@ document.addEventListener('keyup', (e) => {
 document.addEventListener("DOMContentLoaded", () => {
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
-    socket.on('updateGrid', grid => {
-        // ctx.clearRect(0,0,canvas.width, canvas.height);
-        Grid.renderGame(ctx, grid)
-    });
+    // socket.on('updateGrid', grid => {
+    //     // ctx.clearRect(0,0,canvas.width, canvas.height);
+    //     Grid.renderGame(ctx, grid)
+    // });
     socket.on('updatePlayer', data => {
-
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // Grid.renderGame(ctx, grid);
+        // console.log(data);
         Object.values(data.pack).forEach(player => {
+            // console.log(player)
             Player.render(ctx, player);
+            Grid.renderGame(ctx, player.grid)
         });
     });
 

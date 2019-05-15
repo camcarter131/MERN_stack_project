@@ -2,10 +2,10 @@ const Player = require('../player/player');
 class Game {
     constructor () {
         this.startingPositions = [
-            {x:70, y:70},
-            {x:700, y:700},
-            {x:70, y:700},
-            {x:700, y:70}
+            {x:64, y:64},
+            {x:64, y:734},
+            {x:736, y:734},
+            {x:736, y:64}
         ];
 
         // this.numPlayers = numPlayers;
@@ -72,12 +72,13 @@ class Game {
 
     }
 
-    update(players, dt) {
+    update(players, dt, grid, img) {
         const pack = [];
-
         Object.values(players).forEach(player => {
+            player.img = img;
             player.dt = dt;
-            player.update(dt);
+            player.grid = grid;
+            // player.update(dt);
             pack.push(player);
         });
 

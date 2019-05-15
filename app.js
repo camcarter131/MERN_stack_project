@@ -5,11 +5,12 @@ const serv = require('http').Server(app);
 const db = require('./config/keys').mongoURI;
 
 const Game = require('./src/game/game');
+// const ResourceManager = require('./src/resource_manager/resource_manager');
 const Grid = require('./src/game/grid');
 const Player = require('./src/player/player');
 const SOCKETS = {};
 const PLAYERS = {};
-const numPlayers = 4;
+const numPlayers = 2;
 
 mongoose
     .connect(db, { useNewUrlParser: true })
@@ -24,19 +25,23 @@ const io = require('socket.io')(serv, {});
 
 const game = new Game();
 const grid = new Grid();
+// const rm = new ResourceManager();
+// rm.load("./src/images/df_bomber_ss.png");
 let gameStarted = false;
+const img = "https://raw.githubusercontent.com/camcarter131/MERN_stack_project/master/frontend/public/assets/images/df_bomber_ss.png";
+// const img = "/aa-flex/public/src/images/df_bomber_ss.png";
 
 const start = () => { 
     setInterval(function () {
         let time = Date.now();
         let dt = (time - game.initialTime) / 1000.0;
         
-        let pack = game.update(PLAYERS, dt);
+        let pack = game.update(PLAYERS, dt, grid, img);
         
         Object.values(SOCKETS).forEach(socket => {
             // socket.emit('clearCanvas');
             socket.emit('updatePlayer', {pack});
-            socket.emit('updateGrid', grid);
+            // socket.emit('updateGrid', grid);
         });
     
         game.initialTime = time;
@@ -46,7 +51,7 @@ const start = () => {
 io.sockets.on('connection', (socket) => {
     SOCKETS[socket.id] = socket;
     PLAYERS[socket.id] = new Player(game.generateRandomPosition(), game);
-    console.log(Object.keys(PLAYERS).length);
+    // console.log(Object.keys(PLAYERS).length);
 
     if (numPlayers === Object.keys(PLAYERS).length && !gameStarted) {
         console.log('game started');
@@ -55,6 +60,7 @@ io.sockets.on('connection', (socket) => {
     }
 
     socket.on('keysPressed', keys => {
+        // socket.emit('clearCanvas');
         const currentPlayer = PLAYERS[socket.id];
         currentPlayer.handleInput(currentPlayer.dt, keys);
     });
