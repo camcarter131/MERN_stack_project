@@ -3,6 +3,10 @@
     /* width: 100px;
     height: 100px; */
     /* background-color: yellowgreen; */
+    display: flex;
+    flex-direction: column;
+    margin: 0px;
+    padding: 0px;
 }
 
 #bombs{
@@ -13,6 +17,8 @@
     /* background-color: orange; */
     margin:0px;
     padding: 0px;
+    display: flex;
+    flex-direction: column;
 }
 
 #main-container {
@@ -29,6 +35,7 @@
     margin-left: 1%;
     border: 2px solid black;
     height: 100%;
+    
     
 }
 
