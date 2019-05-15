@@ -3,11 +3,13 @@
 const Input = require('./input');
 const keys = require("./keys");
 const Sprite = require('./sprite');
+const Bomb = require('../game/bombs/bomb');
 // import Animation from '../animator/animation';
 
 class Player {
     constructor(position, game, grid, img) {
         this.grid = grid;
+        console.log(this.grid);
         this.img = img;
         this.dt = 0;
         this.position = position;
@@ -22,6 +24,11 @@ class Player {
             width: 32,
             height: 32
         };
+        this.bombSize = 4;
+        this.lives = 3;
+        this.spaceBool = true;
+        this.isKilled = true;
+        // this.bombs = new Bombs(this);
         // this.inputHandler = new Input(this);
         // this.handleInput = this.handleInput.bind(this);
         // super(canvas, ctx, img);
@@ -37,6 +44,25 @@ class Player {
         // this.bombs = new Bombs(this);
         // this.animation = new Animation(ctx, this, { frames: [1, 2], loop: true });
         // window.bombQueue = this.bombs.bombQueue;
+        this.bombQueue = [];
+        this.pickUpBomb();
+    }
+
+    // createBombs() {
+    //     this.bombs = new Bombs(this);
+    // }
+    pickUpBomb() {
+        this.bombData = { grid: this.grid, position: this.position, bombSize: this.bombSize }
+        let newBomb = new Bomb(this.bombData);
+        this.bombQueue.push(newBomb);
+    }
+
+    deploy() {
+        let bomb = this.bombQueue.pop();
+        if (bomb) {
+            bomb.deploy();
+            this.player.statsChange();
+        }
     }
 
     itemMonitoring(row, col) {
@@ -59,7 +85,13 @@ class Player {
     handleInput(dt, keys) {
         if (keys.space) {
             // let gridCoords = this.grid.canvasToArray([this.position.x, this.position.y]);
-            this.bombs.deploy();
+            // this.bombs.deploy();
+            if (this.spaceBool) {
+                this.spaceBool = false;
+                this.deploy();
+            } else {
+            this.spaceBool = true;
+            }
         }
 
         if (keys.down) {

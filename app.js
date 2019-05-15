@@ -39,7 +39,7 @@ const start = () => {
         let pack = game.update(PLAYERS, dt, grid, img);
         
         Object.values(SOCKETS).forEach(socket => {
-            // socket.emit('clearCanvas');
+            socket.emit('clearCanvas');
             socket.emit('updatePlayer', {pack});
             // socket.emit('updateGrid', grid);
         });

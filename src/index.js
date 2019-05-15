@@ -86,6 +86,9 @@ document.addEventListener("DOMContentLoaded", () => {
             Grid.renderGame(ctx, player.grid)
         });
     });
+    // socket.on('updatePlayer', data => {
+
+    // });
 
     // socket.on('clearCanvas', () => {
     //     // ctx.clearRect(0, 0, canvas.width, canvas.height)
