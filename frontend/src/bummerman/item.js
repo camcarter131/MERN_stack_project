@@ -13,6 +13,10 @@ export default class Item {
         ctx.fillStyle = "#81F353";
         ctx.fillRect(position[0], position[1], 48, 48);
     }
+    static renderI4(ctx, position) {
+        ctx.fillStyle = "#53A1F3";
+        ctx.fillRect(position[0], position[1], 48, 48);
+    }
 
     static itemSelector(){
         //legend
@@ -20,8 +24,7 @@ export default class Item {
         //I2 = speed+ //red
         //I3 = fire+
         //I4 = invisibility
-        // let options = ["I1", "I2", "I3", "X", "X", "X", "X", "X"];
-        let options = ["I1"];
+        let options = ["I1", "I2", "I3", "I4", "X", "X", "X", "X"];
         let item = options[Math.floor(Math.random() * options.length)];
         return item;
     }
