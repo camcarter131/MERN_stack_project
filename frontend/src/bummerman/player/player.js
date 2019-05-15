@@ -235,6 +235,9 @@ class Player extends Sprite {
                 // setTimeout(() => { this.bombSize /= 2; }, 5000);
                 this.grid.gridArray[row][col] = 'X';
                 break;
+            case "I4":
+                this.grid.gridArray[row][col] = 'X';
+                break;
             default:
                 break;
         }
