@@ -2,14 +2,18 @@ import Wall from './wall';
 import Object from './object';
 import Bomb from './bombs/bomb';
 import Item from './item';
+import Background from './background';
 
 export default class Grid {
 
-    constructor(canvas, ctx){
+    constructor(canvas, ctx, crateImg, grassImg, wallImg){
         this.ctx = ctx;
         this.height = canvas.height;
         this.width = canvas.width;
         this.gridArray = [...Array(17)].map(e => ["X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X"]);
+        this.crateImg = crateImg;
+        this.grassImg = grassImg;
+        this.blockImg = wallImg;
         this.createWalls();
         this.createObjects();
         this.renderGame(this.ctx);
@@ -71,12 +75,16 @@ export default class Grid {
             row.forEach((el, y) => {
                 let canvasCoords = this.arrayToCanvas([x, y]);
                 switch(el) {
+                    case "X":
+                        let background = new Background(this.ctx, canvasCoords, this.grassImg);
+                        background.render();
+                        break;
                     case "W":
-                        let wall = new Wall(this.ctx, canvasCoords)
+                        let wall = new Wall(this.ctx, canvasCoords, this.crateImg)
                         wall.render();
                         break;
                     case "O":
-                        let object = new Object(this.ctx, canvasCoords)
+                        let object = new Object(this.ctx, canvasCoords, this.blockImg)
                         object.render();
                         break;
                     case "B":

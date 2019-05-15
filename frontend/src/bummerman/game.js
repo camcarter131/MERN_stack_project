@@ -8,16 +8,25 @@ class Game {
         this.ctx = ctx;
 
         this.rm = new ResourceManager();
+        this.rm.load("assets/images/df_bomber_ss.png");
+        this.rm.load("assets/images/crates.png");
+        this.rm.load("assets/images/grass.png");
+        this.rm.load("assets/images/crates_real.png");
+        this.rm.onReady(this.init.bind(this));
 
-        this.grid = new Grid(canvas, ctx);
+        this.grid = new Grid(
+            canvas, 
+            ctx, 
+            this.rm.get("assets/images/crates.png"),
+            this.rm.get("assets/images/grass.png"),
+            this.rm.get("assets/images/crates_real.png")
+        );
         // this.player = new Player(canvas, ctx);
         window.gridArray = this.grid.gridArray;
 
         this.initialTime = Date.now();
 
         
-        this.rm.load("assets/images/df_bomber_ss.png");
-        this.rm.onReady(this.init.bind(this));
         
         
         this.init();
