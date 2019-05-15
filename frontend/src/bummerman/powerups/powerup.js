@@ -11,6 +11,5 @@ export default class Powerup {
     }
 
     onPickup() {
-        console.log(`${this.name} received!`);
     }
 }

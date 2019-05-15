@@ -125,7 +125,6 @@ class Player extends Sprite {
                 this.isKilled = false;
                 this.lives -= 1;
                 setTimeout(() => this.relocatePlayer(), 1000);
-                console.log(this.lives);
                 this.speed = 0;
                 this.bombs = new Bombs(this);
                 this.bombSize = 4;
@@ -203,7 +202,6 @@ class Player extends Sprite {
             document.getElementById('lives').appendChild(heartIcon);
         }
         for (let j = 0; j < this.bombs.bombQueue.length; j++) {
-            // debugger    
             let bombIcon = document.createElement("IMG");
             bombIcon.setAttribute("src", "bomb.png");
             bombIcon.setAttribute("width", "48");
@@ -344,7 +342,6 @@ class Player extends Sprite {
             this.velocity.x = this.speed;
             this.velocity.y = 0;
             let gridCoords = this.grid.canvasToArray([this.position.x - 4, this.position.y + 20]);
-            // debugger
             // let gridCoordsU = this.grid.canvasToArray([this.position.x - this.radius_partial, this.position.y - this.radius_partial]);
             // let gridCoordsD = this.grid.canvasToArray([this.position.x - this.radius_partial, this.position.y + this.radius_partial]);
             // if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' || this.grid.gridArray[gridCoordsU[0]][gridCoordsU[1]] === 'W' || this.grid.gridArray[gridCoordsD[0]][gridCoordsD[1]] === 'W') {
@@ -377,7 +374,6 @@ class Player extends Sprite {
     }
 
     render () {
-        // debugger;
         super.render();
         
         // document.getElementById("lives").innerHTML = `num lives: ${this.lives}`;
