@@ -8,3 +8,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     ReactDOM.render(<p>Hello</p>, canvas);
 });
+
+// this is my nonsensical omment
