@@ -72,9 +72,9 @@ class Player extends Sprite {
                 this.grid.gridArray[row][col] = 'X';
                 break;
             case "I2":
-                this.speed *= 2;
+                this.speed = 250;
                 this.grid.gridArray[row][col] = 'X';
-                setTimeout(() => {this.speed /= 2; }, 5000);
+                setTimeout(() => {this.speed = 125; }, 5000);
                 break;
             case "I3":
                 this.bombSize += 4;
