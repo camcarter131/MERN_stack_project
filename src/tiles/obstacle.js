@@ -1,4 +1,4 @@
-class Object {
+class Obstacle {
     constructor(ctx, position) {
         this.ctx = ctx;
         this.position = position;
@@ -10,4 +10,4 @@ class Object {
     }
 }
 
-module.exports = Object;
+module.exports = Obstacle;

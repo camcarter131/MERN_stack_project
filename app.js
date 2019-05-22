@@ -22,9 +22,11 @@ app.use('/public', express.static(__dirname + '/public'));
 const port = process.env.PORT || 3000;
 serv.listen(port);
 const io = require('socket.io')(serv, {});
+const images = {};
 
 const game = new Game();
 const grid = new Grid();
+
 // const rm = new ResourceManager();
 // rm.load("./src/images/df_bomber_ss.png");
 let gameStarted = false;
@@ -51,7 +53,6 @@ const start = () => {
 io.sockets.on('connection', (socket) => {
     SOCKETS[socket.id] = socket;
     PLAYERS[socket.id] = new Player(game.generateRandomPosition(), game, grid);
-    // console.log(Object.keys(PLAYERS).length);
 
     if (numPlayers === Object.keys(PLAYERS).length && !gameStarted) {
         console.log('game started');
@@ -69,5 +70,18 @@ io.sockets.on('connection', (socket) => {
         delete PLAYERS[socket.id];
         delete SOCKETS[socket.id];
     });
+
+    socket.on('Wall', (img) => {
+        images['Wall'] = img;
+        grid.wallImg = img;
+    })
+    socket.on('Grass', (img) => {
+        images['Grass'] = img;
+        grid.grassImg = img;
+    })
+    socket.on('Crate', (img) => {
+        images['Crate'] = img;
+        grid.crateImg = img;
+    })
     
 });

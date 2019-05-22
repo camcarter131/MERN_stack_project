@@ -1,16 +1,17 @@
 const Wall = require('../tiles/wall');
-const Object = require('../tiles/object');
+const Obstacle = require('../tiles/obstacle');
 const Bomb = require('./bombs/bomb');
 const Item = require('../tiles/item');
+const Background = require('./background');
 
 class Grid {
     constructor() {
         this.gridArray = [...Array(17)].map(e => ["X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X"]);
         this.createWalls();
-        this.createObjects();
+        this.createObstacles();
         // this.renderGame(this.ctx);
     }
-    
+
     //populates gridArray with W's
     createWalls() {
         let rowTop = 0;
@@ -33,8 +34,8 @@ class Grid {
 
     }
 
-    createObjects() {
-        // let numObjects = 25;
+    createObstacles() {
+        
         for (let i = 1; i < this.gridArray[0].length - 1; i += 1) {
             for (let j = 1; j < this.gridArray[0].length - 1; j += 1) {
                 // if (i === 15 && j === 15) break;
@@ -46,7 +47,7 @@ class Grid {
                 if (this.gridArray[i][j] === "W") continue;
                 if (Math.random() < 0.35) {
                     this.gridArray[i][j] = "O";
-                    // numObjects -= 1;
+                    
                 }
             }
         }
@@ -67,13 +68,17 @@ class Grid {
             row.forEach((el, y) => {
                 let canvasCoords = [48 * y, 48 * x];
                 switch (el) {
+                    case "X":
+                        let background = new Background(this.ctx, canvasCoords, this.grassImg);
+                        background.render();
+                        break;
                     case "W":
                         let wall = new Wall(ctx, canvasCoords)
                         wall.render();
                         break;
                     case "O":
-                        let object = new Object(ctx, canvasCoords)
-                        object.render();
+                        let obstacle = new Obstacle(ctx, canvasCoords)
+                        obstacle.render();
                         break;
                     case "B":
                         // let bombParams = {grid:this, position:canvasCoords, bombSize:4}
