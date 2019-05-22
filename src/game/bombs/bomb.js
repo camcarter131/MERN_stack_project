@@ -1,4 +1,4 @@
-// import Item from '../item';
+const Item = require('../../tiles/item');
 
 class Bomb {
 
@@ -17,18 +17,15 @@ class Bomb {
         ctx.fillRect(position[0], position[1], 48, 48);
     }
 
-    constructor({ grid, position, bombSize }) {
-        debugger
+    constructor({grid, position, bombSize}) {
         this.grid = grid;
         this.position = position;
         this.bombSize = bombSize;
         // this.img = '';
         // this.flickerIntervalId = null;
         // this.ctx = ctx;
-        // this.grid = grid;
-        // this.player = player;
-        this.deploy = this.deploy.bind(this);
 
+        this.deploy = this.deploy.bind(this);
         this.explodeBothWays = this.explodeBothWays.bind(this);
 
         // this.explode = this.explode.bind(this);
@@ -170,23 +167,22 @@ class Bomb {
         }
     }
 
-    // clearExplosion() {
-    //     let gridArray = this.grid.gridArray;
+    clearExplosion() {
+        let gridArray = this.grid.gridArray;
 
-    //     for (let row = 0; row < gridArray.length; row++) {
-    //         for (let col = 0; col < gridArray.length; col++) {
-    //             if (gridArray[row][col] === 'E') {
-    //                 gridArray[row][col] = 'X';
-    //             }
-    //             else if (gridArray[row][col] === 'EO') {
-    //                 gridArray[row][col] = Item.itemSelector();
-    //             }
-    //         }
-    //     }
-    // }
+        for (let row = 0; row < gridArray.length; row++) {
+            for (let col = 0; col < gridArray.length; col++) {
+                if (gridArray[row][col] === 'E') {
+                    gridArray[row][col] = 'X';
+                }
+                else if (gridArray[row][col] === 'EO') {
+                    gridArray[row][col] = Item.itemSelector();
+                }
+            }
+        }
+    }
 
     deploy() {
-        console.log(this.grid);
         const position = this.grid.canvasToArray([this.position.x, this.position.y]);
         this.grid.gridArray[position[0]][position[1]] = 'B';
         let row = position[0];
@@ -198,11 +194,11 @@ class Bomb {
 
         }, 2000);
 
-        // setTimeout(() => {
-        //     this.clearExplosion();
-        //     this.bombs.pickUpBomb(this);
-        //     this.statsChange();
-        // }, 3000);
+        setTimeout(() => {
+            this.clearExplosion();
+            // this.player.pickUpBomb();
+            // this.statsChange();
+        }, 3000);
 
     }
 

@@ -50,7 +50,7 @@ const start = () => {
 
 io.sockets.on('connection', (socket) => {
     SOCKETS[socket.id] = socket;
-    PLAYERS[socket.id] = new Player(game.generateRandomPosition(), game);
+    PLAYERS[socket.id] = new Player(game.generateRandomPosition(), game, grid);
     // console.log(Object.keys(PLAYERS).length);
 
     if (numPlayers === Object.keys(PLAYERS).length && !gameStarted) {

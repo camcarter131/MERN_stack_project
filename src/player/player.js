@@ -1,20 +1,18 @@
-// import Bombs from '../bombs/bombs'
 // import { DOWN, UP, RIGHT, LEFT, SPACE } from '../keys';
 const Input = require('./input');
 const keys = require("./keys");
 const Sprite = require('./sprite');
 const Bomb = require('../game/bombs/bomb');
+const Item = require('../tiles/item');
 // import Animation from '../animator/animation';
 
 class Player {
     constructor(position, game, grid, img) {
         this.grid = grid;
-        console.log(this.grid);
         this.img = img;
         this.dt = 0;
         this.position = position;
         this.game = game;
-        this.update = this.update.bind(this);
         this.velocity = {
             x: 0,
             y: 0
@@ -29,6 +27,7 @@ class Player {
         this.spaceBool = true;
         this.isKilled = true;
         // this.bombs = new Bombs(this);
+        // this.bombQueue = [new Bomb(this.grid, this.position, this.bombSize)];
         // this.inputHandler = new Input(this);
         // this.handleInput = this.handleInput.bind(this);
         // super(canvas, ctx, img);
@@ -52,8 +51,7 @@ class Player {
     //     this.bombs = new Bombs(this);
     // }
     pickUpBomb() {
-        this.bombData = { grid: this.grid, position: this.position, bombSize: this.bombSize }
-        let newBomb = new Bomb(this.bombData);
+        let newBomb = new Bomb(this);
         this.bombQueue.push(newBomb);
     }
 
@@ -61,7 +59,8 @@ class Player {
         let bomb = this.bombQueue.pop();
         if (bomb) {
             bomb.deploy();
-            this.player.statsChange();
+            setTimeout(this.pickUpBomb.bind(this), 3000);
+            // this.player.statsChange();
         }
     }
 
@@ -88,9 +87,11 @@ class Player {
             // this.bombs.deploy();
             if (this.spaceBool) {
                 this.spaceBool = false;
+                console.log("Hello");
+                console.log(this.spaceBool);
                 this.deploy();
             } else {
-            this.spaceBool = true;
+                this.spaceBool = true;
             }
         }
 
@@ -173,29 +174,10 @@ class Player {
         }
     }
 
-    update(dt) {
-        // this.handleInput(dt);
-        // this.animation.update(dt);
-    }
-
-    render() {
-        // debugger;
-        // super.render();
-        // this.animation.render("y", 1);
-    }
-
     static render (ctx, player) {
-        // ctx.fillStyle = '#000000';
-        // ctx.beginPath();
-        // ctx.arc(player.position.x, player.position.y, 20, 0, 2 * Math.PI);
-        // ctx.closePath();
-        // ctx.fill();
-        // debugger
         const img = new Image();
         img.src = player.img;
         player.img = img;
-
-        // debugger
         ctx.drawImage(player.img, 0, 0, player.size.width, player.size.height, player.position.x - (player.size.width / 2), player.position.y - (player.size.height / 2), 48, 48);
     }
 

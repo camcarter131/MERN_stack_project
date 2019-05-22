@@ -1,22 +1,17 @@
 const Wall = require('../tiles/wall');
 const Object = require('../tiles/object');
-// import Bomb from './bombs/bomb';
-// import Item from './item';
+const Bomb = require('./bombs/bomb');
+const Item = require('../tiles/item');
 
 class Grid {
-
     constructor() {
-        // this.ctx = null;
-        // this.canvas = null;
-        // this.height = canvas.height;
-        // this.width = canvas.width;
         this.gridArray = [...Array(17)].map(e => ["X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X"]);
         this.createWalls();
         this.createObjects();
         // this.renderGame(this.ctx);
     }
-
-    //populates gridarray with W's
+    
+    //populates gridArray with W's
     createWalls() {
         let rowTop = 0;
         let rowBottom = 16;
@@ -81,6 +76,8 @@ class Grid {
                         object.render();
                         break;
                     case "B":
+                        // let bombParams = {grid:this, position:canvasCoords, bombSize:4}
+                        // let bomb = new Bomb(bombParams);
                         Bomb.renderBomb(ctx, canvasCoords);
                         break;
                     case "E":
@@ -124,7 +121,7 @@ class Grid {
         return [x / 48, y / 48];
     }
 
-
+ 
     // drawGrid() {
     //     this.height = canvas.height;
     //     this.width = canvas.width;
