@@ -21,9 +21,9 @@ class Item {
         //legend
         //I1 = bomb+ //pink
         //I2 = speed+ //red
-        //I3 = fire+
-        //I4 = invisibility
-        let options = ["I1", "I2", "I3", "I4", "X", "X", "X", "X"];
+        //I3 = fire+ //green
+        //I4 = blue+ //invisibility
+        let options = ["I1", "I2", "I3", "X", "X", "X", "X"];
         let item = options[Math.floor(Math.random() * options.length)];
         return item;
     }

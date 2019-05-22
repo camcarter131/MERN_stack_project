@@ -67,7 +67,7 @@ class Player {
     itemMonitoring(row, col) {
         switch (this.grid.gridArray[row][col]) {
             case "I1":
-                this.bombs.pickUpBomb();
+                this.pickUpBomb();
                 setTimeout(() => this.grid.gridArray[row][col] = 'X', 500);
                 break;
             case "I2":
@@ -75,7 +75,11 @@ class Player {
                 this.grid.gridArray[row][col] = 'X';
                 setTimeout(() => { this.speed /= 2 }, 5000);
                 break;
-
+            case "I3":
+                this.bombSize += 4;
+                setTimeout(() => { this.bombSize -= 4; }, 5000);
+                this.grid.gridArray[row][col] = 'X';
+                break;
             default:
                 break;
         }
@@ -87,8 +91,6 @@ class Player {
             // this.bombs.deploy();
             if (this.spaceBool) {
                 this.spaceBool = false;
-                console.log("Hello");
-                console.log(this.spaceBool);
                 this.deploy();
             } else {
                 this.spaceBool = true;
@@ -106,7 +108,7 @@ class Player {
             //     return null
             // } else {
             // }
-            // this.itemMonitoring(gridCoords[0], gridCoords[1]);
+            this.itemMonitoring(gridCoords[0], gridCoords[1]);
 
             if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W'
                 || this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'O') {
@@ -126,7 +128,7 @@ class Player {
             //     return null
             // } else {
             // }
-            // this.itemMonitoring(gridCoords[0], gridCoords[1]);
+            this.itemMonitoring(gridCoords[0], gridCoords[1]);
 
             if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W'
                 || this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'O') {
@@ -145,7 +147,7 @@ class Player {
             // if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' || this.grid.gridArray[gridCoordsU[0]][gridCoordsU[1]] === 'W' || this.grid.gridArray[gridCoordsD[0]][gridCoordsD[1]] === 'W') {
             //     return null
             // }
-            // this.itemMonitoring(gridCoords[0], gridCoords[1]);
+            this.itemMonitoring(gridCoords[0], gridCoords[1]);
 
             if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W'
                 || this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'O') {
@@ -163,7 +165,7 @@ class Player {
             // if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W' || this.grid.gridArray[gridCoordsU[0]][gridCoordsU[1]] === 'W' || this.grid.gridArray[gridCoordsD[0]][gridCoordsD[1]] === 'W') {
             //     return null
             // }
-            // this.itemMonitoring(gridCoords[0], gridCoords[1]);
+            this.itemMonitoring(gridCoords[0], gridCoords[1]);
 
             if (this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'W'
                 || this.grid.gridArray[gridCoords[0]][gridCoords[1]] === 'O') {
