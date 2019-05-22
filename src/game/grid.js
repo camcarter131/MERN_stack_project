@@ -5,10 +5,17 @@ const Item = require('../tiles/item');
 const Background = require('./background');
 
 class Grid {
-    constructor() {
+    constructor(grassImg, wallImg, crateImg) {
         this.gridArray = [...Array(17)].map(e => ["X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X"]);
         this.createWalls();
         this.createObstacles();
+
+        this.grassImgSrc = grassImg;
+        this.wallImgSrc = wallImg;
+        this.crateImgSrc = crateImg;
+
+
+
         // this.renderGame(this.ctx);
     }
 
@@ -64,20 +71,31 @@ class Grid {
     //I1 = item 1 etc.....
 
     static renderGame(ctx, grid) {
+        // const grassImgSrc = "https://raw.githubusercontent.com/camcarter131/MERN_stack_project/master/frontend/public/assets/images/grass.png";
+        // const wallImgSrc = "https://github.com/camcarter131/MERN_stack_project/blob/master/frontend/public/assets/images/crates.png";
+        // const crateImgSrc = "https://raw.githubusercontent.com/camcarter131/MERN_stack_project/master/frontend/public/assets/images/crates_real.png";
+
+        const grassImg = new Image();
+        grassImg.src = grid.grassImgSrc;
+        const wallImg = new Image();
+        wallImg.src = grid.wallImgSrc;
+        const crateImg = new Image();
+        crateImg.src = grid.crateImgSrc;
+        
         grid.gridArray.forEach((row, x) => {
             row.forEach((el, y) => {
                 let canvasCoords = [48 * y, 48 * x];
                 switch (el) {
                     case "X":
-                        let background = new Background(this.ctx, canvasCoords, this.grassImg);
+                        let background = new Background(ctx, canvasCoords, grassImg);
                         background.render();
                         break;
                     case "W":
-                        let wall = new Wall(ctx, canvasCoords)
+                        let wall = new Wall(ctx, canvasCoords, wallImg)
                         wall.render();
                         break;
                     case "O":
-                        let obstacle = new Obstacle(ctx, canvasCoords)
+                        let obstacle = new Obstacle(ctx, canvasCoords, crateImg)
                         obstacle.render();
                         break;
                     case "B":

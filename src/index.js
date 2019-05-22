@@ -72,20 +72,25 @@ document.addEventListener('keyup', (e) => {
 document.addEventListener("DOMContentLoaded", () => {
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
-    const grassImg = new Image();
-    grassImg.src = "https://raw.githubusercontent.com/camcarter131/MERN_stack_project/master/frontend/public/assets/images/grass.png";
+    // const grassImg = new Image();
+    // grassImg.src = "https://raw.githubusercontent.com/camcarter131/MERN_stack_project/master/frontend/public/assets/images/grass.png";
     // const wallImg = new Image("https://github.com/camcarter131/MERN_stack_project/blob/master/frontend/public/assets/images/crates.png");
     // const crateImg = new Image("https://raw.githubusercontent.com/camcarter131/MERN_stack_project/master/frontend/public/assets/images/crates_real.png");
 
-    grassImg.onload(() => socket.emit("Grass", grassImg));
-    wallImg.onload(() => socket.emit("Wall", wallImg));
-    crateImg.onload(() => socket.emit("Crate", crateImg));
+    // https://github.com/camcarter131/MERN_stack_project/blob/master/frontend/public/assets/images/grass.png?raw=true
+
+    // grassImg.onload(() => socket.emit("Grass", grassImg));
+    // wallImg.onload(() => socket.emit("Wall", wallImg));
+    // crateImg.onload(() => socket.emit("Crate", crateImg));
 
     socket.on('updatePlayer', data => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         Object.values(data.pack).forEach(player => {
-            Player.render(ctx, player);
             Grid.renderGame(ctx, player.grid)
+        });
+
+        Object.values(data.pack).forEach(player => {
+            Player.render(ctx, player);
         });
     });
 

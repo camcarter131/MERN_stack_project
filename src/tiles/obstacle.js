@@ -1,12 +1,12 @@
 class Obstacle {
-    constructor(ctx, position) {
+    constructor(ctx, position, img) {
         this.ctx = ctx;
         this.position = position;
+        this.crateImg = img;
     }
 
     render() {
-        this.ctx.fillStyle = "#834437";
-        this.ctx.fillRect(this.position[0], this.position[1], 48, 48);
+        this.ctx.drawImage(this.crateImg, this.position[0], this.position[1], 48, 48);
     }
 }
 

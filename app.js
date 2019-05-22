@@ -24,8 +24,11 @@ serv.listen(port);
 const io = require('socket.io')(serv, {});
 const images = {};
 
+const grassImg = "https://raw.githubusercontent.com/camcarter131/MERN_stack_project/master/frontend/public/assets/images/grass.png";
+const wallImg = "https://raw.githubusercontent.com/camcarter131/MERN_stack_project/master/frontend/public/assets/images/crates.png";
+const crateImg = "https://raw.githubusercontent.com/camcarter131/MERN_stack_project/master/frontend/public/assets/images/crates_real.png";
 const game = new Game();
-const grid = new Grid();
+const grid = new Grid(grassImg, wallImg, crateImg);
 
 // const rm = new ResourceManager();
 // rm.load("./src/images/df_bomber_ss.png");
@@ -71,17 +74,17 @@ io.sockets.on('connection', (socket) => {
         delete SOCKETS[socket.id];
     });
 
-    socket.on('Wall', (img) => {
-        images['Wall'] = img;
-        grid.wallImg = img;
-    })
-    socket.on('Grass', (img) => {
-        images['Grass'] = img;
-        grid.grassImg = img;
-    })
-    socket.on('Crate', (img) => {
-        images['Crate'] = img;
-        grid.crateImg = img;
-    })
+    // socket.on('Wall', (img) => {
+    //     images['Wall'] = img;
+    //     grid.wallImg = img;
+    // })
+    // socket.on('Grass', (img) => {
+    //     images['Grass'] = img;
+    //     grid.grassImg = img;
+    // })
+    // socket.on('Crate', (img) => {
+    //     images['Crate'] = img;
+    //     grid.crateImg = img;
+    // })
     
 });
