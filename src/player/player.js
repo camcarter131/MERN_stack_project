@@ -45,7 +45,46 @@ class Player {
         // window.bombQueue = this.bombs.bombQueue;
         this.bombQueue = [];
         this.pickUpBomb();
+        this.isKilled = true;
+        // this.deathMonitoring = this.deathMonitoring.bind(this);
+        this.lives = 3;
     }
+
+    static deathMonitoring(row, col, player) {
+        if (player.grid.gridArray[row][col] === 'E') {
+            if (player.isKilled) {
+                player.isKilled = false;
+                player.lives -= 1;
+                setTimeout(() => this.relocatePlayer(player), 1000);
+                player.speed = 0;
+                player.bombsQueue = [new Bomb(player)];
+                // player.pickUpBomb();
+                player.bombSize = 4;
+                setTimeout(() => player.speed = 200, 1000);
+                console.log(player.lives);
+            }
+        } else {
+            player.isKilled = true;
+        }
+    }
+
+    static relocatePlayer(player) {
+        let respawns = [
+            //bottom left
+            [64, 734],
+            //bottom right
+            [736, 734],
+            //top left
+            [64, 64],
+            //top right
+            [736, 64]
+        ]
+
+        let randomLocation = respawns[Math.floor(Math.random() * respawns.length)];
+        player.position.x = randomLocation[0];
+        player.position.y = randomLocation[1];
+    }
+
 
     // createBombs() {
     //     this.bombs = new Bombs(this);
@@ -86,6 +125,7 @@ class Player {
     }
 
     handleInput(dt, keys) {
+
         if (keys.space) {
             // let gridCoords = this.grid.canvasToArray([this.position.x, this.position.y]);
             // this.bombs.deploy();
@@ -96,6 +136,10 @@ class Player {
                 this.spaceBool = true;
             }
         }
+        
+        // let currPos = this.grid.canvasToArray([this.position.x, this.position.y]);
+        // this.deathMonitoring(currPos[0], currPos[1]);
+
 
         if (keys.down) {
             this.velocity.y = this.speed;
@@ -180,6 +224,13 @@ class Player {
         const img = new Image();
         img.src = player.img;
         player.img = img;
+
+        let x = Math.floor(player.position.y / 48) * 48;
+        let y = Math.floor(player.position.x / 48) * 48;
+
+        let currPos = [x/48,y/48];
+        this.deathMonitoring(currPos[0], currPos[1], player);
+        
         ctx.drawImage(player.img, 0, 0, player.size.width, player.size.height, player.position.x - (player.size.width / 2), player.position.y - (player.size.height / 2), 48, 48);
     }
 
