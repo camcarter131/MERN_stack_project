@@ -56,6 +56,7 @@ class Player {
                 player.isKilled = false;
                 player.lives -= 1;
                 setTimeout(() => this.relocatePlayer(player), 1000);
+                // this.relocatePlayer(player);
                 player.speed = 0;
                 player.bombsQueue = [new Bomb(player)];
                 // player.pickUpBomb();
@@ -83,6 +84,7 @@ class Player {
         let randomLocation = respawns[Math.floor(Math.random() * respawns.length)];
         player.position.x = randomLocation[0];
         player.position.y = randomLocation[1];
+        console.log(player.position);
     }
 
 
@@ -137,8 +139,8 @@ class Player {
             }
         }
         
-        // let currPos = this.grid.canvasToArray([this.position.x, this.position.y]);
-        // this.deathMonitoring(currPos[0], currPos[1]);
+        let currPos = this.grid.canvasToArray([this.position.x, this.position.y]);
+        Player.deathMonitoring(currPos[0], currPos[1], this);
 
 
         if (keys.down) {
@@ -229,7 +231,7 @@ class Player {
         let y = Math.floor(player.position.x / 48) * 48;
 
         let currPos = [x/48,y/48];
-        this.deathMonitoring(currPos[0], currPos[1], player);
+        // this.deathMonitoring(currPos[0], currPos[1], player);
         
         ctx.drawImage(player.img, 0, 0, player.size.width, player.size.height, player.position.x - (player.size.width / 2), player.position.y - (player.size.height / 2), 48, 48);
     }
