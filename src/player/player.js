@@ -17,7 +17,7 @@ class Player {
             x: 0,
             y: 0
         };
-        this.speed = 200;
+        this.speed = 200; 
         this.size = {
             width: 32,
             height: 32

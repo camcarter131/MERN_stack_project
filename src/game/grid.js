@@ -5,7 +5,7 @@ const Item = require('../tiles/item');
 const Background = require('./background');
 
 class Grid {
-    constructor(grassImg, wallImg, crateImg) {
+    constructor(grassImg, wallImg, crateImg, bombImg) {
         this.gridArray = [...Array(17)].map(e => ["X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X"]);
         this.createWalls();
         this.createObstacles();
@@ -13,8 +13,7 @@ class Grid {
         this.grassImgSrc = grassImg;
         this.wallImgSrc = wallImg;
         this.crateImgSrc = crateImg;
-
-
+        this.bombImgSrc = bombImg;
 
         // this.renderGame(this.ctx);
     }
@@ -71,16 +70,14 @@ class Grid {
     //I1 = item 1 etc.....
 
     static renderGame(ctx, grid) {
-        // const grassImgSrc = "https://raw.githubusercontent.com/camcarter131/MERN_stack_project/master/frontend/public/assets/images/grass.png";
-        // const wallImgSrc = "https://github.com/camcarter131/MERN_stack_project/blob/master/frontend/public/assets/images/crates.png";
-        // const crateImgSrc = "https://raw.githubusercontent.com/camcarter131/MERN_stack_project/master/frontend/public/assets/images/crates_real.png";
-
         const grassImg = new Image();
         grassImg.src = grid.grassImgSrc;
         const wallImg = new Image();
         wallImg.src = grid.wallImgSrc;
         const crateImg = new Image();
         crateImg.src = grid.crateImgSrc;
+        const bombImg = new Image();
+        bombImg.src = grid.bombImgSrc;
         
         grid.gridArray.forEach((row, x) => {
             row.forEach((el, y) => {
@@ -101,7 +98,7 @@ class Grid {
                     case "B":
                         // let bombParams = {grid:this, position:canvasCoords, bombSize:4}
                         // let bomb = new Bomb(bombParams);
-                        Bomb.renderBomb(ctx, canvasCoords);
+                        Bomb.renderBomb(ctx, canvasCoords, bombImg, grassImg);
                         break;
                     case "E":
                         Bomb.renderExplosion(ctx, canvasCoords);
@@ -143,23 +140,6 @@ class Grid {
         let y = Math.floor(canvasPosition[0] / 48) * 48;
         return [x / 48, y / 48];
     }
-
- 
-    // drawGrid() {
-    //     this.height = canvas.height;
-    //     this.width = canvas.width;
-    //     for (let x = 0; x <= this.width; x += 48) {
-    //         this.ctx.moveTo(x, 0);
-    //         this.ctx.lineTo(x, this.height);
-    //     }
-
-    //     for (let y = 0; y <= this.height; y += 48) {
-    //         this.ctx.moveTo(0, y);
-    //         this.ctx.lineTo(this.width, y);
-    //     }
-    //     this.ctx.strokeStyle = "black";
-    //     this.ctx.stroke();
-    // }
 
 }
 

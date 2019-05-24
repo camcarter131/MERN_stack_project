@@ -2,16 +2,19 @@ const Item = require('../../tiles/item');
 
 class Bomb {
 
-    static renderBomb(ctx, position) {
-        ctx.fillStyle = "#ff0000";
-        ctx.fillRect(position[0], position[1], 48, 48);
+    static renderBomb(ctx, position, bombImg, grassImg) {
+        console.log(position);
+        // ctx.fillStyle = "#ff0000";
+        // ctx.fillRect(position[0], position[1], 48, 48);
+        ctx.drawImage(grassImg, position[0], position[1], 48, 48);
+        ctx.drawImage(bombImg, position[0]+5, position[1] + 5, 41, 41);
     }
 
     static renderExplosion(ctx, position) {
         ctx.fillStyle = "#ffff00";
         ctx.fillRect(position[0], position[1], 48, 48);
     }
-
+ 
     static renderExplosionObstacle(ctx, position) {
         ctx.fillStyle = "#ffff00";
         ctx.fillRect(position[0], position[1], 48, 48);

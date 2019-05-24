@@ -27,8 +27,11 @@ const images = {};
 const grassImg = "https://raw.githubusercontent.com/camcarter131/MERN_stack_project/master/frontend/public/assets/images/grass.png";
 const wallImg = "https://raw.githubusercontent.com/camcarter131/MERN_stack_project/master/frontend/public/assets/images/crates.png";
 const crateImg = "https://raw.githubusercontent.com/camcarter131/MERN_stack_project/master/frontend/public/assets/images/crates_real.png";
+// const bombImg = "https://raw.githubusercontent.com/camcarter131/MERN_stack_project/master/frontend/public/bomb3.png";
+const bombImg = "https://raw.githubusercontent.com/camcarter131/MERN_stack_project/master/frontend/public/bomb.png";
+// const bombImg = "https://raw.githubusercontent.com/camcarter131/MERN_stack_project/master/frontend/public/bomb2.png";
 const game = new Game();
-const grid = new Grid(grassImg, wallImg, crateImg);
+const grid = new Grid(grassImg, wallImg, crateImg, bombImg);
 
 // const rm = new ResourceManager();
 // rm.load("./src/images/df_bomber_ss.png");
