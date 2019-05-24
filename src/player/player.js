@@ -221,36 +221,36 @@ class Player {
                 //     this.grid.gridArray[row][col] = "I2";
                 // })
             }, 2000);
-            // this.statsChange();
+            this.statsChange();
         }
     }
 
-    // statsChange() {
-    //     var lives = document.getElementById('lives');
-    //     while (lives.firstChild) {
-    //         lives.removeChild(lives.firstChild);
-    //     }
+    statsChange() {
+        var lives = document.getElementById('lives');
+        while (lives.firstChild) {
+            lives.removeChild(lives.firstChild);
+        }
 
-    //     var bombs = document.getElementById('bombs');
-    //     while (bombs.firstChild) {
-    //         bombs.removeChild(bombs.firstChild);
-    //     }
+        var bombs = document.getElementById('bombs');
+        while (bombs.firstChild) {
+            bombs.removeChild(bombs.firstChild);
+        }
 
-    //     for (let i = 0; i < this.lives; i++) {
-    //         let heartIcon = document.createElement("IMG");
-    //         heartIcon.setAttribute("src", "heart.png");
-    //         heartIcon.setAttribute("width", "48");
-    //         heartIcon.setAttribute("height", "48");
-    //         document.getElementById('lives').appendChild(heartIcon);
-    //     }
-    //     for (let j = 0; j < this.bombs.bombQueue.length; j++) {
-    //         let bombIcon = document.createElement("IMG");
-    //         bombIcon.setAttribute("src", "bomb.png");
-    //         bombIcon.setAttribute("width", "48");
-    //         bombIcon.setAttribute("height", "48");
-    //         document.getElementById('bombs').appendChild(bombIcon);
-    //     }
-    // }
+        for (let i = 0; i < this.lives; i++) {
+            let heartIcon = document.createElement("IMG");
+            heartIcon.setAttribute("src", "heart.png");
+            heartIcon.setAttribute("width", "48");
+            heartIcon.setAttribute("height", "48");
+            document.getElementById('lives').appendChild(heartIcon);
+        }
+        for (let j = 0; j < this.bombs.bombQueue.length; j++) {
+            let bombIcon = document.createElement("IMG");
+            bombIcon.setAttribute("src", "bomb.png");
+            bombIcon.setAttribute("width", "48");
+            bombIcon.setAttribute("height", "48");
+            document.getElementById('bombs').appendChild(bombIcon);
+        }
+    }
 
 
     // createBombs() {
