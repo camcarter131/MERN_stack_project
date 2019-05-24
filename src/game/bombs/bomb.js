@@ -10,9 +10,11 @@ class Bomb {
         ctx.drawImage(bombImg, position[0]+5, position[1] + 5, 41, 41);
     }
 
-    static renderExplosion(ctx, position) {
-        ctx.fillStyle = "#ffff00";
-        ctx.fillRect(position[0], position[1], 48, 48);
+    static renderExplosion(ctx, position, explosionImg, grassImg) {
+        // ctx.fillStyle = "#ffff00";
+        // ctx.fillRect(position[0], position[1], 48, 48);
+        ctx.drawImage(grassImg, position[0], position[1], 48, 48);
+        ctx.drawImage(explosionImg, position[0], position[1], 48, 48);
     }
  
     static renderExplosionObstacle(ctx, position) {

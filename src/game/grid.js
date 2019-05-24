@@ -5,7 +5,7 @@ const Item = require('../tiles/item');
 const Background = require('./background');
 
 class Grid {
-    constructor(grassImg, wallImg, crateImg, bombImg) {
+    constructor(grassImg, wallImg, crateImg, bombImg, explosionImg) {
         this.gridArray = [...Array(17)].map(e => ["X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X"]);
         this.createWalls();
         this.createObstacles();
@@ -14,6 +14,8 @@ class Grid {
         this.wallImgSrc = wallImg;
         this.crateImgSrc = crateImg;
         this.bombImgSrc = bombImg;
+        this.explosionImgSrc = explosionImg;
+        console.log(this.explosionImgSrc)
 
         // this.renderGame(this.ctx);
     }
@@ -78,6 +80,8 @@ class Grid {
         crateImg.src = grid.crateImgSrc;
         const bombImg = new Image();
         bombImg.src = grid.bombImgSrc;
+        const explosionImg = new Image();
+        explosionImg.src = grid.explosionImgSrc;
         
         grid.gridArray.forEach((row, x) => {
             row.forEach((el, y) => {
@@ -101,7 +105,7 @@ class Grid {
                         Bomb.renderBomb(ctx, canvasCoords, bombImg, grassImg);
                         break;
                     case "E":
-                        Bomb.renderExplosion(ctx, canvasCoords);
+                        Bomb.renderExplosion(ctx, canvasCoords, explosionImg, grassImg);
                         break;
                     case "EO":
                         Bomb.renderExplosionObstacle(ctx, canvasCoords);
