@@ -75,6 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     socket.on('updatePlayer', data => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // Flicker 
         Object.values(data.pack).forEach(player => {
             Grid.renderGame(ctx, player.grid)
         });

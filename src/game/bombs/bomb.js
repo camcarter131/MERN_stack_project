@@ -3,7 +3,6 @@ const Item = require('../../tiles/item');
 class Bomb {
 
     static renderBomb(ctx, position, bombImg, grassImg) {
-        console.log(position);
         // ctx.fillStyle = "#ff0000";
         // ctx.fillRect(position[0], position[1], 48, 48);
         ctx.drawImage(grassImg, position[0], position[1], 48, 48);

@@ -76,7 +76,7 @@ class Game {
         const pack = [];
         Object.values(players).forEach(player => {
             player.img = img;
-            player.dt = dt;
+            // player.dt = dt;
             player.grid = grid;
             // player.update(dt);
             pack.push(player);

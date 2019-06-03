@@ -10,12 +10,15 @@ class Grid {
         this.createWalls();
         this.createObstacles();
 
+        // this.grassImg = new Image();
+        // this.grassImg.onload(() => this.grassImg.src = grassImg);
         this.grassImgSrc = grassImg;
+        // this.grassImg = grassImg;
         this.wallImgSrc = wallImg;
         this.crateImgSrc = crateImg;
         this.bombImgSrc = bombImg;
         this.explosionImgSrc = explosionImg;
-        console.log(this.explosionImgSrc)
+        // console.log(this.explosionImgSrc)
 
         // this.renderGame(this.ctx);
     }
@@ -53,7 +56,7 @@ class Grid {
                     || (i === 15 && j === 14) || (i === 14 && j === 15)
                     || (i === 1 && j === 14) || (i === 2 && j === 15)) continue;
                 if (this.gridArray[i][j] === "W") continue;
-                if (Math.random() < 0.35) {
+                if (Math.random() < 0.33) {
                     this.gridArray[i][j] = "O";
                     
                 }
