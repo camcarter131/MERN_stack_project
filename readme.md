@@ -1,10 +1,10 @@
 
-# Bummerman
+# ExploderDude
 
 ## Background and Overview
 An interactive, multi-player Bomberman-inspired game where you are able to connect with and play with up to three other online friends.
 
-We created Bummerman as a throwback, retro browser-based game to use to play with friends. 
+We created ExploderDude as a throwback, retro browser-based game to use to play with friends. 
 
 ## Functionality and MVP
 We are building a basic Bomberman game with multi-player functionaity being our highest order MVP. 
@@ -14,7 +14,7 @@ Players will be able to visit our site, create a session without logging in, sen
 Once the game starts, four players will interact with the board by laying bombs, destroying perishable objects and picking up powerups, with the main goal of being the last man standing by eliminating all other players. 
 
 ## Technologies and Technical Challenges
-Bummerman was built using a MongoDB and Express backend, with a frontend relying on React/Node.js with Canvas.
+ExploderDude was built using a MongoDB and Express backend, with a frontend relying on React/Node.js with Canvas.
 
 #### Backend: MongoDB/Express
 Our backend holds our high scores as well as our WebSocket API that will enable our multi-player functionality. Additionally, we will use MongoDB to hold all of our bonus feature content.
