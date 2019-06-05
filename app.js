@@ -10,6 +10,7 @@ const Grid = require('./src/game/grid');
 const Player = require('./src/player/player');
 const SOCKETS = {};
 const PLAYERS = {};
+const STATBARS = {};
 const numPlayers = 2;
 
 mongoose
@@ -54,7 +55,7 @@ const start = () => {
 
 io.sockets.on('connection', (socket) => {
     SOCKETS[socket.id] = socket;
-    PLAYERS[socket.id] = new Player(game.generateRandomPosition(), game, grid);
+    PLAYERS[socket.id] = new Player(game.generateRandomPosition(), game, grid, socket.id);
 
     if (numPlayers === Object.keys(PLAYERS).length && !gameStarted) {
         console.log('game started');

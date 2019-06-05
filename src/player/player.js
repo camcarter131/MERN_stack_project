@@ -7,7 +7,8 @@ const Item = require('../tiles/item');
 // import Animation from '../animator/animation';
 
 class Player {
-    constructor(position, game, grid, img) {
+    constructor(position, game, grid, img, id) {
+        this.id = id;
         this.grid = grid;
         this.img = img;
         this.dt = 0;
@@ -26,7 +27,6 @@ class Player {
         this.lives = 3;
         this.spaceBool = true;
         this.isKilled = true;
-        // this.bombs = new Bombs(this);
         // this.bombQueue = [new Bomb(this.grid, this.position, this.bombSize)];
         // this.inputHandler = new Input(this);
         // this.handleInput = this.handleInput.bind(this);
@@ -49,6 +49,7 @@ class Player {
         // this.deathMonitoring = this.deathMonitoring.bind(this);
         this.lives = 3;
         this.shouldEndGame = true;
+        // this.statsChange();
         this.gameOverAnimation = [
             [2, 1],
             [2, 2],
@@ -224,12 +225,12 @@ class Player {
     }
 
     statsChange() {
-        var lives = document.getElementById('lives');
+        let lives = document.getElementById('lives');
         while (lives.firstChild) {
             lives.removeChild(lives.firstChild);
         }
 
-        var bombs = document.getElementById('bombs');
+        let bombs = document.getElementById('bombs');
         while (bombs.firstChild) {
             bombs.removeChild(bombs.firstChild);
         }

@@ -1,8 +1,8 @@
 #lives{
-    /* font-size: 14px; */
-    /* width: 100px;
-    height: 100px; */
-    /* background-color: yellowgreen; */
+    font-size: 14px;
+    width: 100px;
+    height: 100px;
+    background-color: yellowgreen;
     display: flex;
     flex-direction: column;
     margin: 0px;
@@ -10,11 +10,11 @@
 }
 
 #bombs{
-    /* display: flex; */
-    /* font-size: 14px; */
-    /* width: 100px;
-    height: 100px; */
-    /* background-color: orange; */
+    display: flex;
+    font-size: 14px;
+    width: 100px;
+    height: 100px;
+    background-color: orange;
     margin:0px;
     padding: 0px;
     display: flex;

@@ -73,6 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
 
+
     socket.on('updatePlayer', data => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         // Flicker 
@@ -81,7 +82,37 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         Object.values(data.pack).forEach(player => {
+
+            
             Player.render(ctx, player);
+            if (socket.id === player.id) {
+                let lives = document.getElementById('lives');
+                let bombs = document.getElementById('bombs');
+                
+                while (lives.firstChild) {
+                    lives.removeChild(lives.firstChild);
+                }
+    
+                while (bombs.firstChild) {
+                    bombs.removeChild(bombs.firstChild);
+                }
+                for (let i = 0; i < player.lives; i++) {
+                    let heartIcon = document.createElement("IMG");
+                    heartIcon.setAttribute("src", "https://raw.githubusercontent.com/camcarter131/MERN_stack_project/master/frontend/public/heart.png");
+                    heartIcon.setAttribute("width", "48");
+                    heartIcon.setAttribute("height", "48");
+                    lives.appendChild(heartIcon);
+                }
+                for (let j = 0; j < player.bombQueue.length; j++) {
+                    let bombIcon = document.createElement("IMG");
+                    bombIcon.setAttribute("src", "https://raw.githubusercontent.com/camcarter131/MERN_stack_project/master/frontend/public/bomb.png");
+                    bombIcon.setAttribute("width", "48");
+                    bombIcon.setAttribute("height", "48");
+                    bombs.appendChild(bombIcon);
+                }
+            }
+                
+
         });
     });
 });
